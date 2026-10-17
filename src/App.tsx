@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import Navbar from "./components/layout/Navbar.tsx";
 import Footer from "./components/layout/Footer.tsx";
-import HeroBanner from "./ui/HeroBanner.tsx";
+import HeroBanner from "./components/ui/HeroBanner.tsx";
 import AboutUs from "./pages/AboutUs.tsx";
 import ContactUs from "./pages/contactus.tsx";
+import Home from "./pages/Home";
 
 function App() {
   const [currentPath, setCurrentPath] = useState(
@@ -47,23 +48,29 @@ function App() {
 
   const isContactPage =
     currentPath === "/contact" || currentPath === "/contactus";
+  const isHomePage = currentPath === "/";
 
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
 
-      <main>
-        {isContactPage ? (
-          <ContactUs />
-        ) : (
-          <>
-            <HeroBanner />
-            <AboutUs />
-          </>
-        )}
-      </main>
-
-      <Footer />
+      {isHomePage ? (
+        <Home />
+      ) : (
+        <>
+          <main>
+            {isContactPage ? (
+              <ContactUs />
+            ) : (
+              <>
+                <HeroBanner />
+                <AboutUs />
+              </>
+            )}
+          </main>
+          <Footer />
+        </>
+      )}
     </div>
   );
 }

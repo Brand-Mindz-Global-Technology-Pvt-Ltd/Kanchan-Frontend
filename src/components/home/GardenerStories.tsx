@@ -1,0 +1,99 @@
+import {
+  AnimatedHeadingText,
+  useDecorativeLeafReveal,
+} from "../../hooks/useDecorativeLeafReveal";
+
+const testimonials = [
+  {
+    name: "Jason",
+    avatar: "https://i.pravatar.cc/150?img=12",
+    review:
+      "The plants arrived fresh and carefully packed. I also appreciated the simple care guidance—it made settling them into my home much easier.",
+  },
+  {
+    name: "Kayal",
+    avatar: "https://i.pravatar.cc/150?img=47",
+    review:
+      "Beautiful plant quality and thoughtful packaging. My order was easy to receive, and every plant looked healthy and well cared for.",
+  },
+  {
+    name: "Raja",
+    avatar: "https://i.pravatar.cc/150?img=11",
+    review:
+      "I found everything I needed for my balcony garden in one place. The plants and gardening supplies have been a lovely addition to my space.",
+  },
+  {
+    name: "Aliya",
+    avatar: "https://i.pravatar.cc/150?img=44",
+    review:
+      "Ordering plants online can be risky, but this shop completely won me over! Every single leaf was intact, and the soil was perfectly moist.",
+  },
+];
+
+export default function GardenerStories() {
+  const sectionRef = useDecorativeLeafReveal<HTMLElement>();
+
+  return (
+    <section ref={sectionRef} className="w-full bg-[#FCFAF4] py-[28px]">
+      <div className="mx-auto w-[90%] max-w-[826px] min-[1000px]:w-[82%]">
+        <div className="text-center">
+          <p className="text-[10px] font-bold leading-3 uppercase tracking-[1.2px] text-[#5B944B]">
+            GARDENER STORIES
+          </p>
+
+          <h2
+            aria-label="What Our Happy Gardeners Say"
+            className="mt-[7px] font-serif text-[28px] font-bold leading-[1.2] text-[#18382B]"
+          >
+            <AnimatedHeadingText text="What Our Happy Gardeners Say" />
+          </h2>
+
+          <p
+            data-reveal-paragraph
+            className="mt-1 text-[11px] leading-[14px] text-[#718074]"
+          >
+            Real experiences from people who made their spaces greener with Kanchan Garden.
+          </p>
+
+          <span className="mt-[9px] inline-flex rounded-full bg-[#EDF3E6] px-2 py-[5px] text-[7px] leading-[8px] font-semibold uppercase tracking-[0.08em] text-[#6B8660]">
+            SAMPLE TESTIMONIALS
+          </span>
+        </div>
+
+        <div className="mt-5 grid grid-cols-2 gap-3 min-[640px]:grid-cols-2 min-[640px]:gap-4 min-[1000px]:grid-cols-4 min-[1000px]:gap-[14px]">
+          {testimonials.map((item) => (
+            <article
+              key={item.name}
+              data-reveal-card
+              className="flex min-h-[198px] min-w-0 flex-col rounded-[15px] border border-[#E8E9DD] bg-white p-[14px_12px] min-[640px]:p-[18px_18px_16px] shadow-[0_4px_11px_rgba(35,55,35,0.2)]"
+            >
+              <div className="flex items-center gap-[10px]">
+                <img
+                  src={item.avatar}
+                  alt={`${item.name} testimonial`}
+                  className="h-[34px] w-[34px] shrink-0 rounded-full object-cover"
+                />
+
+                <div className="min-w-0">
+                  <h3 className="text-[13px] leading-4 font-medium text-[#294638]">
+                    {item.name}
+                  </h3>
+                  <div
+                    aria-label="5 out of 5 stars"
+                    className="mt-[2px] text-[11px] leading-3 tracking-[0.01em] text-[#F2A900]"
+                  >
+                    ★★★★★
+                  </div>
+                </div>
+              </div>
+
+              <p className="mt-[14px] font-serif text-[12px] leading-[19px] text-[#5D7062]">
+                “{item.review}”
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
