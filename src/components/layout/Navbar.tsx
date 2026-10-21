@@ -1,10 +1,13 @@
 
+import { useState } from "react";
+
 type NavbarLink = {
   name: string;
   href: string;
 };
 
 function Navbar() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const currentPath = window.location.pathname;
   const links: NavbarLink[] = [
     { name: "Home", href: "/" },
@@ -17,6 +20,22 @@ function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-green-100 bg-white">
+      <style>{`
+        .kanchan-mobile-menu-toggle,
+        .kanchan-mobile-navigation {
+          display: none;
+        }
+
+        @media (width < 48rem) {
+          .kanchan-mobile-menu-toggle {
+            display: flex;
+          }
+
+          .kanchan-mobile-navigation {
+            display: block;
+          }
+        }
+      `}</style>
       <nav className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-6 py-3 lg:px-16">
         {/* Logo */}
         
@@ -79,8 +98,50 @@ function Navbar() {
               <path d="M5 21v-2a7 7 0 0 1 14 0v2" />
             </svg>
           </button>
+
+          <button
+            type="button"
+            aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setIsMobileMenuOpen((isOpen) => !isOpen)}
+            className="kanchan-mobile-menu-toggle h-10 w-10 items-center justify-center rounded-md text-green-950 hover:bg-green-50 hover:text-green-700"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="h-6 w-6" aria-hidden="true">
+              {isMobileMenuOpen ? (
+                <path d="m6 6 12 12M18 6 6 18" />
+              ) : (
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
         </div>
       </nav>
+
+      {isMobileMenuOpen && (
+        <nav
+          id="mobile-navigation"
+          aria-label="Mobile navigation"
+          className="kanchan-mobile-navigation mx-auto max-w-[1440px] border-t border-green-100 px-6 py-3 lg:px-16"
+        >
+          <div className="flex flex-col gap-1">
+            {links.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`rounded-md px-4 py-3 text-sm font-medium transition ${
+                  currentPath === link.href
+                    ? "bg-green-900 text-white"
+                    : "text-green-950 hover:bg-green-100"
+                }`}
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+        </nav>
+      )}
     </header>
   );
 }
