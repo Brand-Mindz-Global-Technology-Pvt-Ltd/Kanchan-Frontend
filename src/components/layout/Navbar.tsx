@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import HomeEdgeLeaves from "../home/HomeEdgeLeaves";
 
 type NavbarLink = {
   name: string;
@@ -19,7 +20,7 @@ function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-green-100 bg-white">
+    <header className="sticky top-0 z-50 isolate w-full border-b border-green-100 bg-white">
       <style>{`
         .kanchan-mobile-menu-toggle,
         .kanchan-mobile-navigation {
@@ -36,7 +37,17 @@ function Navbar() {
           }
         }
       `}</style>
-      <nav className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-6 py-3 lg:px-16">
+      {currentPath === "/" && (
+        <HomeEdgeLeaves
+          placements={[
+            {
+              left: { top: "-20%", width: "clamp(85px, 11vw, 150px)", opacity: 0.9 },
+              right: { top: "-25%", width: "clamp(100px, 13vw, 175px)", opacity: 0.9 },
+            },
+          ]}
+        />
+      )}
+      <nav className="relative z-10 mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-6 py-3 lg:px-16">
         {/* Logo */}
         
 <img

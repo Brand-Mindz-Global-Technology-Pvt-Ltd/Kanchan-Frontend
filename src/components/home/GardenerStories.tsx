@@ -2,6 +2,7 @@ import {
   AnimatedHeadingText,
   useDecorativeLeafReveal,
 } from "../../hooks/useDecorativeLeafReveal";
+import HomeEdgeLeaves from "./HomeEdgeLeaves";
 
 const testimonials = [
   {
@@ -34,8 +35,20 @@ export default function GardenerStories() {
   const sectionRef = useDecorativeLeafReveal<HTMLElement>();
 
   return (
-    <section ref={sectionRef} className="w-full bg-[#FCFAF4] py-[28px]">
-      <div className="mx-auto w-[90%] max-w-[826px] min-[1000px]:w-[82%]">
+    <section ref={sectionRef} className="relative isolate w-full overflow-hidden bg-[#FCFAF4] py-[28px]">
+      <HomeEdgeLeaves
+        placements={[
+          {
+            left: { top: "-20%", width: "clamp(100px, 16vw, 220px)", opacity: 0.88 },
+            right: { top: "-15%", width: "clamp(110px, 17vw, 230px)", opacity: 0.9 },
+          },
+          {
+            left: { bottom: "-25%", width: "clamp(115px, 18vw, 240px)", opacity: 0.92 },
+            right: { bottom: "-20%", width: "clamp(110px, 17vw, 230px)", opacity: 0.9 },
+          },
+        ]}
+      />
+      <div className="relative z-10 mx-auto w-[90%] max-w-[826px] min-[1000px]:w-[82%]">
         <div className="text-center">
           <p className="text-[10px] font-bold leading-3 uppercase tracking-[1.2px] text-[#5B944B]">
             GARDENER STORIES

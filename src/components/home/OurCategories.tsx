@@ -1,4 +1,5 @@
 import CategoryCard from "./CategoryCard";
+import HomeEdgeLeaves from "./HomeEdgeLeaves";
 import {
   AnimatedHeadingText,
   useDecorativeLeafReveal,
@@ -176,10 +177,22 @@ function OurCategories() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-[#FCFAF4] py-14 sm:py-16 lg:py-20"
+      className="relative isolate w-full overflow-hidden bg-[#FCFAF4] py-14 sm:py-16 lg:py-20"
       aria-labelledby="categories-heading"
     >
-      <div className="mx-auto w-[92%] max-w-[1240px]">
+      <HomeEdgeLeaves
+        placements={[
+          {
+            left: { top: "4%", width: "clamp(90px, 14vw, 190px)", opacity: 0.72 },
+            right: { top: "12%", width: "clamp(85px, 13vw, 180px)", opacity: 0.68 },
+          },
+          {
+            left: { bottom: "-8%", width: "clamp(105px, 16vw, 220px)", opacity: 0.9 },
+            right: { bottom: "-10%", width: "clamp(110px, 17vw, 230px)", opacity: 0.88 },
+          },
+        ]}
+      />
+      <div className="relative z-10 mx-auto w-[92%] max-w-[1240px]">
         {/* Section Heading */}
         <div className="mb-10 text-center sm:mb-12">
           <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#4A7C59]">

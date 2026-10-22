@@ -1,6 +1,4 @@
-// Decorative leaf assets
-import leafTwo from "../../assets/leaves/leaf-2.png";
-import leafThree from "../../assets/leaves/leaf-3.png";
+import HomeEdgeLeaves from "./HomeEdgeLeaves";
 import {
   AnimatedHeadingText,
   useDecorativeLeafReveal,
@@ -110,46 +108,17 @@ export default function WhyChooseKanchan() {
       className="relative isolate w-full overflow-hidden bg-[linear-gradient(180deg,#F0F4DF_0%,#E8EFD8_100%)] pb-[88px] pt-[70px]"
       aria-labelledby="choose-kanchan-heading"
     >
-      {/* ── Decorative Leaf Illustrations ── */}
-      {/* Left edge leaf */}
-      <img
-        src={leafThree}
-        alt=""
-        aria-hidden="true"
-        data-decorative-leaf
-        className="pointer-events-none absolute -left-12 top-1/2 z-0 h-auto w-40 -translate-y-1/2 -rotate-15 opacity-75 sm:w-48 lg:w-56"
-      />
-      {/* Top center-left leaf (above card 2) */}
-      <img
-        src={leafTwo}
-        alt=""
-        aria-hidden="true"
-        data-decorative-leaf
-        className="pointer-events-none absolute left-[26%] top-4 z-0 h-auto w-20 -rotate-35 opacity-70 sm:w-24"
-      />
-      {/* Top center-right leaf (above card 4) */}
-      <img
-        src={leafThree}
-        alt=""
-        aria-hidden="true"
-        data-decorative-leaf
-        className="pointer-events-none absolute right-[16%] top-6 z-0 h-auto w-24 rotate-25 opacity-75 sm:w-28"
-      />
-      {/* Bottom-left leaf */}
-      <img
-        src={leafTwo}
-        alt=""
-        aria-hidden="true"
-        data-decorative-leaf
-        className="pointer-events-none absolute -bottom-6 -left-6 z-0 h-auto w-32 rotate-30 opacity-70 sm:w-36"
-      />
-      {/* Bottom-right leaf */}
-      <img
-        src={leafThree}
-        alt=""
-        aria-hidden="true"
-        data-decorative-leaf
-        className="pointer-events-none absolute -bottom-8 -right-8 z-0 h-auto w-44 rotate-35 opacity-75 sm:w-52 lg:w-56"
+      <HomeEdgeLeaves
+        placements={[
+          {
+            left: { top: "-3%", width: "clamp(115px, 18vw, 245px)", opacity: 0.92 },
+            right: { top: "0%", width: "clamp(105px, 17vw, 230px)", opacity: 0.9 },
+          },
+          {
+            left: { bottom: "-12%", width: "clamp(110px, 17vw, 235px)", opacity: 0.88 },
+            right: { bottom: "-10%", width: "clamp(115px, 18vw, 245px)", opacity: 0.9 },
+          },
+        ]}
       />
 
       <div className="relative z-10 mx-auto w-[92%] max-w-[1180px]">

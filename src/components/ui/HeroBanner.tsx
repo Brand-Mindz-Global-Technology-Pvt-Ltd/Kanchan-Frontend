@@ -1,6 +1,6 @@
 import heroImage from "../../assets/hero-image.png";
 import leafTwo from "../../assets/leaves/leaf-2.png";
-import leafThree from "../../assets/leaves/leaf-3.png";
+import HomeEdgeLeaves from "../home/HomeEdgeLeaves";
 import {
   AnimatedHeadingText,
   useDecorativeLeafReveal,
@@ -66,7 +66,7 @@ const features = [
   },
 ] as const;
 
-function HeroBanner() {
+function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) {
   const sectionRef = useDecorativeLeafReveal<HTMLElement>();
 
   return (
@@ -105,32 +105,6 @@ function HeroBanner() {
 
           .hero-banner-mobile .hero-banner-image > div {
             border-radius: 24px 10px 12px 24px !important;
-          }
-
-          .hero-banner-mobile [data-decorative-leaf] {
-            width: 24px;
-            opacity: 0.5;
-          }
-
-          .hero-banner-mobile [data-decorative-leaf]:nth-of-type(1) {
-            top: 4px;
-            left: -4px;
-          }
-
-          .hero-banner-mobile [data-decorative-leaf]:nth-of-type(2) {
-            bottom: -4px;
-            left: -4px;
-          }
-
-          .hero-banner-mobile [data-decorative-leaf]:nth-of-type(3) {
-            top: 4px;
-            right: -4px;
-          }
-
-          .hero-banner-mobile [data-decorative-leaf]:nth-of-type(4) {
-            right: -4px;
-            bottom: -4px;
-            width: 28px;
           }
 
           .hero-banner-mobile .hero-banner-badge {
@@ -232,39 +206,20 @@ function HeroBanner() {
           }
         }
       `}</style>
-      {/* ── Outer Decorative Leaves ── */}
-      {/* Top-left leaf */}
-      <img
-        src={leafThree}
-        alt=""
-        aria-hidden="true"
-        data-decorative-leaf
-        className="pointer-events-none absolute -left-6 top-8 z-0 h-auto w-20 -rotate-25 opacity-70 sm:-left-6 sm:top-10 sm:w-40 lg:w-44"
-      />
-      {/* Bottom-left leaf */}
-      <img
-        src={leafTwo}
-        alt=""
-        aria-hidden="true"
-        data-decorative-leaf
-        className="pointer-events-none absolute -bottom-6 -left-4 z-0 h-auto w-20 rotate-25 opacity-70 sm:-bottom-8 sm:-left-6 sm:w-36 lg:w-40"
-      />
-      {/* Top-right leaf */}
-      <img
-        src={leafTwo}
-        alt=""
-        aria-hidden="true"
-        data-decorative-leaf
-        className="pointer-events-none absolute -right-4 top-4 z-0 h-auto w-20 rotate-15 opacity-70 sm:right-4 sm:top-6 sm:w-32 lg:w-36"
-      />
-      {/* Bottom-right leaf */}
-      <img
-        src={leafThree}
-        alt=""
-        aria-hidden="true"
-        data-decorative-leaf
-        className="pointer-events-none absolute -bottom-8 -right-6 z-0 h-auto w-24 rotate-35 opacity-70 sm:-bottom-10 sm:-right-8 sm:w-44 lg:w-48"
-      />
+      {homeDecorations && (
+        <HomeEdgeLeaves
+          placements={[
+            {
+              left: { top: "-8%", width: "clamp(110px, 18vw, 250px)", opacity: 0.94 },
+              right: { top: "-4%", width: "clamp(120px, 19vw, 260px)", opacity: 0.94 },
+            },
+            {
+              left: { bottom: "-10%", width: "clamp(100px, 16vw, 220px)", opacity: 0.9 },
+              right: { bottom: "-12%", width: "clamp(110px, 17vw, 235px)", opacity: 0.9 },
+            },
+          ]}
+        />
+      )}
 
       <div className="relative z-10 mx-auto w-[92%] max-w-[1320px]">
         <div className="hero-banner-layout flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-10 xl:gap-14">

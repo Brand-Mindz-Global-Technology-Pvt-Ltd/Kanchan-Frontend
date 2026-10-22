@@ -1,5 +1,6 @@
 
 import gardenBanner from "../../assets/garden-banner.png";
+import HomeEdgeLeaves from "./HomeEdgeLeaves";
 import {
   AnimatedHeadingText,
   useDecorativeLeafReveal,
@@ -11,10 +12,22 @@ function GardenBanner() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-[#FCFAF4] px-4 py-6 sm:px-6 lg:px-8"
+      className="relative isolate w-full overflow-hidden bg-[#FCFAF4] px-4 py-6 sm:px-6 lg:px-8"
     >
+      <HomeEdgeLeaves
+        placements={[
+          {
+            left: { top: "-15%", width: "clamp(105px, 17vw, 230px)", opacity: 0.86 },
+            right: { top: "-15%", width: "clamp(105px, 17vw, 230px)", opacity: 0.86 },
+          },
+          {
+            left: { bottom: "-20%", width: "clamp(100px, 16vw, 215px)", opacity: 0.82 },
+            right: { bottom: "-20%", width: "clamp(100px, 16vw, 215px)", opacity: 0.82 },
+          },
+        ]}
+      />
       <div
-        className="relative mx-auto overflow-hidden rounded-[12px] sm:rounded-[14px]"
+        className="relative z-10 mx-auto overflow-hidden rounded-[12px] sm:rounded-[14px]"
         style={{
           width: "100%",
           maxWidth: "1328px",

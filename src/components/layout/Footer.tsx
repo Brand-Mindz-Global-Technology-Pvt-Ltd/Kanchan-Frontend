@@ -1,9 +1,10 @@
 import kanchanLogo from "../../assets/kanchan-logo.png";
+import HomeEdgeLeaves from "../home/HomeEdgeLeaves";
 
-export default function Footer() {
+export default function Footer({ homeDecorations = false }: { homeDecorations?: boolean }) {
   return (
     <footer
-      className="w-full"
+      className="relative isolate w-full overflow-hidden"
       style={{
         backgroundColor: "#EDF3E2",
         fontFamily: "Inter, 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
@@ -43,8 +44,23 @@ export default function Footer() {
         }
       `}</style>
 
+      {homeDecorations && (
+        <HomeEdgeLeaves
+          placements={[
+            {
+              left: { top: "-12%", width: "clamp(105px, 16vw, 220px)", opacity: 0.9 },
+              right: { top: "-12%", width: "clamp(110px, 17vw, 230px)", opacity: 0.9 },
+            },
+            {
+              left: { bottom: "-18%", width: "clamp(105px, 16vw, 220px)", opacity: 0.9 },
+              right: { bottom: "-18%", width: "clamp(110px, 17vw, 230px)", opacity: 0.9 },
+            },
+          ]}
+        />
+      )}
+
       {/* Main container */}
-      <div className="mx-auto max-w-[1140px] px-6 sm:px-8 lg:px-10" style={{ paddingTop: "38px", paddingBottom: "36px" }}>
+      <div className="relative z-10 mx-auto max-w-[1140px] px-6 sm:px-8 lg:px-10" style={{ paddingTop: "38px", paddingBottom: "36px" }}>
         {/* Four Columns */}
         <div className="footer-cols">
           {/* Column 1 — Logo and description */}

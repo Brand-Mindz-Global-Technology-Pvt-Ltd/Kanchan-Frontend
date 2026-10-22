@@ -1,4 +1,5 @@
 import CategoryCard from "./CategoryCard";
+import HomeEdgeLeaves from "./HomeEdgeLeaves";
 import {
   AnimatedHeadingText,
   useDecorativeLeafReveal,
@@ -35,8 +36,23 @@ function BotanicalChronicle() {
   const sectionRef = useDecorativeLeafReveal<HTMLElement>();
 
   return (
-    <section ref={sectionRef} className="w-full bg-[#FBF9F1] py-10">
-      <div className="mx-auto w-[92%] max-w-[1180px] sm:w-[82%]">
+    <section
+      ref={sectionRef}
+      className="relative isolate w-full overflow-hidden bg-[#FBF9F1] py-10"
+    >
+      <HomeEdgeLeaves
+        placements={[
+          {
+            left: { top: "0%", width: "clamp(100px, 15vw, 210px)", opacity: 0.88 },
+            right: { top: "8%", width: "clamp(100px, 15vw, 210px)", opacity: 0.88 },
+          },
+          {
+            left: { bottom: "-12%", width: "clamp(105px, 16vw, 220px)", opacity: 0.9 },
+            right: { bottom: "-12%", width: "clamp(105px, 16vw, 220px)", opacity: 0.9 },
+          },
+        ]}
+      />
+      <div className="relative z-10 mx-auto w-[92%] max-w-[1180px] sm:w-[82%]">
         <header>
           <p className="text-[12px] font-bold leading-4 tracking-[0.16em] text-[#4A7C43]">
             THE BOTANICAL CHRONICLE

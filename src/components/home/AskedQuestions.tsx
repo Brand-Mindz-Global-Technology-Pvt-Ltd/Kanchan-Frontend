@@ -1,8 +1,6 @@
 import { useState } from "react";
+import HomeEdgeLeaves from "./HomeEdgeLeaves";
 
-// Decorative leaf assets
-import leafTwo from "../../assets/leaves/leaf-2.png";
-import leafThree from "../../assets/leaves/leaf-3.png";
 import {
   AnimatedHeadingText,
   useDecorativeLeafReveal,
@@ -60,46 +58,17 @@ function AskedQuestions() {
       className="relative isolate w-full overflow-hidden bg-[#EDF3E2] py-16 sm:py-20 lg:py-24"
       aria-labelledby="faq-heading"
     >
-      {/* ── Decorative Leaf Illustrations around outer edges ── */}
-      {/* Top-left leaf */}
-      <img
-        src={leafThree}
-        alt=""
-        aria-hidden="true"
-        data-decorative-leaf
-        className="pointer-events-none absolute -left-12 top-6 z-0 h-auto w-36 -rotate-25 opacity-70 sm:-left-8 sm:top-8 sm:w-44 lg:-left-6 lg:top-10 lg:w-48"
-      />
-      {/* Top-right leaf (near heading/container) */}
-      <img
-        src={leafTwo}
-        alt=""
-        aria-hidden="true"
-        data-decorative-leaf
-        className="pointer-events-none absolute right-10 top-8 z-0 h-auto w-24 rotate-15 opacity-75 sm:right-16 sm:top-10 sm:w-28 lg:right-28 lg:top-12 lg:w-32"
-      />
-      {/* Far top-right edge leaf */}
-      <img
-        src={leafThree}
-        alt=""
-        aria-hidden="true"
-        data-decorative-leaf
-        className="pointer-events-none absolute -right-8 top-4 z-0 h-auto w-28 rotate-45 opacity-60 sm:-right-6 sm:w-32 lg:-right-4 lg:w-36"
-      />
-      {/* Bottom-left leaf */}
-      <img
-        src={leafTwo}
-        alt=""
-        aria-hidden="true"
-        data-decorative-leaf
-        className="pointer-events-none absolute -bottom-8 -left-8 z-0 h-auto w-32 rotate-20 opacity-70 sm:-bottom-6 sm:left-2 sm:w-36 lg:left-4 lg:w-40"
-      />
-      {/* Bottom-right leaf */}
-      <img
-        src={leafThree}
-        alt=""
-        aria-hidden="true"
-        data-decorative-leaf
-        className="pointer-events-none absolute -bottom-10 -right-8 z-0 h-auto w-40 rotate-35 opacity-75 sm:-bottom-8 sm:right-0 sm:w-48 lg:-right-4 lg:w-52"
+      <HomeEdgeLeaves
+        placements={[
+          {
+            left: { top: "0%", width: "clamp(110px, 17vw, 235px)", opacity: 0.9 },
+            right: { top: "0%", width: "clamp(110px, 17vw, 235px)", opacity: 0.9 },
+          },
+          {
+            left: { bottom: "-8%", width: "clamp(120px, 18vw, 245px)", opacity: 0.9 },
+            right: { bottom: "-8%", width: "clamp(110px, 17vw, 230px)", opacity: 0.88 },
+          },
+        ]}
       />
 
       <div className="relative z-10 mx-auto w-[92%] max-w-[1240px]">
