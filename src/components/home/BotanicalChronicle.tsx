@@ -51,6 +51,7 @@ function BotanicalChronicle() {
             right: { bottom: "-12%", width: "clamp(105px, 16vw, 220px)", opacity: 0.9 },
           },
         ]}
+        mobileBorderTreatment
       />
       <div className="relative z-10 mx-auto w-[92%] max-w-[1180px] sm:w-[82%]">
         <header>

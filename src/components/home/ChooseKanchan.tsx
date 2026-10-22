@@ -119,6 +119,7 @@ export default function WhyChooseKanchan() {
             right: { bottom: "-10%", width: "clamp(115px, 18vw, 245px)", opacity: 0.9 },
           },
         ]}
+        mobileBorderTreatment
       />
 
       <div className="relative z-10 mx-auto w-[92%] max-w-[1180px]">

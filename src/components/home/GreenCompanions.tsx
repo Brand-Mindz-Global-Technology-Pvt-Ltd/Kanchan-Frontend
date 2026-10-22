@@ -79,6 +79,7 @@ function GreenCompanions() {
             right: { bottom: "-12%", width: "clamp(115px, 17vw, 235px)", opacity: 0.9 },
           },
         ]}
+        mobileBorderTreatment
       />
 
       <div className="relative z-10 mx-auto w-[92%] max-w-[1240px]">

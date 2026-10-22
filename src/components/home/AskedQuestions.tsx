@@ -69,6 +69,7 @@ function AskedQuestions() {
             right: { bottom: "-8%", width: "clamp(110px, 17vw, 230px)", opacity: 0.88 },
           },
         ]}
+        mobileBorderTreatment
       />
 
       <div className="relative z-10 mx-auto w-[92%] max-w-[1240px]">

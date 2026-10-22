@@ -47,6 +47,7 @@ export default function GardenerStories() {
             right: { bottom: "-20%", width: "clamp(110px, 17vw, 230px)", opacity: 0.9 },
           },
         ]}
+        mobileBorderTreatment
       />
       <div className="relative z-10 mx-auto w-[90%] max-w-[826px] min-[1000px]:w-[82%]">
         <div className="text-center">

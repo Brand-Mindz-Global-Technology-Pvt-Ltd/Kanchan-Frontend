@@ -1,4 +1,4 @@
-
+﻿
 import gardenBanner from "../../assets/garden-banner.png";
 import HomeEdgeLeaves from "./HomeEdgeLeaves";
 import {
@@ -12,8 +12,41 @@ function GardenBanner() {
   return (
     <section
       ref={sectionRef}
-      className="relative isolate w-full overflow-hidden bg-[#FCFAF4] px-4 py-6 sm:px-6 lg:px-8"
+      className="garden-banner relative isolate w-full overflow-hidden bg-[#FCFAF4] px-2 py-3 sm:px-3 sm:py-3 lg:px-4 lg:py-3"
     >
+      <style>{`
+        @media (max-width: 640px) {
+          .garden-banner .garden-banner__left-content {
+            transform: translate(30px, 5px) !important;
+          }
+
+          .garden-banner .garden-banner__label {
+            font-size: 7px !important;
+          }
+
+          .garden-banner .garden-banner__heading {
+            font-size: 14px !important;
+          }
+
+          .garden-banner .garden-banner__description {
+            font-size: 8px !important;
+          }
+
+          .garden-banner .garden-banner__button {
+            font-size: 5px !important;
+          }
+
+          .garden-banner .garden-banner__slogan {
+            left: auto !important;
+            right: 4% !important;
+            bottom: 8% !important;
+          }
+
+          .garden-banner .garden-banner__slogan p {
+            font-size: 7px !important;
+          }
+        }
+      `}</style>
       <HomeEdgeLeaves
         placements={[
           {
@@ -25,15 +58,16 @@ function GardenBanner() {
             right: { bottom: "-20%", width: "clamp(100px, 16vw, 215px)", opacity: 0.82 },
           },
         ]}
+        mobileBorderTreatment
       />
       <div
         className="relative z-10 mx-auto overflow-hidden rounded-[12px] sm:rounded-[14px]"
         style={{
           width: "100%",
           maxWidth: "1328px",
-          aspectRatio: "3.17 / 1",
-          minHeight: "220px",
-          boxShadow: "0 8px 22px rgba(26, 67, 36, 0.12)",
+          aspectRatio: "3.8 / 1",
+minHeight: "0",
+          boxShadow: "none",
         }}
       >
         <img
@@ -53,6 +87,7 @@ function GardenBanner() {
           style={{
             background:
               "linear-gradient(90deg, rgba(4,54,28,0.68) 0%, rgba(3,57,28,0.48) 52%, rgba(3,57,28,0.16) 100%)",
+            clipPath: "inset(0 3% 8% 3% round 3% / 11%)",
           }}
         />
 
@@ -65,7 +100,7 @@ function GardenBanner() {
         >
           {/* Left content */}
           <div
-            className="flex flex-col items-start"
+            className="garden-banner__left-content flex flex-col items-start"
             style={{
               width: "min(62%, 440px)",
               minWidth: 0,
@@ -73,10 +108,10 @@ function GardenBanner() {
             }}
           >
             <p
-              className="font-bold uppercase text-white"
+              className="garden-banner__label font-bold uppercase text-white"
               style={{
                 margin: 0,
-                fontSize: "calc(clamp(5px, 0.65vw, 7px) + 5px)",
+                fontSize: "calc(clamp(5px, 0.65vw, 7px) + 3px)",
                 letterSpacing: "0.14em",
                 lineHeight: 1.4,
               }}
@@ -86,10 +121,10 @@ function GardenBanner() {
 
             <h2
               aria-label="Grow Naturally Live Beautifully."
-              className="font-serif font-bold text-white"
+              className="garden-banner__heading font-serif font-bold text-white"
               style={{
                 margin: "clamp(6px, 1.1vw, 10px) 0 0",
-                fontSize: "calc(clamp(15px, 2.05vw, 25px) + 5px)",
+                fontSize: "calc(clamp(15px, 2.05vw, 25px) + 3px)",
                 lineHeight: 1.02,
               }}
             >
@@ -100,11 +135,11 @@ function GardenBanner() {
 
             <p
               data-reveal-paragraph
-              className="text-white"
+              className="garden-banner__description text-white"
               style={{
                 maxWidth: "390px",
                 margin: "clamp(5px, 0.9vw, 9px) 0 0",
-                fontSize: "calc(clamp(6px, 0.72vw, 9px) + 5px)",
+                fontSize: "calc(clamp(6px, 0.72vw, 9px) + 3px)",
                 lineHeight: 1.4,
               }}
             >
@@ -115,13 +150,13 @@ function GardenBanner() {
 
             <a
               href="/plants"
-              className="inline-flex items-center bg-white font-semibold text-[#183B2B] transition-colors hover:bg-[#F2F7EF]"
+              className="garden-banner__button inline-flex items-center bg-white font-semibold text-[#183B2B] transition-colors hover:bg-[#F2F7EF]"
               style={{
                 gap: "8px",
                 marginTop: "clamp(8px, 1.5vw, 14px)",
                 padding: "clamp(5px, 0.8vw, 8px) clamp(9px, 1.3vw, 14px)",
                 borderRadius: "5px",
-                fontSize: "clamp(6px, 0.68vw, 9px)",
+                fontSize: "clamp(4px, calc(0.68vw - 2px), 7px)",
                 lineHeight: 1.3,
                 textDecoration: "none",
               }}
@@ -133,10 +168,10 @@ function GardenBanner() {
 
           {/* Right slogan */}
           <div
-            className="absolute flex flex-col justify-end"
+            className="garden-banner__slogan absolute flex flex-col justify-end"
             style={{
-              left: "min(calc(62% + 35px), 520px)",
-              bottom: "20%",
+              right: "4%",
+              bottom: "8%",
               display: "flex",
               alignItems: "flex-end",
               justifyContent: "flex-end",
@@ -147,7 +182,7 @@ function GardenBanner() {
               className="font-serif font-bold italic text-white"
               style={{
                 margin: 0,
-                fontSize: "clamp(11px, 1.65vw, 20px)",
+                fontSize: "clamp(6px, calc(1.2vw - 2px), 14px)",
                 lineHeight: 1.02,
                 textAlign: "left",
                 textShadow: "0 2px 8px rgba(0,0,0,0.25)",
