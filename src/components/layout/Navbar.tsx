@@ -51,7 +51,7 @@ function Navbar() {
         {/* Logo */}
         
 <img
-  src="/src/assets/kanchan-logo.png"
+              src={kanchanLogo}
   alt="Kanchan Logo"
   style={{ height: "50px", width: "auto", objectFit: "contain" }}
 />
@@ -158,3 +158,4 @@ function Navbar() {
 }
 
 export default Navbar;
+import kanchanLogo from "../../assets/kanchan-logo.png";
