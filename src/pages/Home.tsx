@@ -19,7 +19,7 @@ function Home() {
       <GardenerStories />
       <AskedQuestions />
       <BotanicalChronicle />
-      <Footer homeDecorations />
+      <Footer />
     </main>
   );
 }

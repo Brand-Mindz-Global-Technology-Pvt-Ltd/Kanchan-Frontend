@@ -16,34 +16,51 @@ function GardenBanner() {
     >
       <style>{`
         @media (max-width: 640px) {
+          .garden-banner__frame {
+            aspect-ratio: auto !important;
+            min-height: clamp(280px, 82vw, 340px) !important;
+          }
+
+          .garden-banner__content {
+            padding: 20px !important;
+          }
+
           .garden-banner .garden-banner__left-content {
-            transform: translate(30px, 5px) !important;
+            width: 70% !important;
+            transform: none !important;
           }
 
           .garden-banner .garden-banner__label {
-            font-size: 7px !important;
+            font-size: 9px !important;
           }
 
           .garden-banner .garden-banner__heading {
-            font-size: 14px !important;
+            font-size: 21px !important;
+            line-height: 1.08 !important;
           }
 
           .garden-banner .garden-banner__description {
-            font-size: 8px !important;
+            font-size: 11px !important;
+            line-height: 1.45 !important;
           }
 
           .garden-banner .garden-banner__button {
-            font-size: 5px !important;
+            gap: 6px !important;
+            margin-top: 12px !important;
+            padding: 7px 10px !important;
+            font-size: 10px !important;
           }
 
           .garden-banner .garden-banner__slogan {
             left: auto !important;
-            right: 4% !important;
-            bottom: 8% !important;
+            right: 5% !important;
+            bottom: 7% !important;
+            width: 25%;
           }
 
           .garden-banner .garden-banner__slogan p {
-            font-size: 7px !important;
+            font-size: clamp(11px, 3.4vw, 15px) !important;
+            text-align: right !important;
           }
         }
       `}</style>
@@ -61,12 +78,12 @@ function GardenBanner() {
         mobileBorderTreatment
       />
       <div
-        className="relative z-10 mx-auto overflow-hidden rounded-[12px] sm:rounded-[14px]"
+        className="garden-banner__frame relative z-10 mx-auto overflow-hidden rounded-[12px] sm:rounded-[14px]"
         style={{
           width: "100%",
           maxWidth: "1328px",
           aspectRatio: "3.8 / 1",
-minHeight: "0",
+          minHeight: "0",
           boxShadow: "none",
         }}
       >
@@ -92,7 +109,7 @@ minHeight: "0",
         />
 
         <div
-          className="absolute inset-0 flex items-stretch justify-between"
+          className="garden-banner__content absolute inset-0 flex items-stretch justify-between"
           style={{
             boxSizing: "border-box",
             padding: "clamp(16px, 2.5%, 24px) clamp(16px, 2.8%, 38px)",

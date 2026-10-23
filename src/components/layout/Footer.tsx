@@ -1,7 +1,6 @@
 import kanchanLogo from "../../assets/kanchan-logo.png";
-import HomeEdgeLeaves from "../home/HomeEdgeLeaves";
 
-export default function Footer({ homeDecorations = false }: { homeDecorations?: boolean }) {
+export default function Footer() {
   return (
     <footer
       className="relative isolate w-full overflow-hidden"
@@ -43,21 +42,6 @@ export default function Footer({ homeDecorations = false }: { homeDecorations?: 
           }
         }
       `}</style>
-
-      {homeDecorations && (
-        <HomeEdgeLeaves
-          placements={[
-            {
-              left: { top: "-12%", width: "clamp(105px, 16vw, 220px)", opacity: 0.9 },
-              right: { top: "-12%", width: "clamp(110px, 17vw, 230px)", opacity: 0.9 },
-            },
-            {
-              left: { bottom: "-18%", width: "clamp(105px, 16vw, 220px)", opacity: 0.9 },
-              right: { bottom: "-18%", width: "clamp(110px, 17vw, 230px)", opacity: 0.9 },
-            },
-          ]}
-        />
-      )}
 
       {/* Main container */}
       <div className="relative z-10 mx-auto max-w-[1140px] px-6 sm:px-8 lg:px-10" style={{ paddingTop: "38px", paddingBottom: "36px" }}>

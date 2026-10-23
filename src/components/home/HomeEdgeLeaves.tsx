@@ -1,6 +1,6 @@
 import leftBorder from "../../assets/leaves/boder/left-1.png";
 import rightBorder from "../../assets/leaves/boder/rigth-1.png";
-import type { CSSProperties } from "react";
+import { Fragment, type CSSProperties } from "react";
 
 type LeafPlacement = {
   top?: string;
@@ -23,9 +23,6 @@ function HomeEdgeLeaves({
   mobileBorderTreatment = false,
   mobileOpacity,
 }: HomeEdgeLeavesProps) {
-  const leftPlacement = placements.find((placement) => placement.left)?.left;
-  const rightPlacement = placements.find((placement) => placement.right)?.right;
-
   return (
     <>
       {mobileBorderTreatment && (
@@ -58,34 +55,43 @@ function HomeEdgeLeaves({
             : ({ "--home-edge-mobile-opacity": mobileOpacity } as CSSProperties)
         }
       >
-        {leftPlacement && (
-          <img
-            src={leftBorder}
-            alt=""
-            data-decorative-leaf
-            data-home-edge-leaf="left"
-            className="pointer-events-none absolute left-0 top-0 h-full max-w-none object-fill"
-            style={{
-              width: leftPlacement.width,
-              opacity: leftPlacement.opacity ?? 0.7,
-            }}
-          />
-        )}
+        {placements.map(({ left, right }, index) => (
+          <Fragment key={index}>
+            {left && (
+              <img
+                src={leftBorder}
+                alt=""
+                data-decorative-leaf
+                data-home-edge-leaf="left"
+                className="pointer-events-none absolute h-full max-w-none object-fill"
+                style={{
+                  left: 0,
+                  top: left.top,
+                  bottom: left.bottom,
+                  width: left.width,
+                  opacity: left.opacity ?? 0.7,
+                }}
+              />
+            )}
 
-        {rightPlacement && (
-          <img
-            src={rightBorder}
-            alt=""
-            data-decorative-leaf
-            data-home-edge-leaf="right"
-            className="pointer-events-none absolute top-0 h-full max-w-none object-fill"
-            style={{
-              right: 0,
-              width: rightPlacement.width,
-              opacity: rightPlacement.opacity ?? 0.7,
-            }}
-          />
-        )}
+            {right && (
+              <img
+                src={rightBorder}
+                alt=""
+                data-decorative-leaf
+                data-home-edge-leaf="right"
+                className="pointer-events-none absolute h-full max-w-none object-fill"
+                style={{
+                  right: 0,
+                  top: right.top,
+                  bottom: right.bottom,
+                  width: right.width,
+                  opacity: right.opacity ?? 0.7,
+                }}
+              />
+            )}
+          </Fragment>
+        ))}
       </div>
     </>
   );
