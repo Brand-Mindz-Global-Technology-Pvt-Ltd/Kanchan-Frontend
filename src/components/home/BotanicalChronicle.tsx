@@ -44,7 +44,7 @@ function BotanicalChronicle() {
         placements={[
           {
             left: { top: "0%", width: "clamp(100px, 15vw, 210px)", opacity: 0.88 },
-            right: { top: "8%", width: "clamp(100px, 15vw, 210px)", opacity: 0.88 },
+            right: { top: "0%", width: "clamp(100px, 15vw, 210px)", opacity: 0.88  },
           },
           {
             left: { bottom: "-12%", width: "clamp(105px, 16vw, 220px)", opacity: 0.9 },
