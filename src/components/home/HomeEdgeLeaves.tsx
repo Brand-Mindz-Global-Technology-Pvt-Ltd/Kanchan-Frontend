@@ -82,12 +82,13 @@ function HomeEdgeLeaves({
                 data-home-edge-leaf="right"
                 className="pointer-events-none absolute h-full max-w-none object-fill"
                 style={{
-                  right: 0,
-                  top: right.top,
-                  bottom: right.bottom,
-                  width: right.width,
-                  opacity: right.opacity ?? 0.7,
-                }}
+  right: 0,
+  top: right.top,
+  bottom: right.bottom,
+  transform: "translateY(-2px)",
+  width: right.width,
+  opacity: right.opacity ?? 0.7,
+}}
               />
             )}
           </Fragment>

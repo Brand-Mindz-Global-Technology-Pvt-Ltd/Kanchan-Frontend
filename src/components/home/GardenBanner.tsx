@@ -18,48 +18,57 @@ function GardenBanner() {
         @media (max-width: 640px) {
           .garden-banner__frame {
             aspect-ratio: auto !important;
-            min-height: clamp(280px, 82vw, 340px) !important;
           }
 
-          .garden-banner__content {
-            padding: 20px !important;
+          .garden-banner .garden-banner__content {
+            position: relative;
+            inset: auto;
+            display: flex;
+            padding: clamp(5px, 1.5vw, 7px) 5% clamp(28px, 8vw, 36px) !important;
           }
 
           .garden-banner .garden-banner__left-content {
-            width: 70% !important;
-            transform: none !important;
+            width: 62% !important;
+            max-width: 62% !important;
+            transform: translate(2vw, 1vw) !important;
+            padding-right: 0 !important;
           }
 
           .garden-banner .garden-banner__label {
-            font-size: 9px !important;
+            font-size: clamp(7px, 2.2vw, 9px) !important;
+            line-height: 1.4 !important;
           }
 
           .garden-banner .garden-banner__heading {
-            font-size: 21px !important;
-            line-height: 1.08 !important;
+            font-size: clamp(13px, 4.2vw, 18px) !important;
+            line-height: 1.02 !important;
+            margin-top: clamp(3px, 1.1vw, 5px) !important;
           }
 
           .garden-banner .garden-banner__description {
-            font-size: 11px !important;
-            line-height: 1.45 !important;
+            font-size: clamp(7px, 2.1vw, 9px) !important;
+            line-height: 1.4 !important;
+            max-width: 100% !important;
+            margin-top: clamp(3px, 0.9vw, 4px) !important;
           }
 
           .garden-banner .garden-banner__button {
-            gap: 6px !important;
-            margin-top: 12px !important;
-            padding: 7px 10px !important;
-            font-size: 10px !important;
+            gap: clamp(3px, 0.6vw, 4px) !important;
+            margin-top: clamp(4px, 1vw, 5px) !important;
+            padding: clamp(3px, 0.7vw, 4px) clamp(5px, 1vw, 7px) !important;
+            font-size: clamp(6px, 1.7vw, 7px) !important;
           }
 
           .garden-banner .garden-banner__slogan {
-            left: auto !important;
-            right: 5% !important;
-            bottom: 7% !important;
-            width: 25%;
+            right: 4% !important;
+            bottom: 8% !important;
+            width: auto !important;
+            max-width: 25% !important;
           }
 
           .garden-banner .garden-banner__slogan p {
-            font-size: clamp(11px, 3.4vw, 15px) !important;
+            font-size: clamp(8px, 2.4vw, 10px) !important;
+            line-height: 1.02 !important;
             text-align: right !important;
           }
         }
@@ -90,7 +99,7 @@ function GardenBanner() {
         <img
           src={gardenBanner}
           alt="Lush blooming garden pathway"
-          className="absolute inset-0 h-full w-full"
+          className="absolute inset-0 h-full w-full object-cover"
           style={{
             objectFit: "cover",
             objectPosition: "center",

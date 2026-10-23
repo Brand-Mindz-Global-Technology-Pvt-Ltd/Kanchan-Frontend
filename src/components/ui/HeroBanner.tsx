@@ -96,6 +96,7 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
 
           .hero-banner-mobile .hero-banner-copy {
             grid-column: 1;
+            margin-left: clamp(40px, 13vw, 80px);
           }
 
           .hero-banner-mobile .hero-banner-image {
@@ -205,6 +206,34 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
             font-size: 6px;
           }
         }
+
+        @media (min-width: 1024px) {
+          .hero-banner-mobile .hero-banner-content-shell {
+            width: auto;
+            max-width: none;
+            margin-inline: clamp(88px, 8vw, 116px);
+          }
+
+          .hero-banner-mobile .hero-banner-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+            align-items: center;
+            gap: clamp(20px, 3vw, 44px);
+          }
+
+          .hero-banner-mobile .hero-banner-copy {
+            width: auto;
+            max-width: 600px;
+            min-width: 0;
+          }
+
+          .hero-banner-mobile .hero-banner-image {
+            width: auto;
+            max-width: 620px;
+            min-width: 0;
+            margin-top: 0;
+          }
+        }
       `}</style>
       {homeDecorations && (
         <HomeEdgeLeaves
@@ -218,10 +247,11 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
               right: { bottom: "-12%", width: "clamp(110px, 17vw, 235px)", opacity: 0.9 },
             },
           ]}
+          mobileBorderTreatment
         />
       )}
 
-      <div className="relative z-10 mx-auto w-[92%] max-w-[1320px]">
+      <div className="hero-banner-content-shell relative z-10 mx-auto w-[92%] max-w-[1320px]">
         <div className="hero-banner-layout flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-10 xl:gap-14">
           
           {/* ── Left Column: Text & Features ── */}

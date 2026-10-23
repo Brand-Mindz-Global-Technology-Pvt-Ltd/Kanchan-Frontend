@@ -184,11 +184,11 @@ function OurCategories() {
         placements={[
           {
             left: { top: "4%", width: "clamp(90px, 14vw, 190px)", opacity: 0.72 },
-            right: { top: "12%", width: "clamp(85px, 13vw, 180px)", opacity: 0.68 },
+            right: { top: "4%", width: "clamp(90px, 14vw, 190px)", opacity: 0.72 },
           },
           {
             left: { bottom: "-8%", width: "clamp(105px, 16vw, 220px)", opacity: 0.9 },
-            right: { bottom: "-10%", width: "clamp(110px, 17vw, 230px)", opacity: 0.88 },
+            right: { bottom: "-8%", width: "clamp(105px, 16vw, 220px)", opacity: 0.9  },
           },
         ]}
         mobileBorderTreatment
