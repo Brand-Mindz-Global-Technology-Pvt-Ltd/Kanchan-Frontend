@@ -74,12 +74,12 @@ export default function GardenerStories() {
           </span>
         </div>
 
-        <div className="mt-5 grid grid-cols-2 gap-3 min-[640px]:grid-cols-2 min-[640px]:gap-4 min-[1000px]:grid-cols-4 min-[1000px]:gap-[14px]">
+        <div className="mt-5 flex overflow-x-auto overflow-y-hidden gap-3.5 pb-3 pt-1 snap-x snap-mandatory touch-pan-x [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:pb-0 sm:pt-0 sm:snap-none min-[1000px]:grid-cols-4 min-[1000px]:gap-[14px]">
           {testimonials.map((item) => (
             <article
               key={item.name}
               data-reveal-card
-              className="flex min-h-[198px] min-w-0 flex-col rounded-[15px] border border-[#E8E9DD] bg-white p-[14px_12px] min-[640px]:p-[18px_18px_16px] shadow-[0_4px_11px_rgba(35,55,35,0.2)]"
+              className="flex min-h-[198px] min-w-0 w-[87%] shrink-0 snap-start flex-col rounded-[15px] border border-[#E8E9DD] bg-white p-[14px_12px] shadow-[0_4px_11px_rgba(35,55,35,0.2)] sm:w-auto sm:shrink sm:snap-align-none min-[640px]:p-[18px_18px_16px]"
             >
               <div className="flex items-center gap-[10px]">
                 <img

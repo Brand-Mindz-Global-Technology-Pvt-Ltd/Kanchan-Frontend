@@ -1,4 +1,4 @@
-﻿
+
 import gardenBanner from "../../assets/garden-banner.png";
 import HomeEdgeLeaves from "./HomeEdgeLeaves";
 import {
@@ -16,60 +16,77 @@ function GardenBanner() {
     >
       <style>{`
         @media (max-width: 640px) {
+          .garden-banner {
+            padding: 6px 12px !important;
+          }
+
           .garden-banner__frame {
             aspect-ratio: auto !important;
+            height: 150px !important;
+            min-height: 150px !important;
+            border-radius: 12px !important;
+          }
+
+          .garden-banner__frame img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            object-position: center !important;
+          }
+
+          /* Hide decorative leaf/blur elements on mobile so banner image has clean edges */
+          .garden-banner .home-edge-leaves {
+            display: none !important;
+          }
+
+          /* Subtle green overlay for text readability while keeping image crisp */
+          .garden-banner .garden-banner__overlay {
+            clip-path: none !important;
+            background: linear-gradient(90deg, rgba(4,54,28,0.72) 0%, rgba(4,54,28,0.52) 55%, rgba(3,57,28,0.2) 100%) !important;
           }
 
           .garden-banner .garden-banner__content {
-            position: relative;
-            inset: auto;
-            display: flex;
-            padding: clamp(5px, 1.5vw, 7px) 5% clamp(28px, 8vw, 36px) !important;
+            position: absolute !important;
+            inset: 0 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: flex-start !important;
+            padding: 12px 16px !important;
           }
 
           .garden-banner .garden-banner__left-content {
-            width: 62% !important;
-            max-width: 62% !important;
-            transform: translate(2vw, 1vw) !important;
-            padding-right: 0 !important;
+            width: 85% !important;
+            max-width: 85% !important;
+            transform: none !important;
+            padding: 0 !important;
           }
 
-          .garden-banner .garden-banner__label {
-            font-size: clamp(7px, 2.2vw, 9px) !important;
-            line-height: 1.4 !important;
+          /* Hide description, label, and slogan on mobile */
+          .garden-banner .garden-banner__label,
+          .garden-banner .garden-banner__description,
+          .garden-banner .garden-banner__slogan {
+            display: none !important;
           }
 
+          /* Show only Heading and Button */
           .garden-banner .garden-banner__heading {
-            font-size: clamp(13px, 4.2vw, 18px) !important;
-            line-height: 1.02 !important;
-            margin-top: clamp(3px, 1.1vw, 5px) !important;
-          }
-
-          .garden-banner .garden-banner__description {
-            font-size: clamp(7px, 2.1vw, 9px) !important;
-            line-height: 1.4 !important;
-            max-width: 100% !important;
-            margin-top: clamp(3px, 0.9vw, 4px) !important;
+            display: block !important;
+            font-size: 17px !important;
+            line-height: 1.15 !important;
+            margin: 0 !important;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
           }
 
           .garden-banner .garden-banner__button {
-            gap: clamp(3px, 0.6vw, 4px) !important;
-            margin-top: clamp(4px, 1vw, 5px) !important;
-            padding: clamp(3px, 0.7vw, 4px) clamp(5px, 1vw, 7px) !important;
-            font-size: clamp(6px, 1.7vw, 7px) !important;
-          }
-
-          .garden-banner .garden-banner__slogan {
-            right: 4% !important;
-            bottom: 8% !important;
-            width: auto !important;
-            max-width: 25% !important;
-          }
-
-          .garden-banner .garden-banner__slogan p {
-            font-size: clamp(8px, 2.4vw, 10px) !important;
-            line-height: 1.02 !important;
-            text-align: right !important;
+            display: inline-flex !important;
+            margin-top: 8px !important;
+            padding: 5px 12px !important;
+            font-size: 11px !important;
+            line-height: 1.2 !important;
+            border-radius: 5px !important;
+            width: fit-content !important;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15) !important;
           }
         }
       `}</style>
@@ -85,6 +102,7 @@ function GardenBanner() {
           },
         ]}
         mobileBorderTreatment
+        mobileOpacity={0.15}
       />
       <div
         className="garden-banner__frame relative z-10 mx-auto overflow-hidden rounded-[12px] sm:rounded-[14px]"
@@ -109,7 +127,7 @@ function GardenBanner() {
 
         <div
           aria-hidden="true"
-          className="absolute inset-0"
+          className="garden-banner__overlay absolute inset-0"
           style={{
             background:
               "linear-gradient(90deg, rgba(4,54,28,0.68) 0%, rgba(3,57,28,0.48) 52%, rgba(3,57,28,0.16) 100%)",

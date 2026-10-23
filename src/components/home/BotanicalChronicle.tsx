@@ -70,7 +70,7 @@ function BotanicalChronicle() {
           </p>
         </header>
 
-        <div className="mt-[25px] grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 min-[1280px]:gap-[60px]">
+        <div className="mt-[25px] grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 min-[1280px]:gap-[60px]">
           {articles.map((article) => (
             <CategoryCard
               key={article.title}

@@ -206,7 +206,28 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
             font-size: 6px;
           }
         }
+          @media (max-width: 767px) {
+  .hero-banner-mobile .hero-banner-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
 
+  .hero-banner-mobile .hero-banner-copy {
+    order: 1;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .hero-banner-mobile .hero-banner-image {
+    order: 2;
+    width: 100%;
+    max-width: none;
+    margin-top: 0;
+  }
+}
+    
         @media (min-width: 1024px) {
           .hero-banner-mobile .hero-banner-content-shell {
             width: auto;
@@ -234,6 +255,99 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
             margin-top: 0;
           }
         }
+        @media (max-width: 767px) {
+  .hero-banner-mobile .hero-banner-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .hero-banner-mobile .hero-banner-copy {
+    order: 1;
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .hero-banner-mobile .hero-banner-heading,
+  .hero-banner-mobile h1 {
+    width: 100%;
+    text-align: center;
+    font-size: 26px;
+    line-height: 1.3;
+  }
+
+  .hero-banner-mobile .hero-banner-description {
+    width: 100%;
+    max-width: none;
+    margin-top: 12px;
+    font-size: 15px;
+    line-height: 1.6;
+    text-align: center;
+    color: #43584b;
+  }
+
+  .hero-banner-mobile .hero-banner-badge {
+    margin-inline: auto;
+    font-size: 10px;
+    padding: 6px 8px;
+  }
+
+  .hero-banner-mobile .hero-banner-ctas {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .hero-banner-mobile .hero-banner-ctas a {
+    font-size: 12px;
+    padding: 9px 12px;
+    white-space: normal;
+  }
+
+  .hero-banner-mobile .hero-banner-features {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: 14px;
+}
+
+.hero-banner-mobile [data-reveal-card] {
+  min-width: 0;
+  padding: 5px 3px;
+  gap: 3px;
+}
+
+.hero-banner-mobile [data-reveal-card] div > span:first-child {
+  font-size: 8px;
+}
+
+.hero-banner-mobile [data-reveal-card] div > span:last-child {
+  font-size: 7px;
+}
+
+  .hero-banner-mobile [data-reveal-card] {
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .hero-banner-mobile [data-reveal-card] div > span:first-child {
+    font-size: 12px;
+  }
+
+  .hero-banner-mobile [data-reveal-card] div > span:last-child {
+    font-size: 10px;
+  }
+
+  .hero-banner-mobile .hero-banner-image {
+    order: 2;
+    width: 100%;
+    max-width: none;
+    margin-top: 0;
+  }
+}
+ 
       `}</style>
       {homeDecorations && (
         <HomeEdgeLeaves

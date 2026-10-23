@@ -146,15 +146,14 @@ export default function WhyChooseKanchan() {
           </p>
         </div>
 
-        {/* Feature Cards Grid (4 in one row on desktop) */}
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-[27px]">
+        {/* Feature Cards Grid */}
+        <div className="flex overflow-x-auto overflow-y-hidden gap-3.5 pb-4 pt-1 snap-x snap-mandatory touch-pan-x [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:pb-0 sm:pt-0 sm:snap-none lg:grid-cols-4 lg:gap-[27px]">
           {features.map((feature) => (
             <article
               key={feature.title}
               data-reveal-card
-              className="group flex h-full flex-col rounded-[20px] border border-[#E6EDE0]/70 bg-white p-4 shadow-[0px_8px_24px_0px_rgba(26,67,36,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0px_12px_32px_0px_rgba(26,67,36,0.1)] sm:p-7"
+              className="group flex h-full min-w-0 w-[87%] shrink-0 snap-start flex-col rounded-[20px] border border-[#E6EDE0]/70 bg-white p-4 shadow-[0px_8px_24px_0px_rgba(26,67,36,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0px_12px_32px_0px_rgba(26,67,36,0.1)] sm:w-auto sm:shrink sm:snap-align-none sm:p-7"
             >
-              {/* Pale green rounded square with green icon */}
               <div
                 className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-[#DFF1D9] text-[#215732]"
                 aria-hidden="true"
@@ -162,12 +161,10 @@ export default function WhyChooseKanchan() {
                 {feature.icon}
               </div>
 
-              {/* Title */}
               <h3 className="mt-4 text-[15.5px] font-bold leading-snug text-[#183B2B] sm:text-[16px]">
                 {feature.title}
               </h3>
 
-              {/* Description */}
               <p className="mt-2 text-[12.5px] leading-[1.45] text-[#5E7163] sm:text-[13px]">
                 {feature.description}
               </p>
