@@ -38,10 +38,7 @@ export default function GardenerStories() {
     <section ref={sectionRef} className="relative isolate w-full overflow-hidden bg-[#FCFAF4] py-[28px]">
       <HomeEdgeLeaves
         placements={[
-          {
-            left: { top: "-20%", width: "clamp(100px, 16vw, 220px)", opacity: 0.88 },
-            right: { top: "-15%", width: "clamp(110px, 17vw, 230px)", opacity: 0.9 },
-          },
+
           {
             left: { bottom: "-25%", width: "clamp(115px, 18vw, 240px)", opacity: 0.92 },
             right: { bottom: "-20%", width: "clamp(110px, 17vw, 230px)", opacity: 0.9 },
@@ -49,7 +46,34 @@ export default function GardenerStories() {
         ]}
         mobileBorderTreatment
       />
-      <div className="relative z-10 mx-auto w-[90%] max-w-[826px] min-[1000px]:w-[82%]">
+      <style>{`
+        @media (min-width: 1000px) {
+          .gardener-container {
+            max-width: 1040px !important;
+            width: 88% !important;
+          }
+          .gardener-card {
+            height: 100% !important;
+            min-height: 245px !important;
+            padding: 10px 10px 8px !important;
+            width: calc(100% - 3px) !important;
+            justify-self: center !important;
+          }
+          .gardener-name {
+            font-size: 20px !important;
+            line-height: 1.25 !important;
+          }
+          .gardener-stars {
+            font-size: 17px !important;
+            line-height: 1.2 !important;
+          }
+          .gardener-review {
+            font-size: 18px !important;
+            line-height: 26px !important;
+          }
+        }
+      `}</style>
+      <div className="gardener-container relative z-10 mx-auto w-[90%] max-w-[826px] min-[1000px]:w-[88%] min-[1000px]:max-w-[1040px]">
         <div className="text-center">
           <p className="text-[10px] font-bold leading-3 uppercase tracking-[1.2px] text-[#5B944B]">
             GARDENER STORIES
@@ -74,12 +98,12 @@ export default function GardenerStories() {
           </span>
         </div>
 
-        <div className="mt-5 flex overflow-x-auto overflow-y-hidden gap-3.5 pb-3 pt-1 snap-x snap-mandatory touch-pan-x [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:pb-0 sm:pt-0 sm:snap-none min-[1000px]:grid-cols-4 min-[1000px]:gap-[14px]">
+        <div className="mt-5 flex overflow-x-auto overflow-y-hidden gap-3.5 pb-3 pt-1 snap-x snap-mandatory touch-pan-x [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:pb-0 sm:pt-0 sm:snap-none min-[1000px]:grid-cols-4 min-[1000px]:gap-3.5 xl:gap-4">
           {testimonials.map((item) => (
             <article
               key={item.name}
               data-reveal-card
-              className="flex min-h-[198px] min-w-0 w-[87%] shrink-0 snap-start flex-col rounded-[15px] border border-[#E8E9DD] bg-white p-[14px_12px] shadow-[0_4px_11px_rgba(35,55,35,0.2)] sm:w-auto sm:shrink sm:snap-align-none min-[640px]:p-[18px_18px_16px]"
+              className="gardener-card flex min-h-[198px] min-w-0 w-[87%] shrink-0 snap-start flex-col rounded-[15px] border border-[#E8E9DD] bg-white p-[14px_12px] shadow-[0_4px_11px_rgba(35,55,35,0.2)] sm:w-auto sm:shrink sm:snap-align-none min-[640px]:p-[18px_18px_16px] min-[1000px]:h-full min-[1000px]:min-h-[245px] min-[1000px]:w-[calc(100%-3px)] min-[1000px]:justify-self-center min-[1000px]:p-[10px_10px_8px]"
             >
               <div className="flex items-center gap-[10px]">
                 <img
@@ -89,19 +113,19 @@ export default function GardenerStories() {
                 />
 
                 <div className="min-w-0">
-                  <h3 className="text-[13px] leading-4 font-medium text-[#294638]">
+                  <h3 className="gardener-name text-[18px] leading-snug font-medium text-[#294638] sm:text-[13px] sm:leading-4 min-[1000px]:text-[20px] min-[1000px]:leading-[25px]">
                     {item.name}
                   </h3>
                   <div
                     aria-label="5 out of 5 stars"
-                    className="mt-[2px] text-[11px] leading-3 tracking-[0.01em] text-[#F2A900]"
+                    className="gardener-stars mt-[2px] text-[16px] leading-tight tracking-[0.01em] text-[#F2A900] sm:text-[11px] sm:leading-3 min-[1000px]:text-[17px] min-[1000px]:leading-tight"
                   >
                     ★★★★★
                   </div>
                 </div>
               </div>
 
-              <p className="mt-[14px] font-serif text-[12px] leading-[19px] text-[#5D7062]">
+              <p className="gardener-review mt-[14px] font-serif text-[17px] leading-[25px] text-[#5D7062] sm:text-[12px] sm:leading-[19px] min-[1000px]:mt-2.5 min-[1000px]:text-[18px] min-[1000px]:leading-[26px]">
                 “{item.review}”
               </p>
             </article>

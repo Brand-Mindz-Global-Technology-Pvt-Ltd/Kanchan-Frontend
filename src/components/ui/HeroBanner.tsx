@@ -1,5 +1,9 @@
-import heroImage from "../../assets/hero-image.png";
+import { useEffect, useRef } from "react";
+import heroImage from "../../assets/hero-image.jpg";
 import leafTwo from "../../assets/leaves/leaf-2.png";
+import leafThree from "../../assets/leaves/leaf-3.png";
+import leafFour from "../../assets/leaves/leaf-4.png";
+import leafFive from "../../assets/leaves/leaf-5.png";
 import HomeEdgeLeaves from "../home/HomeEdgeLeaves";
 import {
   AnimatedHeadingText,
@@ -18,7 +22,7 @@ const features = [
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="h-4 w-4"
+        className="h-6 w-6"
         aria-hidden="true"
       >
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -68,6 +72,33 @@ const features = [
 
 function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) {
   const sectionRef = useDecorativeLeafReveal<HTMLElement>();
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  // Replay the hero image fade-up animation each time the section enters the viewport
+  useEffect(() => {
+    const img = imgRef.current;
+    const section = sectionRef.current;
+    if (!img || !section || typeof IntersectionObserver === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Remove then re-add the class to restart the animation
+            img.classList.remove("hero-img-animate");
+            // Force reflow so the browser registers the class removal
+            void img.offsetWidth;
+            img.classList.add("hero-img-animate");
+          }
+        });
+      },
+      { threshold: 0.15 },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [sectionRef]);
 
   return (
     <section
@@ -159,28 +190,28 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
 
           .hero-banner-mobile [data-reveal-card] {
             min-width: 0;
-            gap: 3px;
-            padding: 3px;
-            border-radius: 7px;
+            gap: 5px;
+            padding: 5px;
+            border-radius: 8px;
           }
 
           .hero-banner-mobile [data-reveal-card] > span {
-            width: 16px;
-            height: 16px;
-            border-radius: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
           }
 
           .hero-banner-mobile [data-reveal-card] svg {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
           }
 
           .hero-banner-mobile [data-reveal-card] div > span:first-child {
-            font-size: 6px;
+            font-size: 7px;
           }
 
           .hero-banner-mobile [data-reveal-card] div > span:last-child {
-            font-size: 5px;
+            font-size: 6px;
           }
         }
 
@@ -194,16 +225,16 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
           }
 
           .hero-banner-mobile [data-reveal-card] > span {
-            width: 18px;
-            height: 18px;
+            width: 22px;
+            height: 22px;
           }
 
           .hero-banner-mobile [data-reveal-card] div > span:first-child {
-            font-size: 7px;
+            font-size: 8px;
           }
 
           .hero-banner-mobile [data-reveal-card] div > span:last-child {
-            font-size: 6px;
+            font-size: 7px;
           }
         }
           @media (max-width: 767px) {
@@ -286,7 +317,7 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
     font-size: 15px;
     line-height: 1.6;
     text-align: center;
-    color: #43584b;
+    color: #43584B;
   }
 
   .hero-banner-mobile .hero-banner-badge {
@@ -315,29 +346,29 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
 
 .hero-banner-mobile [data-reveal-card] {
   min-width: 0;
-  padding: 5px 3px;
-  gap: 3px;
+  padding: 7px 5px;
+  gap: 5px;
 }
 
 .hero-banner-mobile [data-reveal-card] div > span:first-child {
-  font-size: 8px;
+  font-size: 10px;
 }
 
 .hero-banner-mobile [data-reveal-card] div > span:last-child {
-  font-size: 7px;
+  font-size: 8px;
 }
 
   .hero-banner-mobile [data-reveal-card] {
-    padding: 10px;
-    gap: 8px;
+    padding: 14px;
+    gap: 12px;
   }
 
   .hero-banner-mobile [data-reveal-card] div > span:first-child {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .hero-banner-mobile [data-reveal-card] div > span:last-child {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .hero-banner-mobile .hero-banner-image {
@@ -348,26 +379,127 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
   }
 }
  
+
+        @keyframes hero-img-fadein {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .hero-img-animate {
+          animation: hero-img-fadein 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .hero-img-animate {
+            animation: none;
+          }
+        }
+
+        /* ── Leaf float animations ── */
+        @keyframes leaf-float {
+          0%, 100% { transform: translateY(0px); }
+          50%       { transform: translateY(-8px); }
+        }
+
+        @keyframes leaf-float-spin {
+          0%   { transform: translateY(0px) rotate(0deg); }
+          25%  { transform: translateY(-6px) rotate(2deg); }
+          50%  { transform: translateY(-10px) rotate(-2deg); }
+          75%  { transform: translateY(-4px) rotate(1deg); }
+          100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .leaf-float {
+          animation: leaf-float 5s ease-in-out infinite;
+        }
+        .leaf-float-alt {
+          animation: leaf-float 6.5s ease-in-out infinite;
+          animation-delay: -2.5s;
+        }
+        .leaf-float-spin {
+          animation: leaf-float-spin 7s ease-in-out infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .leaf-float,
+          .leaf-float-alt,
+          .leaf-float-spin {
+            animation: none;
+          }
+        }
       `}</style>
       {homeDecorations && (
         <HomeEdgeLeaves
           placements={[
             {
-              left: { top: "-8%", width: "clamp(110px, 18vw, 250px)", opacity: 0.94 },
-              right: { top: "-4%", width: "clamp(120px, 19vw, 260px)", opacity: 0.94 },
-            },
-            {
-              left: { bottom: "-10%", width: "clamp(100px, 16vw, 220px)", opacity: 0.9 },
-              right: { bottom: "-12%", width: "clamp(110px, 17vw, 235px)", opacity: 0.9 },
+              left: {
+                top: "0",
+                width: "clamp(80px, 13vw, 210px)",
+                height: "100%",
+                opacity: 0.92,
+              },
+              right: {
+                top: "0",
+                width: "clamp(80px, 13vw, 210px)",
+                height: "100%",
+                opacity: 0.92,
+              },
             },
           ]}
           mobileBorderTreatment
+          mobileOpacity={0.5}
         />
+      )}
+
+      {/* Scattered floating leaf decorations – natural botanical distribution */}
+      {homeDecorations && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden sm:block"
+        >
+          {/* ── Zone 1: Heading / badge area ── */}
+          <img src={leafThree} alt="" className="leaf-float absolute" style={{ top: "6%", left: "50%", width: "clamp(30px, 3.3vw, 48px)", opacity: 0.38, transform: "rotate(18deg)" }} />
+          <img src={leafFive} alt="" className="leaf-float-alt absolute" style={{ top: "10%", right: "clamp(180px, 26vw, 320px)", width: "clamp(27px, 3vw, 42px)", opacity: 0.32, transform: "rotate(-22deg)" }} />
+
+          {/* ── Zone 2: Description / paragraph area ── */}
+          <img src={leafFive} alt="" className="leaf-float absolute" style={{ top: "44%", left: "clamp(200px, 32vw, 390px)", width: "clamp(24px, 2.55vw, 36px)", opacity: 0.28, transform: "rotate(30deg)" }} />
+          <img src={leafThree} alt="" className="leaf-float-alt absolute" style={{ top: "38%", left: "52%", width: "clamp(33px, 3.45vw, 51px)", opacity: 0.30, transform: "rotate(-12deg)" }} />
+
+          {/* ── Zone 3: Above / beside the hero image frame ── */}
+          <img src={leafFive} alt="" className="leaf-float absolute" style={{ top: "8%", right: "clamp(100px, 15vw, 195px)", width: "clamp(30px, 3.15vw, 45px)", opacity: 0.35, transform: "rotate(40deg)" }} />
+          <img src={leafThree} alt="" className="leaf-float-alt absolute" style={{ top: "50%", right: "clamp(95px, 14vw, 185px)", width: "clamp(27px, 2.85vw, 42px)", opacity: 0.28, transform: "rotate(-35deg)" }} />
+
+          {/* ── Zone 4: Near the bottom of the hero image frame ── */}
+          <img src={leafFive} alt="" className="leaf-float absolute" style={{ bottom: "12%", right: "clamp(160px, 23vw, 300px)", width: "clamp(27px, 3vw, 42px)", opacity: 0.30, transform: "rotate(25deg)" }} />
+          <img src={leafThree} alt="" className="leaf-float-alt absolute" style={{ bottom: "8%", left: "48%", width: "clamp(24px, 2.7vw, 39px)", opacity: 0.25, transform: "rotate(-18deg)" }} />
+
+          {/* ── NEW Zone A: Upper-left open background ── */}
+          <img src={leafFour} alt="" className="leaf-float absolute" style={{ top: "5%", left: "clamp(180px, 26vw, 340px)", width: "clamp(26px, 2.8vw, 40px)", opacity: 0.27, transform: "rotate(-45deg)" }} />
+          <img src={leafThree} alt="" className="leaf-float-alt absolute" style={{ top: "20%", left: "clamp(155px, 22vw, 290px)", width: "clamp(22px, 2.4vw, 36px)", opacity: 0.22, transform: "rotate(55deg)" }} />
+
+          {/* ── NEW Zone B: Lower-left backstop ── */}
+          <img src={leafFive} alt="" className="leaf-float absolute" style={{ top: "62%", left: "clamp(165px, 24vw, 310px)", width: "clamp(24px, 2.6vw, 38px)", opacity: 0.24, transform: "rotate(-50deg)" }} />
+          <img src={leafFour} alt="" className="leaf-float-alt absolute" style={{ bottom: "5%", left: "clamp(170px, 25vw, 320px)", width: "clamp(20px, 2.2vw, 32px)", opacity: 0.20, transform: "rotate(38deg)" }} />
+
+          {/* ── NEW Zone C: Far-right strip ── */}
+          <img src={leafFive} alt="" className="leaf-float absolute" style={{ top: "26%", right: "clamp(88px, 12vw, 160px)", width: "clamp(22px, 2.4vw, 34px)", opacity: 0.26, transform: "rotate(60deg)" }} />
+          <img src={leafThree} alt="" className="leaf-float-alt absolute" style={{ bottom: "22%", right: "clamp(90px, 13vw, 168px)", width: "clamp(24px, 2.5vw, 36px)", opacity: 0.23, transform: "rotate(-48deg)" }} />
+
+          {/* ── NEW Zone D: Center gaps ── */}
+          <img src={leafFour} alt="" className="leaf-float absolute" style={{ top: "3%", left: "40%", width: "clamp(20px, 2.1vw, 30px)", opacity: 0.22, transform: "rotate(-28deg)" }} />
+          <img src={leafFive} alt="" className="leaf-float-alt absolute" style={{ bottom: "18%", left: "44%", width: "clamp(22px, 2.3vw, 34px)", opacity: 0.24, transform: "rotate(42deg)" }} />
+        </div>
       )}
 
       <div className="hero-banner-content-shell relative z-10 mx-auto w-[92%] max-w-[1320px]">
         <div className="hero-banner-layout flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-10 xl:gap-14">
-          
+
           {/* ── Left Column: Text & Features ── */}
           <div className="hero-banner-copy relative z-10 w-full shrink-0 lg:max-w-[560px] xl:max-w-[600px]">
             {/* Badge */}
@@ -408,14 +540,14 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
                 src={leafTwo}
                 alt=""
                 aria-hidden="true"
-                className="pointer-events-none absolute right-4 top-1/2 hidden h-auto w-12 -translate-y-1/2 rotate-25 opacity-75 sm:block lg:right-6 lg:w-14"
+                className="leaf-float-spin pointer-events-none absolute right-4 top-1/2 hidden h-auto w-12 -translate-y-1/2 rotate-25 opacity-75 sm:block lg:right-6 lg:w-14"
               />
             </div>
 
             {/* Paragraph */}
             <p
               data-reveal-paragraph
-              className="hero-banner-description mt-4 max-w-[460px] text-[14px] leading-relaxed text-[#637365] sm:mt-5 sm:text-[15px]"
+              className="hero-banner-description mt-4 max-w-[460px] text-[14px] leading-relaxed text-[#43584B] sm:mt-5 sm:text-[15px]"
             >
               Everything you need to grow, nurture, and create your own serene
               sanctuary. From rare tropical foliage to seeds and organic
@@ -439,21 +571,21 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
             </div>
 
             {/* 3 Feature cards */}
-            <div className="hero-banner-features mt-6 grid max-w-[500px] grid-cols-3 gap-2 sm:mt-10 sm:gap-3">
+            <div className="hero-banner-features mt-6 grid max-w-[800px] grid-cols-3 gap-3 sm:mt-10 sm:gap-4">
               {features.map((feature) => (
                 <div
                   key={feature.title}
                   data-reveal-card
-                  className="flex min-w-0 flex-col items-start gap-1.5 rounded-[14px] border border-[#E7EADF] bg-white/95 p-2 shadow-[0px_4px_16px_0px_rgba(26,67,36,0.06)] sm:flex-row sm:items-center sm:gap-2.5 sm:rounded-[16px] sm:p-2.5"
+                  className="flex min-w-0 flex-col items-start gap-3 rounded-[20px] border border-[#E7EADF] bg-white/95 p-4 shadow-[0px_4px_16px_0px_rgba(26,67,36,0.06)] sm:flex-row sm:items-center sm:gap-4 sm:rounded-[22px] sm:p-6"
                 >
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[10px] bg-[#E2F1DA] text-[#267445] sm:h-9 sm:w-9">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[12px] bg-[#E2F1DA] text-[#267445] sm:h-12 sm:w-12">
                     {feature.icon}
                   </span>
-                  <div className="min-w-0 flex-1">
-                    <span className="block truncate text-[10.5px] font-bold leading-tight text-[#18382B] sm:text-[11.5px]">
+                  <div className="flex-1">
+                    <span className="block text-[12px] font-bold leading-tight text-[#18382B] sm:text-[14px]">
                       {feature.title}
                     </span>
-                    <span className="mt-0.5 block truncate text-[8.5px] text-[#718073] sm:text-[9.5px]">
+                    <span className="mt-0.5 block text-[10px] text-[#718073] sm:text-[11px]">
                       {feature.detail}
                     </span>
                   </div>
@@ -471,9 +603,10 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
               }}
             >
               <img
+                ref={imgRef}
                 src={heroImage}
                 alt="Potted blooming garden plants on display with Green Happier You"
-                className="h-full w-full object-cover object-center"
+                className="hero-img-animate h-full w-full object-cover object-center transition-transform duration-500 ease-out hover:scale-[1.02]"
               />
             </div>
           </div>

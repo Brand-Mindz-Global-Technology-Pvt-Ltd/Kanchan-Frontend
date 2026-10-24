@@ -4,6 +4,9 @@ import Footer from "./components/layout/Footer.tsx";
 import HeroBanner from "./components/ui/HeroBanner.tsx";
 import AboutUs from "./pages/AboutUs.tsx";
 import ContactUs from "./pages/contactus.tsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
+import TermsConditions from "./pages/TermsConditions.tsx";
+import ShippingPolicy from "./pages/ShippingPolicy.tsx";
 import Home from "./pages/Home";
 
 function App() {
@@ -29,7 +32,15 @@ function App() {
         !target.getAttribute("download")
       ) {
         const path = target.pathname.toLowerCase();
-        if (path === "/contact" || path === "/contactus" || path === "/about" || path === "/") {
+        if (
+          path === "/contact" ||
+          path === "/contactus" ||
+          path === "/about" ||
+          path === "/" ||
+          path === "/privacy-policy" ||
+          path === "/terms-conditions" ||
+          path === "/shipping-policy"
+        ) {
           e.preventDefault();
           window.history.pushState({}, "", target.href);
           setCurrentPath(path);
@@ -46,6 +57,9 @@ function App() {
     };
   }, []);
 
+  const isShippingPolicyPage = currentPath === "/shipping-policy";
+  const isTermsConditionsPage = currentPath === "/terms-conditions";
+  const isPrivacyPolicyPage = currentPath === "/privacy-policy";
   const isContactPage =
     currentPath === "/contact" || currentPath === "/contactus";
   const isHomePage = currentPath === "/";
@@ -59,7 +73,13 @@ function App() {
       ) : (
         <>
           <main>
-            {isContactPage ? (
+            {isShippingPolicyPage ? (
+              <ShippingPolicy />
+            ) : isTermsConditionsPage ? (
+              <TermsConditions />
+            ) : isPrivacyPolicyPage ? (
+              <PrivacyPolicy />
+            ) : isContactPage ? (
               <ContactUs />
             ) : (
               <>

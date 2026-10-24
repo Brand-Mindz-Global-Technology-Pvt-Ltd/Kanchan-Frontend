@@ -6,6 +6,7 @@ type LeafPlacement = {
   top?: string;
   bottom?: string;
   width: string;
+  height?: string;
   opacity?: number;
 };
 
@@ -29,9 +30,8 @@ function HomeEdgeLeaves({
         <style>{`
           @media (max-width: 640px) {
             .home-edge-leaves--mobile-border [data-home-edge-leaf] {
-              width: clamp(100px, 28vw, 120px) !important;
-              opacity: var(--home-edge-mobile-opacity, 0.4) !important;
-              object-fit: cover;
+              width: clamp(72px, 22vw, 100px) !important;
+              opacity: var(--home-edge-mobile-opacity, 0.55) !important;
             }
 
             .home-edge-leaves--mobile-border [data-home-edge-leaf="left"] {
@@ -63,13 +63,16 @@ function HomeEdgeLeaves({
                 alt=""
                 data-decorative-leaf
                 data-home-edge-leaf="left"
-                className="pointer-events-none absolute h-full max-w-none object-fill"
+                className="pointer-events-none absolute max-w-none"
                 style={{
                   left: 0,
-                  top: left.top,
+                  top: left.top ?? 0,
                   bottom: left.bottom,
                   width: left.width,
-                  opacity: left.opacity ?? 0.7,
+                  height: left.height ?? "100%",
+                  objectFit: "cover",
+                  objectPosition: "left center",
+                  opacity: left.opacity ?? 0.9,
                 }}
               />
             )}
@@ -80,15 +83,17 @@ function HomeEdgeLeaves({
                 alt=""
                 data-decorative-leaf
                 data-home-edge-leaf="right"
-                className="pointer-events-none absolute h-full max-w-none object-fill"
+                className="pointer-events-none absolute max-w-none"
                 style={{
-  right: 0,
-  top: right.top,
-  bottom: right.bottom,
-  transform: "translateY(-2px)",
-  width: right.width,
-  opacity: right.opacity ?? 0.7,
-}}
+                  right: 0,
+                  top: right.top ?? 0,
+                  bottom: right.bottom,
+                  width: right.width,
+                  height: right.height ?? "100%",
+                  objectFit: "cover",
+                  objectPosition: "right center",
+                  opacity: right.opacity ?? 0.9,
+                }}
               />
             )}
           </Fragment>

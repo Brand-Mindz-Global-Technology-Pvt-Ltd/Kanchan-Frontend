@@ -24,7 +24,10 @@ const features: FeatureItem[] = [
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="h-5 w-5"
+        width="26"
+        height="26"
+        className="choose-kanchan-icon h-[26px] w-[26px] shrink-0 sm:h-5 sm:w-5"
+        style={{ width: "26px", height: "26px", flexShrink: 0 }}
         aria-hidden="true"
       >
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -44,7 +47,10 @@ const features: FeatureItem[] = [
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="h-5 w-5"
+        width="26"
+        height="26"
+        className="choose-kanchan-icon h-[26px] w-[26px] shrink-0 sm:h-5 sm:w-5"
+        style={{ width: "26px", height: "26px", flexShrink: 0 }}
         aria-hidden="true"
       >
         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
@@ -65,7 +71,10 @@ const features: FeatureItem[] = [
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="h-5 w-5"
+        width="26"
+        height="26"
+        className="choose-kanchan-icon h-[26px] w-[26px] shrink-0 sm:h-5 sm:w-5"
+        style={{ width: "26px", height: "26px", flexShrink: 0 }}
         aria-hidden="true"
       >
         <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
@@ -87,7 +96,10 @@ const features: FeatureItem[] = [
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="h-5 w-5"
+        width="26"
+        height="26"
+        className="choose-kanchan-icon h-[26px] w-[26px] shrink-0 sm:h-5 sm:w-5"
+        style={{ width: "26px", height: "26px", flexShrink: 0 }}
         aria-hidden="true"
       >
         <path d="M7 20h10" />
@@ -108,6 +120,37 @@ export default function WhyChooseKanchan() {
       className="relative isolate w-full overflow-hidden bg-[linear-gradient(180deg,#F0F4DF_0%,#E8EFD8_100%)] pb-[88px] pt-[70px]"
       aria-labelledby="choose-kanchan-heading"
     >
+      <style>{`
+        @media (max-width: 639px) {
+          .choose-kanchan-card {
+            height: 150px !important;
+            min-height: 150px !important;
+          }
+
+          .choose-kanchan-card svg {
+            width: 26px !important;
+            height: 26px !important;
+          }
+
+          .choose-kanchan-title {
+            font-size: 19px !important;
+            line-height: 1.25 !important;
+          }
+
+          .choose-kanchan-desc {
+            font-size: 16.5px !important;
+            line-height: 1.35 !important;
+          }
+        }
+
+        @media (min-width: 640px) {
+          .choose-kanchan-card svg {
+            width: 20px !important;
+            height: 20px !important;
+          }
+        }
+      `}</style>
+
       <HomeEdgeLeaves
         placements={[
           {
@@ -147,27 +190,41 @@ export default function WhyChooseKanchan() {
         </div>
 
         {/* Feature Cards Grid */}
-        <div className="flex overflow-x-auto overflow-y-hidden gap-3.5 pb-4 pt-1 snap-x snap-mandatory touch-pan-x [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:pb-0 sm:pt-0 sm:snap-none lg:grid-cols-4 lg:gap-[27px]">
+        <div className="flex overflow-x-auto overflow-y-hidden gap-3.5 pb-4 pt-1 snap-x snap-mandatory touch-pan-x [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:pb-0 sm:pt-0 sm:snap-none lg:grid-cols-4 lg:gap-3.5 xl:gap-5">
           {features.map((feature) => (
             <article
               key={feature.title}
               data-reveal-card
-              className="group flex h-full min-w-0 w-[87%] shrink-0 snap-start flex-col rounded-[20px] border border-[#E6EDE0]/70 bg-white p-4 shadow-[0px_8px_24px_0px_rgba(26,67,36,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0px_12px_32px_0px_rgba(26,67,36,0.1)] sm:w-auto sm:shrink sm:snap-align-none sm:p-7"
+              className="choose-kanchan-card group flex h-[150px] min-h-[150px] min-w-0 w-[calc(87%-20px)] shrink-0 snap-start flex-row items-center rounded-[20px] border border-[#E6EDE0]/70 bg-white p-4 shadow-[0px_8px_24px_0px_rgba(26,67,36,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0px_12px_32px_0px_rgba(26,67,36,0.1)] sm:h-full sm:min-h-0 sm:w-auto sm:shrink sm:snap-align-none sm:p-5 lg:px-3.5 lg:py-5 xl:px-5 xl:py-6"
             >
               <div
                 className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-[#DFF1D9] text-[#215732]"
+                style={{ flexShrink: 0 }}
                 aria-hidden="true"
               >
                 {feature.icon}
               </div>
 
-              <h3 className="mt-4 text-[15.5px] font-bold leading-snug text-[#183B2B] sm:text-[16px]">
-                {feature.title}
-              </h3>
+              <div
+                className="ml-2.5 mr-0 block h-12 w-px shrink-0 bg-[#8FA887] sm:mx-3.5"
+                style={{
+                  width: "1px",
+                  height: "48px",
+                  backgroundColor: "#8FA887",
+                  flexShrink: 0,
+                }}
+                aria-hidden="true"
+              />
 
-              <p className="mt-2 text-[12.5px] leading-[1.45] text-[#5E7163] sm:text-[13px]">
-                {feature.description}
-              </p>
+              <div className="flex min-w-0 flex-1 flex-col justify-center pl-3.5 sm:pl-0">
+                <h3 className="choose-kanchan-title text-[19px] font-bold leading-snug text-[#183B2B] sm:text-[14.5px] xl:text-[15.5px]">
+                  {feature.title}
+                </h3>
+
+                <p className="choose-kanchan-desc mt-1 text-[16.5px] leading-[1.35] text-[#5E7163] sm:text-[12px] xl:text-[12.5px]">
+                  {feature.description}
+                </p>
+              </div>
             </article>
           ))}
         </div>

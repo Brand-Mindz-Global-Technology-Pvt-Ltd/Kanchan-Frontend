@@ -266,9 +266,9 @@ export default function Footer() {
           </span>
           <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
             {[
-              { name: "Privacy Policy", href: "#privacy" },
-              { name: "Terms & Conditions", href: "#terms" },
-              { name: "About Us", href: "/about" },
+              { name: "Privacy Policy", href: "/privacy-policy" },
+              { name: "Terms & Conditions", href: "/terms-conditions" },
+              { name: "Shipping Policy", href: "/shipping-policy" },
             ].map((link) => (
               <a
                 key={link.name}
