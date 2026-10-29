@@ -92,14 +92,14 @@ function GreenCompanions() {
           <h2
             id="companions-heading"
             aria-label="Meet Your New Green Companions"
-            className="mt-2 font-serif text-[28px] font-bold leading-tight text-[#1B3B2F] sm:text-[34px] lg:text-[40px]"
+            className="mx-auto mt-2 max-w-[270px] font-serif text-[23px] font-bold leading-tight text-[#1B3B2F] sm:max-w-none sm:text-[34px] lg:text-[40px]"
           >
             <AnimatedHeadingText text="Meet Your New Green Companions" />
           </h2>
 
           <p
             data-reveal-paragraph
-            className="mx-auto mt-2.5 max-w-[620px] text-[13px] leading-relaxed text-[#5E7163] sm:text-[14px]"
+            className="mx-auto mt-2.5 max-w-[270px] text-[12px] leading-relaxed text-black sm:text-[#5E7163] sm:max-w-[620px] sm:text-[14px]"
           >
             Beautiful, handpicked plants ready to bring timeless green, vitality,
             and peace to any garden or home.

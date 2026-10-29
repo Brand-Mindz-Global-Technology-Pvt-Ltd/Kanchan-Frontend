@@ -54,17 +54,17 @@ function BotanicalChronicle() {
         mobileBorderTreatment
       />
       <div className="relative z-10 mx-auto w-[92%] max-w-[1180px] sm:w-[82%]">
-        <header>
+        <header className="mx-auto max-w-[270px] text-center sm:max-w-none sm:text-left sm:translate-x-[30px]">
           <p className="text-[12px] font-bold leading-4 tracking-[0.16em] text-[#4A7C43]">
             THE BOTANICAL CHRONICLE
           </p>
           <h2
             aria-label="Get Inspired to Grow"
-            className="mt-[18px] font-serif text-[34px] font-bold leading-10 text-[#18382B]"
+            className="mt-2 font-serif text-[23px] font-bold leading-tight text-[#18382B] sm:mt-[18px] sm:text-[34px] sm:leading-10"
           >
             <AnimatedHeadingText text="Get Inspired to Grow" />
           </h2>
-          <p data-reveal-paragraph className="mt-3 text-[14px] leading-5 text-[#718074]">
+          <p data-reveal-paragraph className="mt-2 text-[12px] leading-relaxed text-black sm:text-[#718074] sm:mt-3 sm:text-[14px] sm:leading-5">
             Expert guidance, fresh styling ideas, and seasonal garden advice
             written by our horticulture team.
           </p>

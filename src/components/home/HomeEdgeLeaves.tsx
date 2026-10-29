@@ -1,5 +1,5 @@
-import leftBorder from "../../assets/leaves/boder/left-1.png";
-import rightBorder from "../../assets/leaves/boder/rigth-1.png";
+import leftBorder from "../../assets/leaves/boder/left-1.webp";
+import rightBorder from "../../assets/leaves/boder/right-1.webp";
 import { Fragment, type CSSProperties } from "react";
 
 type LeafPlacement = {
@@ -26,27 +26,59 @@ function HomeEdgeLeaves({
 }: HomeEdgeLeavesProps) {
   return (
     <>
-      {mobileBorderTreatment && (
-        <style>{`
-          @media (max-width: 640px) {
-            .home-edge-leaves--mobile-border [data-home-edge-leaf] {
-              width: clamp(72px, 22vw, 100px) !important;
-              opacity: var(--home-edge-mobile-opacity, 0.55) !important;
-            }
-
-            .home-edge-leaves--mobile-border [data-home-edge-leaf="left"] {
-              object-position: left center;
-            }
-
-            .home-edge-leaves--mobile-border [data-home-edge-leaf="right"] {
-              object-position: right center;
-            }
+      <style>{`
+        @media (max-width: 767px) {
+          .home-edge-leaves,
+          .home-edge-leaves--mobile-border {
+            position: absolute !important;
+            inset: 0 !important;
+            z-index: 0 !important;
+            pointer-events: none !important;
+            overflow: hidden !important;
           }
-        `}</style>
-      )}
+
+          .home-edge-leaves [data-home-edge-leaf],
+          .home-edge-leaves--mobile-border [data-home-edge-leaf] {
+            position: absolute !important;
+            height: 100% !important;
+            width: auto !important;
+            max-width: none !important;
+            object-fit: contain !important;
+            opacity: var(--home-edge-mobile-opacity, 0.45) !important;
+            pointer-events: none !important;
+            z-index: 0 !important;
+          }
+
+          .home-edge-leaves [data-home-edge-leaf="left"],
+          .home-edge-leaves--mobile-border [data-home-edge-leaf="left"] {
+            left: 0 !important;
+            right: auto !important;
+            top: 0 !important;
+            bottom: 0 !important;
+            object-position: left top !important;
+          }
+
+          .home-edge-leaves [data-home-edge-leaf="right"],
+          .home-edge-leaves--mobile-border [data-home-edge-leaf="right"] {
+            right: 0 !important;
+            left: auto !important;
+            top: 0 !important;
+            bottom: 0 !important;
+            object-position: right top !important;
+          }
+
+          /* Hide duplicate/subsequent placement leaves on mobile so one continuous leaf border frames the full height */
+          .home-edge-leaves [data-home-edge-leaf="left"] ~ [data-home-edge-leaf="left"],
+          .home-edge-leaves--mobile-border [data-home-edge-leaf="left"] ~ [data-home-edge-leaf="left"],
+          .home-edge-leaves [data-home-edge-leaf="right"] ~ [data-home-edge-leaf="right"],
+          .home-edge-leaves--mobile-border [data-home-edge-leaf="right"] ~ [data-home-edge-leaf="right"] {
+            display: none !important;
+          }
+        }
+      `}</style>
       <div
         aria-hidden="true"
-        className={`home-edge-leaves pointer-events-none absolute inset-0 z-0 overflow-hidden${
+        className={`home-edge-leaves pointer-events-none absolute inset-0 z-0${
           mobileBorderTreatment ? " home-edge-leaves--mobile-border" : ""
         }`}
         style={

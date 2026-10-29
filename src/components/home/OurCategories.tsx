@@ -177,22 +177,21 @@ function OurCategories() {
   return (
     <section
       ref={sectionRef}
-      className="relative isolate w-full overflow-hidden bg-[#FCFAF4] py-14 sm:py-16 lg:py-20"
+      className="relative isolate w-full overflow-hidden bg-[#FCFAF4] py-14 sm:py-16 lg:py-20 after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[4px] after:w-full after:bg-[#FCFAF4]"
       aria-labelledby="categories-heading"
     >
-      <HomeEdgeLeaves
-        placements={[
-          {
-            left: { top: "4%", width: "clamp(90px, 14vw, 190px)", opacity: 0.72 },
-            right: { top: "4%", width: "clamp(90px, 14vw, 190px)", opacity: 0.72 },
-          },
-          {
-            left: { bottom: "-8%", width: "clamp(105px, 16vw, 220px)", opacity: 0.9 },
-            right: { bottom: "-8%", width: "clamp(105px, 16vw, 220px)", opacity: 0.9  },
-          },
-        ]}
-        mobileBorderTreatment
-      />
+    <HomeEdgeLeaves
+  placements={[
+    {
+      left: { top: "4%", width: "clamp(90px, 14vw, 190px)", opacity: 0.72 },
+      right: { top: "4%", width: "clamp(90px, 14vw, 190px)", opacity: 0.72 },
+    },
+    {
+      left: { bottom: "0%", width: "clamp(105px, 16vw, 220px)", opacity: 0.9 },
+      right: { bottom: "0%", width: "clamp(105px, 16vw, 220px)", opacity: 0.9 },
+    }
+  ]}
+/>
       <div className="relative z-10 mx-auto w-[92%] max-w-[1240px]">
         {/* Section Heading */}
         <div className="mb-10 text-center sm:mb-12">
@@ -203,14 +202,14 @@ function OurCategories() {
           <h2
             id="categories-heading"
             aria-label="Find Everything Your Garden Needs"
-            className="mt-2.5 font-serif text-[30px] font-bold leading-tight text-[#183B2B] sm:text-[36px] lg:text-[40px]"
+            className="mx-auto mt-2.5 max-w-[270px] font-serif text-[23px] font-bold leading-tight text-[#183B2B] sm:max-w-none sm:text-[36px] lg:text-[40px]"
           >
             <AnimatedHeadingText text="Find Everything Your Garden Needs" />
           </h2>
 
           <p
             data-reveal-paragraph
-            className="mx-auto mt-3 max-w-[620px] text-[13px] leading-relaxed text-[#5A6E5F] sm:text-[14px]"
+            className="mx-auto mt-2.5 max-w-[270px] text-[12px] leading-relaxed text-black sm:text-[#5A6E5F] sm:max-w-[620px] sm:text-[14px]"
           >
             Thoughtfully selected essentials for every kind of garden space.
             Balcony, and to terrace welcome.

@@ -45,7 +45,7 @@ function ProductCard({
   return (
     <article data-reveal-card className="group relative flex h-full min-w-0 flex-col rounded-[20px] border border-[#E6E9DF] bg-white p-2.5 shadow-[0px_8px_24px_0px_#1A432412] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0px_14px_32px_0px_#1A43241A] sm:p-4">
       {/* Product Image Container */}
-      <div className="relative aspect-square w-full overflow-hidden rounded-[14px] bg-[#F7F7F2]">
+      <div className="relative aspect-[4/5] sm:aspect-square w-full overflow-hidden rounded-[14px] bg-[#F7F7F2]">
         <img
           src={product.image}
           alt={product.name}
@@ -116,7 +116,7 @@ function ProductCard({
         </h3>
 
         {/* Subtitle */}
-        <p className="mt-0.5 text-[12px] leading-normal text-[#6B7280]">
+        <p className="mt-0.5 text-[12px] leading-normal text-black sm:text-[#6B7280]">
           {product.subtitle}
         </p>
 

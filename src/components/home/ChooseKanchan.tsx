@@ -133,13 +133,14 @@ export default function WhyChooseKanchan() {
           }
 
           .choose-kanchan-title {
-            font-size: 19px !important;
-            line-height: 1.25 !important;
+            font-size: 15px !important;
+            line-height: 1.3 !important;
           }
 
           .choose-kanchan-desc {
-            font-size: 16.5px !important;
-            line-height: 1.35 !important;
+            font-size: 12.5px !important;
+            line-height: 1.4 !important;
+            color: #000000 !important;
           }
         }
 
@@ -175,14 +176,14 @@ export default function WhyChooseKanchan() {
           <h2
             id="choose-kanchan-heading"
             aria-label="Why Choose Kanchan Garden?"
-            className="mt-2 font-serif text-[28px] font-bold leading-tight text-[#183B2B] sm:text-[34px] lg:text-[38px]"
+            className="mx-auto mt-2 max-w-[270px] font-serif text-[23px] font-bold leading-tight text-[#183B2B] sm:max-w-none sm:text-[34px] lg:text-[38px]"
           >
             <AnimatedHeadingText text="Why Choose Kanchan Garden?" />
           </h2>
 
           <p
             data-reveal-paragraph
-            className="mx-auto mt-2.5 max-w-[640px] text-[13px] leading-relaxed text-[#5E7163] sm:text-[14px]"
+            className="mx-auto mt-2.5 max-w-[270px] text-[12px] leading-relaxed text-black sm:text-[#5E7163] sm:max-w-[640px] sm:text-[14px]"
           >
             We believe in a deeper connection between humanity and nature, and
             it shows in everything we do.
@@ -195,7 +196,7 @@ export default function WhyChooseKanchan() {
             <article
               key={feature.title}
               data-reveal-card
-              className="choose-kanchan-card group flex h-[150px] min-h-[150px] min-w-0 w-[calc(87%-20px)] shrink-0 snap-start flex-row items-center rounded-[20px] border border-[#E6EDE0]/70 bg-white p-4 shadow-[0px_8px_24px_0px_rgba(26,67,36,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0px_12px_32px_0px_rgba(26,67,36,0.1)] sm:h-full sm:min-h-0 sm:w-auto sm:shrink sm:snap-align-none sm:p-5 lg:px-3.5 lg:py-5 xl:px-5 xl:py-6"
+              className="choose-kanchan-card group flex h-[150px] min-h-[150px] min-w-0 w-full shrink-0 snap-start flex-row items-center rounded-[20px] border border-[#E6EDE0]/70 bg-white p-4 shadow-[0px_8px_24px_0px_rgba(26,67,36,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0px_12px_32px_0px_rgba(26,67,36,0.1)] sm:h-full sm:min-h-0 sm:w-auto sm:shrink sm:snap-align-none sm:p-5 lg:px-3.5 lg:py-5 xl:px-5 xl:py-6"
             >
               <div
                 className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-[#DFF1D9] text-[#215732]"

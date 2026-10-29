@@ -82,14 +82,14 @@ function AskedQuestions() {
           <h2
             id="faq-heading"
             aria-label="Frequently Asked Questions"
-            className="mt-2 font-serif text-[28px] font-bold leading-tight text-[#183B2B] sm:text-[34px] lg:text-[40px]"
+            className="mx-auto mt-2 max-w-[270px] font-serif text-[23px] font-bold leading-tight text-[#183B2B] sm:max-w-none sm:text-[34px] lg:text-[40px]"
           >
             <AnimatedHeadingText text="Frequently Asked Questions" />
           </h2>
 
           <p
             data-reveal-paragraph
-            className="mx-auto mt-2.5 max-w-[620px] text-[13px] leading-relaxed text-[#5E7163] sm:text-[14px]"
+            className="mx-auto mt-2.5 max-w-[270px] text-[12px] leading-relaxed text-black sm:text-[#5E7163] sm:max-w-[620px] sm:text-[14px]"
           >
             Everything you need to know about choosing and caring for your plants.
           </p>
@@ -110,9 +110,9 @@ function AskedQuestions() {
                     type="button"
                     onClick={() => toggleFAQ(index)}
                     aria-expanded={isOpen}
-                    className="flex w-full cursor-pointer items-center justify-between px-6 py-4.5 text-left transition-colors hover:bg-[#F9FCF5] sm:px-8 sm:py-[18px]"
+                    className="flex w-full cursor-pointer items-center justify-between px-4 py-3.5 text-left transition-colors hover:bg-[#F9FCF5] sm:px-8 sm:py-[18px]"
                   >
-                    <span className="text-[14px] font-semibold text-[#183B2B] sm:text-[15.5px]">
+                    <span className="text-[13.5px] font-semibold leading-snug text-[#183B2B] sm:text-[15.5px]">
                       {faq.question}
                     </span>
 
@@ -142,7 +142,7 @@ function AskedQuestions() {
                   {/* Accordion Answer */}
                   {isOpen && (
                     <div className="animate-fadeIn px-6 pb-5 pt-0 sm:px-8 sm:pb-6">
-                      <p className="text-[13px] leading-relaxed text-[#5A6D5E] sm:text-[14px]">
+                      <p className="text-[13px] leading-relaxed text-black sm:text-[#5A6D5E] sm:text-[14px]">
                         {faq.answer}
                       </p>
                     </div>

@@ -106,6 +106,17 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
       className="hero-banner-mobile relative isolate w-full overflow-hidden bg-[linear-gradient(90deg,#FCFAF3_0%,#F8F6EB_38%,#ECF4DE_75%,#E3EED3_100%)] py-8 sm:py-14 lg:py-16"
     >
       <style>{`
+        @media (min-width: 768px) {
+          .hero-banner-mobile {
+            overflow: visible !important;
+          }
+
+          .hero-banner-mobile .home-edge-leaves,
+          .hero-banner-mobile .home-edge-leaves [data-home-edge-leaf="left"] {
+            overflow: visible !important;
+          }
+        }
+
         @media (max-width: 1023px) {
           .hero-banner-mobile {
             padding-block: 12px;
@@ -127,7 +138,7 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
 
           .hero-banner-mobile .hero-banner-copy {
             grid-column: 1;
-            margin-left: clamp(40px, 13vw, 80px);
+            margin-left: calc(clamp(40px, 13vw, 80px) + 20px);
           }
 
           .hero-banner-mobile .hero-banner-image {
@@ -191,14 +202,16 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
           .hero-banner-mobile [data-reveal-card] {
             min-width: 0;
             gap: 5px;
-            padding: 5px;
+            padding: 6px 5px;
             border-radius: 8px;
+            align-items: center;
           }
 
           .hero-banner-mobile [data-reveal-card] > span {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             border-radius: 6px;
+            flex-shrink: 0;
           }
 
           .hero-banner-mobile [data-reveal-card] svg {
@@ -206,12 +219,29 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
             height: 12px;
           }
 
+          .hero-banner-mobile [data-reveal-card] div {
+            min-width: 0;
+            flex: 1 1 0%;
+            text-align: left;
+          }
+
           .hero-banner-mobile [data-reveal-card] div > span:first-child {
-            font-size: 7px;
+            display: block;
+            font-size: 8.5px;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
 
           .hero-banner-mobile [data-reveal-card] div > span:last-child {
-            font-size: 6px;
+            display: block;
+            margin-top: 1px;
+            font-size: 7px;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
         }
 
@@ -225,39 +255,25 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
           }
 
           .hero-banner-mobile [data-reveal-card] > span {
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
           }
 
           .hero-banner-mobile [data-reveal-card] div > span:first-child {
-            font-size: 8px;
+            font-size: 9.5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
 
           .hero-banner-mobile [data-reveal-card] div > span:last-child {
-            font-size: 7px;
+            font-size: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
         }
-          @media (max-width: 767px) {
-  .hero-banner-mobile .hero-banner-layout {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-  }
 
-  .hero-banner-mobile .hero-banner-copy {
-    order: 1;
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .hero-banner-mobile .hero-banner-image {
-    order: 2;
-    width: 100%;
-    max-width: none;
-    margin-top: 0;
-  }
-}
     
         @media (min-width: 1024px) {
           .hero-banner-mobile .hero-banner-content-shell {
@@ -275,8 +291,9 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
 
           .hero-banner-mobile .hero-banner-copy {
             width: auto;
-            max-width: 600px;
+            max-width: 636px;
             min-width: 0;
+            margin-left: 70px;
           }
 
           .hero-banner-mobile .hero-banner-image {
@@ -284,6 +301,50 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
             max-width: 620px;
             min-width: 0;
             margin-top: 0;
+          }
+
+          .hero-banner-mobile .hero-banner-features {
+            max-width: 636px;
+            gap: 12px;
+          }
+
+          .hero-banner-mobile [data-reveal-card] {
+            min-height: 72px;
+            padding: 14px 12px;
+            gap: 10px;
+            box-sizing: border-box;
+          }
+
+          .hero-banner-mobile [data-reveal-card] > span {
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
+            border-radius: 10px;
+          }
+
+          .hero-banner-mobile [data-reveal-card] div {
+            min-width: 0;
+            flex: 1 1 auto;
+          }
+
+          .hero-banner-mobile [data-reveal-card] div > span:first-child {
+            display: block;
+            font-size: 13px;
+            line-height: 1.25;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: visible;
+            text-overflow: clip;
+          }
+
+          .hero-banner-mobile [data-reveal-card] div > span:last-child {
+            display: block;
+            margin-top: 2px;
+            font-size: 11px;
+            line-height: 1.25;
+            white-space: nowrap;
+            overflow: visible;
+            text-overflow: clip;
           }
         }
         @media (max-width: 767px) {
@@ -297,78 +358,105 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
   .hero-banner-mobile .hero-banner-copy {
     order: 1;
     width: 100%;
-    max-width: none;
-    margin-left: 0;
+    max-width: 330px;
+    margin-inline: auto;
     text-align: center;
   }
 
   .hero-banner-mobile .hero-banner-heading,
   .hero-banner-mobile h1 {
     width: 100%;
+    max-width: 290px;
+    margin-inline: auto;
     text-align: center;
-    font-size: 26px;
-    line-height: 1.3;
+    font-size: 25px;
+    line-height: 1.25;
   }
 
   .hero-banner-mobile .hero-banner-description {
     width: 100%;
-    max-width: none;
-    margin-top: 12px;
-    font-size: 15px;
-    line-height: 1.6;
+    max-width: 285px;
+    margin-inline: auto;
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.9;
     text-align: center;
-    color: #43584B;
+    color: #000000;
   }
 
   .hero-banner-mobile .hero-banner-badge {
     margin-inline: auto;
     font-size: 10px;
-    padding: 6px 8px;
+    padding: 6px 10px;
   }
 
   .hero-banner-mobile .hero-banner-ctas {
     justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
+    margin-top: 14px;
   }
 
   .hero-banner-mobile .hero-banner-ctas a {
     font-size: 12px;
-    padding: 9px 12px;
+    padding: 8px 14px;
     white-space: normal;
   }
 
   .hero-banner-mobile .hero-banner-features {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 4px;
-  margin-top: 14px;
-}
-
-.hero-banner-mobile [data-reveal-card] {
-  min-width: 0;
-  padding: 7px 5px;
-  gap: 5px;
-}
-
-.hero-banner-mobile [data-reveal-card] div > span:first-child {
-  font-size: 10px;
-}
-
-.hero-banner-mobile [data-reveal-card] div > span:last-child {
-  font-size: 8px;
-}
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+    margin-top: 14px;
+    max-width: 340px;
+    margin-inline: auto;
+  }
 
   .hero-banner-mobile [data-reveal-card] {
-    padding: 14px;
-    gap: 12px;
+    min-width: 0;
+    padding: 7px 4px;
+    gap: 4px;
+    align-items: center;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .hero-banner-mobile [data-reveal-card] > span {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    margin-inline: auto;
+  }
+
+  .hero-banner-mobile [data-reveal-card] svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .hero-banner-mobile [data-reveal-card] div {
+    min-width: 0;
+    flex: 1 1 0%;
+    text-align: center;
   }
 
   .hero-banner-mobile [data-reveal-card] div > span:first-child {
-    font-size: 14px;
+    display: block;
+    font-size: 9.5px;
+    line-height: 1.2;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .hero-banner-mobile [data-reveal-card] div > span:last-child {
-    font-size: 12px;
+    display: block;
+    margin-top: 1.5px;
+    font-size: 8px;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .hero-banner-mobile .hero-banner-image {
@@ -457,43 +545,117 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
         />
       )}
 
-      {/* Scattered floating leaf decorations – natural botanical distribution */}
+      {/* Scattered floating leaf decorations – clearly visible background botanical accents */}
       {homeDecorations && (
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden sm:block"
         >
-          {/* ── Zone 1: Heading / badge area ── */}
-          <img src={leafThree} alt="" className="leaf-float absolute" style={{ top: "6%", left: "50%", width: "clamp(30px, 3.3vw, 48px)", opacity: 0.38, transform: "rotate(18deg)" }} />
-          <img src={leafFive} alt="" className="leaf-float-alt absolute" style={{ top: "10%", right: "clamp(180px, 26vw, 320px)", width: "clamp(27px, 3vw, 42px)", opacity: 0.32, transform: "rotate(-22deg)" }} />
+          {/* Top area: to the right of the badge / above heading */}
+          <img
+            src={leafThree}
+            alt=""
+            className="leaf-float absolute"
+            style={{
+              top: "6%",
+              left: "58%",
+              width: "clamp(30px, 2.6vw, 44px)",
+              opacity: 0.72,
+              transform: "rotate(18deg)",
+            }}
+          />
+          <img
+            src={leafFour}
+            alt=""
+            className="leaf-float-alt absolute"
+            style={{
+              top: "4%",
+              left: "38%",
+              width: "clamp(24px, 2vw, 34px)",
+              opacity: 0.65,
+              transform: "rotate(-32deg)",
+            }}
+          />
 
-          {/* ── Zone 2: Description / paragraph area ── */}
-          <img src={leafFive} alt="" className="leaf-float absolute" style={{ top: "44%", left: "clamp(200px, 32vw, 390px)", width: "clamp(24px, 2.55vw, 36px)", opacity: 0.28, transform: "rotate(30deg)" }} />
-          <img src={leafThree} alt="" className="leaf-float-alt absolute" style={{ top: "38%", left: "52%", width: "clamp(33px, 3.45vw, 51px)", opacity: 0.30, transform: "rotate(-12deg)" }} />
+          {/* Description area: open background between text & image */}
+          <img
+            src={leafFive}
+            alt=""
+            className="leaf-float absolute"
+            style={{
+              top: "49%",
+              left: "53%",
+              width: "clamp(32px, 2.6vw, 44px)",
+              opacity: 0.75,
+              transform: "rotate(28deg)",
+            }}
+          />
+          <img
+            src={leafThree}
+            alt=""
+            className="leaf-float-alt absolute"
+            style={{
+              top: "39%",
+              left: "48%",
+              width: "clamp(26px, 2.3vw, 38px)",
+              opacity: 0.70,
+              transform: "rotate(-14deg)",
+            }}
+          />
 
-          {/* ── Zone 3: Above / beside the hero image frame ── */}
-          <img src={leafFive} alt="" className="leaf-float absolute" style={{ top: "8%", right: "clamp(100px, 15vw, 195px)", width: "clamp(30px, 3.15vw, 45px)", opacity: 0.35, transform: "rotate(40deg)" }} />
-          <img src={leafThree} alt="" className="leaf-float-alt absolute" style={{ top: "50%", right: "clamp(95px, 14vw, 185px)", width: "clamp(27px, 2.85vw, 42px)", opacity: 0.28, transform: "rotate(-35deg)" }} />
+          {/* Above & beside the hero image frame */}
+          <img
+            src={leafFive}
+            alt=""
+            className="leaf-float absolute"
+            style={{
+              top: "8%",
+              right: "clamp(120px, 15vw, 220px)",
+              width: "clamp(28px, 2.4vw, 38px)",
+              opacity: 0.68,
+              transform: "rotate(-20deg)",
+            }}
+          />
+          <img
+            src={leafThree}
+            alt=""
+            className="leaf-float-alt absolute"
+            style={{
+              top: "50%",
+              right: "clamp(80px, 11vw, 160px)",
+              width: "clamp(26px, 2.2vw, 36px)",
+              opacity: 0.65,
+              transform: "rotate(-35deg)",
+            }}
+          />
 
-          {/* ── Zone 4: Near the bottom of the hero image frame ── */}
-          <img src={leafFive} alt="" className="leaf-float absolute" style={{ bottom: "12%", right: "clamp(160px, 23vw, 300px)", width: "clamp(27px, 3vw, 42px)", opacity: 0.30, transform: "rotate(25deg)" }} />
-          <img src={leafThree} alt="" className="leaf-float-alt absolute" style={{ bottom: "8%", left: "48%", width: "clamp(24px, 2.7vw, 39px)", opacity: 0.25, transform: "rotate(-18deg)" }} />
+          {/* Below CTAs & near feature cards */}
+          <img
+            src={leafFive}
+            alt=""
+            className="leaf-float absolute"
+            style={{
+              top: "72%",
+              left: "46%",
+              width: "clamp(26px, 2.2vw, 38px)",
+              opacity: 0.70,
+              transform: "rotate(-26deg)",
+            }}
+          />
 
-          {/* ── NEW Zone A: Upper-left open background ── */}
-          <img src={leafFour} alt="" className="leaf-float absolute" style={{ top: "5%", left: "clamp(180px, 26vw, 340px)", width: "clamp(26px, 2.8vw, 40px)", opacity: 0.27, transform: "rotate(-45deg)" }} />
-          <img src={leafThree} alt="" className="leaf-float-alt absolute" style={{ top: "20%", left: "clamp(155px, 22vw, 290px)", width: "clamp(22px, 2.4vw, 36px)", opacity: 0.22, transform: "rotate(55deg)" }} />
-
-          {/* ── NEW Zone B: Lower-left backstop ── */}
-          <img src={leafFive} alt="" className="leaf-float absolute" style={{ top: "62%", left: "clamp(165px, 24vw, 310px)", width: "clamp(24px, 2.6vw, 38px)", opacity: 0.24, transform: "rotate(-50deg)" }} />
-          <img src={leafFour} alt="" className="leaf-float-alt absolute" style={{ bottom: "5%", left: "clamp(170px, 25vw, 320px)", width: "clamp(20px, 2.2vw, 32px)", opacity: 0.20, transform: "rotate(38deg)" }} />
-
-          {/* ── NEW Zone C: Far-right strip ── */}
-          <img src={leafFive} alt="" className="leaf-float absolute" style={{ top: "26%", right: "clamp(88px, 12vw, 160px)", width: "clamp(22px, 2.4vw, 34px)", opacity: 0.26, transform: "rotate(60deg)" }} />
-          <img src={leafThree} alt="" className="leaf-float-alt absolute" style={{ bottom: "22%", right: "clamp(90px, 13vw, 168px)", width: "clamp(24px, 2.5vw, 36px)", opacity: 0.23, transform: "rotate(-48deg)" }} />
-
-          {/* ── NEW Zone D: Center gaps ── */}
-          <img src={leafFour} alt="" className="leaf-float absolute" style={{ top: "3%", left: "40%", width: "clamp(20px, 2.1vw, 30px)", opacity: 0.22, transform: "rotate(-28deg)" }} />
-          <img src={leafFive} alt="" className="leaf-float-alt absolute" style={{ bottom: "18%", left: "44%", width: "clamp(22px, 2.3vw, 34px)", opacity: 0.24, transform: "rotate(42deg)" }} />
+          {/* Bottom right: below hero image frame */}
+          <img
+            src={leafFive}
+            alt=""
+            className="leaf-float-alt absolute"
+            style={{
+              bottom: "4%",
+              right: "clamp(90px, 12vw, 180px)",
+              width: "clamp(30px, 2.5vw, 42px)",
+              opacity: 0.72,
+              transform: "rotate(32deg)",
+            }}
+          />
         </div>
       )}
 
@@ -501,7 +663,7 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
         <div className="hero-banner-layout flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-10 xl:gap-14">
 
           {/* ── Left Column: Text & Features ── */}
-          <div className="hero-banner-copy relative z-10 w-full shrink-0 lg:max-w-[560px] xl:max-w-[600px]">
+          <div className="hero-banner-copy relative z-10 w-full shrink-0 lg:max-w-[580px] xl:max-w-[620px]">
             {/* Badge */}
             <div className="hero-banner-badge inline-flex items-center gap-2 rounded-full bg-[#EAF2D7] px-3.5 py-1.5 text-[11px] font-semibold text-[#315F38] sm:text-[12px]">
               <svg
@@ -547,7 +709,7 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
             {/* Paragraph */}
             <p
               data-reveal-paragraph
-              className="hero-banner-description mt-4 max-w-[460px] text-[14px] leading-relaxed text-[#43584B] sm:mt-5 sm:text-[15px]"
+              className="hero-banner-description mt-4 text-[14px] leading-relaxed text-[#43584B] sm:mt-5 sm:text-[15px] lg:mt-5 lg:max-w-[570px] lg:text-[15px] lg:leading-[1.65]"
             >
               Everything you need to grow, nurture, and create your own serene
               sanctuary. From rare tropical foliage to seeds and organic
@@ -555,7 +717,7 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
             </p>
 
             {/* CTA Buttons */}
-            <div className="hero-banner-ctas mt-6 flex flex-wrap items-center gap-2.5 sm:mt-7 sm:gap-4">
+            <div className="hero-banner-ctas mt-6 flex flex-wrap items-center gap-2.5 sm:mt-7 sm:gap-4 lg:mt-8">
               <a
                 href="/plants"
                 className="inline-flex items-center justify-center rounded-full bg-[#06452E] px-4 py-2.5 text-[13.5px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#043322] active:scale-95 sm:px-6 sm:py-3 sm:text-[14px]"
@@ -571,21 +733,25 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
             </div>
 
             {/* 3 Feature cards */}
-            <div className="hero-banner-features mt-6 grid max-w-[800px] grid-cols-3 gap-3 sm:mt-10 sm:gap-4">
+            <div className="hero-banner-features mt-6 grid max-w-[800px] grid-cols-3 gap-3 sm:mt-10 sm:gap-4 lg:max-w-none">
               {features.map((feature) => (
                 <div
                   key={feature.title}
                   data-reveal-card
-                  className="flex min-w-0 flex-col items-start gap-3 rounded-[20px] border border-[#E7EADF] bg-white/95 p-4 shadow-[0px_4px_16px_0px_rgba(26,67,36,0.06)] sm:flex-row sm:items-center sm:gap-4 sm:rounded-[22px] sm:p-6"
+                  className="flex min-w-0 flex-col items-start gap-2.5 rounded-[18px] border border-[#E7EADF] bg-white/95 p-3.5 shadow-[0px_4px_16px_0px_rgba(26,67,36,0.06)] sm:flex-row sm:items-center sm:gap-3 sm:rounded-[20px] sm:px-3 sm:py-3.5 xl:gap-3.5 xl:px-4 xl:py-4"
                 >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[12px] bg-[#E2F1DA] text-[#267445] sm:h-12 sm:w-12">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] bg-[#E2F1DA] text-[#267445] sm:h-10 sm:w-10 xl:h-11 xl:w-11">
                     {feature.icon}
                   </span>
-                  <div className="flex-1">
-                    <span className="block text-[12px] font-bold leading-tight text-[#18382B] sm:text-[14px]">
+                  <div className="min-w-0 flex-1">
+                    <span
+                      title={feature.title}
+                     className="block break-words text-[12px] font-bold leading-tight text-[#18382B] sm:text-[12.5px] xl:text-[13px]">
                       {feature.title}
                     </span>
-                    <span className="mt-0.5 block text-[10px] text-[#718073] sm:text-[11px]">
+                    <span
+                      title={feature.detail}
+                      className="mt-0.5 block break-words text-[10px] text-[#718073] sm:text-[10.5px] xl:text-[11px]">
                       {feature.detail}
                     </span>
                   </div>

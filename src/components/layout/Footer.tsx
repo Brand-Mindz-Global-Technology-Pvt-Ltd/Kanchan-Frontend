@@ -262,7 +262,8 @@ export default function Footer() {
         {/* Bottom row — seamless, no top divider */}
         <div className="footer-bottom" style={{ marginTop: "36px" }}>
           <span style={{ fontSize: "12px", color: "#4B584D" }}>
-            © 2026 Kanchan Garden. All rights reserved.
+            Copyright © 2026 Havona All rights reserved.Made with ❤ by Brand Mindz
+.
           </span>
           <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
             {[

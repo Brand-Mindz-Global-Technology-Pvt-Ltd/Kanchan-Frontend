@@ -473,7 +473,7 @@ export default function AboutUs() {
             {/* Card 1: Zone A */}
             <div className="flex flex-col overflow-hidden rounded-2xl bg-white shadow-[0_2px_12px_rgba(20,56,35,0.04)]">
               {/* Photo with Overlay Badge */}
-              <div className="relative aspect-[308/192] w-full overflow-hidden bg-[#e8efe9]">
+              <div className="relative aspect-[16/11] sm:aspect-[308/192] w-full overflow-hidden bg-[#e8efe9]">
                 <img
                   src={zoneA}
                   alt="Tropical Aroid Pavilion greenhouse"
@@ -501,7 +501,7 @@ export default function AboutUs() {
             {/* Card 2: Zone B */}
             <div className="flex flex-col overflow-hidden rounded-2xl bg-white shadow-[0_2px_12px_rgba(20,56,35,0.04)]">
               {/* Photo with Overlay Badge */}
-              <div className="relative aspect-[308/192] w-full overflow-hidden bg-[#e8efe9]">
+              <div className="relative aspect-[16/11] sm:aspect-[308/192] w-full overflow-hidden bg-[#e8efe9]">
                 <img
                   src={zoneB}
                   alt="Succulent and Courtyard greenhouse"
@@ -529,7 +529,7 @@ export default function AboutUs() {
             {/* Card 3: Zone C */}
             <div className="flex flex-col overflow-hidden rounded-2xl bg-white shadow-[0_2px_12px_rgba(20,56,35,0.04)]">
               {/* Photo with Overlay Badge */}
-              <div className="relative aspect-[308/192] w-full overflow-hidden bg-[#e8efe9]">
+              <div className="relative aspect-[16/11] sm:aspect-[308/192] w-full overflow-hidden bg-[#e8efe9]">
                 <img
                   src={zoneC}
                   alt="Bio-Media and Soil Lab work bench"
@@ -557,7 +557,7 @@ export default function AboutUs() {
             {/* Card 4: Zone D */}
             <div className="flex flex-col overflow-hidden rounded-2xl bg-white shadow-[0_2px_12px_rgba(20,56,35,0.04)]">
               {/* Photo with Overlay Badge */}
-              <div className="relative aspect-[308/192] w-full overflow-hidden bg-[#e8efe9]">
+              <div className="relative aspect-[16/11] sm:aspect-[308/192] w-full overflow-hidden bg-[#e8efe9]">
                 <img
                   src={zoneD}
                   alt="Plant Doctor Clinic counter and consultation"
@@ -702,7 +702,7 @@ export default function AboutUs() {
             {/* Card 1 — Dr. Vimal Kanchan */}
             <div className="flex flex-col items-center rounded-2xl bg-white px-5 pt-7 pb-6 shadow-[0_2px_12px_rgba(20,56,35,0.05)] text-center">
               {/* Portrait */}
-              <div className="mb-4 h-[100px] w-[100px] shrink-0 overflow-hidden rounded-full">
+              <div className="mb-4 h-28 w-28 sm:h-[100px] sm:w-[100px] shrink-0 overflow-hidden rounded-full">
                 <img
                   src={person1}
                   alt="Dr. Vimal Kanchan"
@@ -726,7 +726,7 @@ export default function AboutUs() {
 
             {/* Card 2 — Priya Sundaram */}
             <div className="flex flex-col items-center rounded-2xl bg-white px-5 pt-7 pb-6 shadow-[0_2px_12px_rgba(20,56,35,0.05)] text-center">
-              <div className="mb-4 h-[100px] w-[100px] shrink-0 overflow-hidden rounded-full">
+              <div className="mb-4 h-28 w-28 sm:h-[100px] sm:w-[100px] shrink-0 overflow-hidden rounded-full">
                 <img
                   src={person2}
                   alt="Priya Sundaram"
@@ -750,7 +750,7 @@ export default function AboutUs() {
 
             {/* Card 3 — Arjun Nambiar */}
             <div className="flex flex-col items-center rounded-2xl bg-white px-5 pt-7 pb-6 shadow-[0_2px_12px_rgba(20,56,35,0.05)] text-center">
-              <div className="mb-4 h-[100px] w-[100px] shrink-0 overflow-hidden rounded-full">
+              <div className="mb-4 h-28 w-28 sm:h-[100px] sm:w-[100px] shrink-0 overflow-hidden rounded-full">
                 <img
                   src={person3}
                   alt="Arjun Nambiar"
@@ -774,7 +774,7 @@ export default function AboutUs() {
 
             {/* Card 4 — Ananya Rao */}
             <div className="flex flex-col items-center rounded-2xl bg-white px-5 pt-7 pb-6 shadow-[0_2px_12px_rgba(20,56,35,0.05)] text-center">
-              <div className="mb-4 h-[100px] w-[100px] shrink-0 overflow-hidden rounded-full">
+              <div className="mb-4 h-28 w-28 sm:h-[100px] sm:w-[100px] shrink-0 overflow-hidden rounded-full">
                 <img
                   src={person4}
                   alt="Ananya Rao"

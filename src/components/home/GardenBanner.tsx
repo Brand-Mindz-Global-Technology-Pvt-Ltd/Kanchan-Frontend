@@ -46,9 +46,9 @@ function GardenBanner() {
 
           .garden-banner__frame {
             aspect-ratio: auto !important;
-            height: 200px !important;
-            min-height: 200px !important;
-            border-radius: 8px !important;
+            height: 240px !important;
+            min-height: 240px !important;
+            border-radius: 50px !important;
           }
 
           .garden-banner__frame img {
@@ -160,31 +160,33 @@ function GardenBanner() {
         aspect-ratio 2.6/1 makes the frame noticeably taller than the original 3.8/1.
       */}
       <div
-        className="garden-banner__frame relative z-10 mx-auto overflow-hidden rounded-[8px]"
+        className="garden-banner__frame relative z-10 mx-auto overflow-hidden rounded-[50px]"
         style={{
           width: "100%",
           maxWidth: "1100px",
           aspectRatio: "2.6 / 1",
           minHeight: "0",
+          borderRadius: "50px",
           boxShadow: "0px 8px 40px 0px rgba(22,70,34,0.10)",
         }}
       >
         <img
           src={gardenBanner}
           alt="Lush blooming garden pathway"
-          className="absolute inset-0 h-full w-full rounded-[8px] object-cover"
+          className="absolute inset-0 h-full w-full rounded-[50px] object-cover"
           style={{
             objectFit: "cover",
             objectPosition: "center top",
             display: "block",
-            borderRadius: "8px",
+            borderRadius: "50px",
           }}
         />
 
         {/* Subtle dark directional gradient overlay for strong text readability */}
         <div
-          className="pointer-events-none absolute inset-0 z-[5] rounded-[8px]"
+          className="pointer-events-none absolute inset-0 z-[5] rounded-[50px]"
           style={{
+            borderRadius: "50px",
             background:
               "linear-gradient(90deg, rgba(12, 28, 18, 0.70) 0%, rgba(12, 28, 18, 0.45) 45%, rgba(12, 28, 18, 0.12) 100%)",
           }}

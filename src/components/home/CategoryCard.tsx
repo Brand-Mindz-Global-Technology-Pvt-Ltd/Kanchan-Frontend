@@ -26,7 +26,7 @@ function CategoryCard({
   if (articleDescription && categoryLabel && readArticleHref) {
     return (
       <article data-reveal-card className="group flex min-h-[349px] min-w-0 flex-col overflow-hidden rounded-[14px] border border-[#E6E9E0] bg-white shadow-[0_6px_18px_rgba(26,67,36,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(26,67,36,0.12)] sm:h-[349px]">
-        <div className="relative aspect-[352/190] w-full shrink-0 overflow-hidden bg-[#F3F1EB]">
+        <div className="relative aspect-[16/10] sm:aspect-[352/190] w-full shrink-0 overflow-hidden bg-[#F3F1EB]">
           <img
             src={image}
             alt={`${categoryLabel}: ${title}`}
@@ -39,7 +39,7 @@ function CategoryCard({
           <h3 className="whitespace-pre-line text-[19px] font-medium leading-[22px] text-[#183B2B]">
             {title}
           </h3>
-          <p className="mt-[7px] text-[12px] leading-4 text-[#637567]">
+          <p className="mt-[7px] text-[12px] leading-4 text-black sm:text-[#637567]">
             {articleDescription}
           </p>
           <a
@@ -56,7 +56,7 @@ function CategoryCard({
   return (
     <article data-reveal-card className="group flex h-full min-w-0 flex-col overflow-hidden rounded-[20px] border border-[#19492A1A] bg-white shadow-[0px_10px_30px_0px_#1A432412] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0px_14px_36px_0px_#1A43241A]">
       {/* Category Image */}
-      <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-[#F3F1EB]">
+      <div className="relative aspect-[4/3] sm:aspect-[16/10] w-full shrink-0 overflow-hidden bg-[#F3F1EB]">
         <img
           src={image}
           alt={title}
@@ -82,7 +82,7 @@ function CategoryCard({
             {title}
           </h3>
 
-          <p className="mt-1 text-[10px] leading-[1.35] text-[#637567] line-clamp-2 sm:text-[12px]">
+          <p className="mt-1 text-[10px] leading-[1.35] text-black sm:text-[#637567] line-clamp-2 sm:text-[12px]">
             {description}
           </p>
         </div>
