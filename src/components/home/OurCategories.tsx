@@ -209,7 +209,7 @@ function OurCategories() {
 
           <p
             data-reveal-paragraph
-            className="mx-auto mt-2.5 max-w-[270px] text-[12px] leading-relaxed text-black sm:text-[#5A6E5F] sm:max-w-[620px] sm:text-[14px]"
+            className="mx-auto mt-2.5 max-w-[270px] text-[12px] leading-relaxed text-[#5A6E5F] sm:max-w-[620px] sm:text-[14px]"
           >
             Thoughtfully selected essentials for every kind of garden space.
             Balcony, and to terrace welcome.

@@ -1,10 +1,12 @@
 import { useEffect, useRef } from "react";
 import heroImage from "../../assets/hero-image.jpg";
+import aboutHeroImage from "../../assets/about/Hero-banner.png";
 import leafTwo from "../../assets/leaves/leaf-2.png";
 import leafThree from "../../assets/leaves/leaf-3.png";
 import leafFour from "../../assets/leaves/leaf-4.png";
 import leafFive from "../../assets/leaves/leaf-5.png";
 import HomeEdgeLeaves from "../home/HomeEdgeLeaves";
+import AboutEdgeLeaves from "../about/AboutEdgeLeaves";
 import {
   AnimatedHeadingText,
   useDecorativeLeafReveal,
@@ -70,6 +72,85 @@ const features = [
   },
 ] as const;
 
+const aboutStatistics = [
+  {
+    title: "12+",
+    detail: "Years of Research",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-6 w-6"
+        aria-hidden="true"
+      >
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+    ),
+  },
+  {
+    title: "50,000+",
+    detail: "Plants Delivered",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-4 w-4"
+        aria-hidden="true"
+      >
+        <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+        <path d="M2 21c0-3 1.85-5.36 5.08-6" />
+      </svg>
+    ),
+  },
+  {
+    title: "100%",
+    detail: "Organic Media",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-4 w-4"
+        aria-hidden="true"
+      >
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+        <path d="M3 6h18" />
+        <path d="M16 10a4 4 0 0 1-8 0" />
+      </svg>
+    ),
+  },
+  {
+    title: "98.7%",
+    detail: "Thriving Rate",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-4 w-4"
+        aria-hidden="true"
+      >
+        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+        <path d="M12 9v4" />
+      </svg>
+    ),
+  },
+] as const;
+
 function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) {
   const sectionRef = useDecorativeLeafReveal<HTMLElement>();
   const imgRef = useRef<HTMLImageElement>(null);
@@ -93,7 +174,7 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
           }
         });
       },
-      { threshold: 0.15 },
+      { threshold: 0.1 },
     );
 
     observer.observe(section);
@@ -103,7 +184,7 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
   return (
     <section
       ref={sectionRef}
-      className="hero-banner-mobile relative isolate w-full overflow-hidden bg-[linear-gradient(90deg,#FCFAF3_0%,#F8F6EB_38%,#ECF4DE_75%,#E3EED3_100%)] py-8 sm:py-14 lg:py-16"
+      className={`${homeDecorations ? "hero-banner-mobile py-8 sm:py-14 lg:py-16" : "py-7 sm:py-10 lg:py-12"} relative isolate w-full overflow-hidden bg-[linear-gradient(90deg,#FCFAF3_0%,#F8F6EB_38%,#ECF4DE_75%,#E3EED3_100%)]`}
     >
       <style>{`
         @media (min-width: 768px) {
@@ -197,6 +278,17 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 3px;
             margin-top: 6px;
+          }
+
+          .hero-banner-mobile .hero-banner-features-4 {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 3px;
+          }
+
+          @media (min-width: 640px) and (max-width: 1023px) {
+            .hero-banner-mobile .hero-banner-features-4 {
+              grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+            }
           }
 
           .hero-banner-mobile [data-reveal-card] {
@@ -358,40 +450,44 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
   .hero-banner-mobile .hero-banner-copy {
     order: 1;
     width: 100%;
-    max-width: 330px;
-    margin-inline: auto;
-    text-align: center;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
   }
 
   .hero-banner-mobile .hero-banner-heading,
   .hero-banner-mobile h1 {
     width: 100%;
-    max-width: 290px;
-    margin-inline: auto;
-    text-align: center;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
     font-size: 25px;
     line-height: 1.25;
   }
 
   .hero-banner-mobile .hero-banner-description {
     width: 100%;
-    max-width: 285px;
-    margin-inline: auto;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
     margin-top: 10px;
     font-size: 13px;
     line-height: 1.9;
-    text-align: center;
-    color: #000000;
+    text-align: left;
+    color: #43584B;
   }
 
   .hero-banner-mobile .hero-banner-badge {
-    margin-inline: auto;
+    margin-left: 0;
+    margin-right: auto;
     font-size: 10px;
     padding: 6px 10px;
   }
 
   .hero-banner-mobile .hero-banner-ctas {
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 8px;
     margin-top: 14px;
@@ -480,7 +576,8 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
         }
 
         .hero-img-animate {
-          animation: hero-img-fadein 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+          opacity: 1;
+          animation: hero-img-fadein 900ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -522,7 +619,7 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
           }
         }
       `}</style>
-      {homeDecorations && (
+      {homeDecorations ? (
         <HomeEdgeLeaves
           placements={[
             {
@@ -543,6 +640,8 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
           mobileBorderTreatment
           mobileOpacity={0.5}
         />
+      ) : (
+        <AboutEdgeLeaves />
       )}
 
       {/* Scattered floating leaf decorations – clearly visible background botanical accents */}
@@ -659,11 +758,26 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
         </div>
       )}
 
-      <div className="hero-banner-content-shell relative z-10 mx-auto w-[92%] max-w-[1320px]">
-        <div className="hero-banner-layout flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-10 xl:gap-14">
+      <div
+        className={`${
+          homeDecorations
+            ? "hero-banner-content-shell relative z-10 mx-auto w-[92%] max-w-[1320px]"
+            : "relative z-10 mx-auto max-w-[1140px] px-6 sm:px-8 lg:px-10"
+        }`}
+      >
+        {/* Two-Column Hero Row */}
+        <div className={`${
+          homeDecorations
+            ? "hero-banner-layout flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-10 xl:gap-14"
+            : "flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-8 xl:gap-10"
+        }`}>
 
           {/* ── Left Column: Text & Features ── */}
-          <div className="hero-banner-copy relative z-10 w-full shrink-0 lg:max-w-[580px] xl:max-w-[620px]">
+          <div className={`${
+            homeDecorations
+              ? "hero-banner-copy relative z-10 w-full shrink-0 lg:max-w-[580px] xl:max-w-[620px]"
+              : "relative z-10 w-full shrink-0 lg:max-w-[540px] xl:max-w-[560px]"
+          }`}>
             {/* Badge */}
             <div className="hero-banner-badge inline-flex items-center gap-2 rounded-full bg-[#EAF2D7] px-3.5 py-1.5 text-[11px] font-semibold text-[#315F38] sm:text-[12px]">
               <svg
@@ -680,21 +794,42 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
                 <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
                 <path d="M2 21c0-3 1.85-5.36 5.08-6" />
               </svg>
-              <span>Natural • Sustainable • Healthier Homes</span>
+              <span>
+                {homeDecorations
+                  ? "Natural • Sustainable • Healthier Homes"
+                  : "OUR STORY & MISSION"}
+              </span>
             </div>
 
             {/* Heading with middle decorative leaf */}
             <div className="hero-banner-heading relative mt-4 sm:mt-5">
               <h1
-                aria-label="Bring Home the Beauty of Nature"
-                className="font-serif text-[32px] font-bold leading-[1.1] tracking-[-0.02em] text-[#18382B] sm:text-[46px] lg:text-[52px] xl:text-[56px]"
+                aria-label={
+                  homeDecorations
+                    ? "Bring Home the Beauty of Nature"
+                    : "Cultivating Green Spaces & Timeless Botanicals"
+                }
+                className="font-serif text-[32px] font-bold leading-[1.1] tracking-[-0.02em] text-[#18382B] sm:text-[46px] lg:text-[50px] xl:text-[54px]"
               >
-                <span className="block">
-                  <AnimatedHeadingText text="Bring Home the" />
-                </span>
-                <span className="block italic text-[#0B633B]">
-                  <AnimatedHeadingText text="Beauty of Nature" />
-                </span>
+                {homeDecorations ? (
+                  <>
+                    <span className="block">
+                      <AnimatedHeadingText text="Bring Home the" />
+                    </span>
+                    <span className="block italic text-[#0B633B]">
+                      <AnimatedHeadingText text="Beauty of Nature" />
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span className="block">
+                      <AnimatedHeadingText text="Cultivating Green Spaces &" />
+                    </span>
+                    <span className="block italic text-[#0B633B]">
+                      <AnimatedHeadingText text="Timeless Botanicals" />
+                    </span>
+                  </>
+                )}
               </h1>
 
               {/* Decorative leaf next to "Nature" */}
@@ -711,57 +846,87 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
               data-reveal-paragraph
               className="hero-banner-description mt-4 text-[14px] leading-relaxed text-[#43584B] sm:mt-5 sm:text-[15px] lg:mt-5 lg:max-w-[570px] lg:text-[15px] lg:leading-[1.65]"
             >
-              Everything you need to grow, nurture, and create your own serene
-              sanctuary. From rare tropical foliage to seeds and organic
-              nourishment.
+              {homeDecorations
+                ? "Everything you need to grow, nurture, and create your own serene sanctuary. From rare tropical foliage to seeds and organic nourishment."
+                : "At Kanchan Garden, we believe every room deserves a touch of nature. Our passion for plants inspires us to bring beautiful greenery thoughtfully curated garden ingredients."}
             </p>
 
             {/* CTA Buttons */}
             <div className="hero-banner-ctas mt-6 flex flex-wrap items-center gap-2.5 sm:mt-7 sm:gap-4 lg:mt-8">
-              <a
-                href="/plants"
-                className="inline-flex items-center justify-center rounded-full bg-[#06452E] px-4 py-2.5 text-[13.5px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#043322] active:scale-95 sm:px-6 sm:py-3 sm:text-[14px]"
-              >
-                Shop Plants <span className="ml-2 font-normal">›</span>
-              </a>
-              <a
-                href="/services"
-                className="inline-flex items-center justify-center rounded-full border border-[#D9DFD0] bg-white/90 px-4 py-2.5 text-[13.5px] font-semibold text-[#254233] shadow-sm transition-all duration-200 hover:bg-white active:scale-95 sm:px-6 sm:py-3 sm:text-[14px]"
-              >
-                Explore Our Services
-              </a>
+              {homeDecorations ? (
+                <>
+                  <a
+                    href="/plants"
+                    className="inline-flex items-center justify-center rounded-full bg-[#06452E] px-4 py-2.5 text-[13.5px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#043322] active:scale-95 sm:px-6 sm:py-3 sm:text-[14px]"
+                  >
+                    Shop Plants <span className="ml-2 font-normal">›</span>
+                  </a>
+                  <a
+                    href="/services"
+                    className="inline-flex items-center justify-center rounded-full border border-[#D9DFD0] bg-white/90 px-4 py-2.5 text-[13.5px] font-semibold text-[#254233] shadow-sm transition-all duration-200 hover:bg-white active:scale-95 sm:px-6 sm:py-3 sm:text-[14px]"
+                  >
+                    Explore Our Services
+                  </a>
+                </>
+              ) : (
+                <a
+                  href="#story"
+                  onClick={(e) => {
+                    const storyEl =
+                      document.querySelector("[data-about-story-heading]") ||
+                      document.querySelector("section:nth-of-type(2)");
+                    if (storyEl) {
+                      e.preventDefault();
+                      storyEl.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                  className="inline-flex items-center justify-center rounded-full bg-[#06452E] px-6 py-3.5 text-[14px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#043322] active:scale-95 sm:px-7 sm:py-3.5 sm:text-[14.5px]"
+                >
+                  Explore Our Journey <span className="ml-2 font-normal">›</span>
+                </a>
+              )}
             </div>
 
-            {/* 3 Feature cards */}
-            <div className="hero-banner-features mt-6 grid max-w-[800px] grid-cols-3 gap-3 sm:mt-10 sm:gap-4 lg:max-w-none">
-              {features.map((feature) => (
-                <div
-                  key={feature.title}
-                  data-reveal-card
-                  className="flex min-w-0 flex-col items-start gap-2.5 rounded-[18px] border border-[#E7EADF] bg-white/95 p-3.5 shadow-[0px_4px_16px_0px_rgba(26,67,36,0.06)] sm:flex-row sm:items-center sm:gap-3 sm:rounded-[20px] sm:px-3 sm:py-3.5 xl:gap-3.5 xl:px-4 xl:py-4"
-                >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] bg-[#E2F1DA] text-[#267445] sm:h-10 sm:w-10 xl:h-11 xl:w-11">
-                    {feature.icon}
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <span
-                      title={feature.title}
-                     className="block break-words text-[12px] font-bold leading-tight text-[#18382B] sm:text-[12.5px] xl:text-[13px]">
-                      {feature.title}
+            {/* Feature cards for Home Page ONLY */}
+            {homeDecorations && (
+              <div className="hero-banner-features mt-6 grid max-w-[800px] grid-cols-3 gap-3 sm:mt-10 sm:gap-4 lg:max-w-none">
+                {features.map((feature) => (
+                  <div
+                    key={feature.title}
+                    data-reveal-card
+                    className="flex min-w-0 flex-col items-start gap-2.5 rounded-[18px] border border-[#E7EADF] bg-white/95 p-3.5 shadow-[0px_4px_16px_0px_rgba(26,67,36,0.06)] sm:flex-row sm:items-center sm:gap-3 sm:rounded-[20px] sm:px-3 sm:py-3.5 xl:gap-3.5 xl:px-4 xl:py-4"
+                  >
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] bg-[#E2F1DA] text-[#267445] sm:h-10 sm:w-10 xl:h-11 xl:w-11">
+                      {feature.icon}
                     </span>
-                    <span
-                      title={feature.detail}
-                      className="mt-0.5 block break-words text-[10px] text-[#718073] sm:text-[10.5px] xl:text-[11px]">
-                      {feature.detail}
-                    </span>
+                    <div className="min-w-0 flex-1">
+                      <span
+                        title={feature.title}
+                        className="block break-words text-[12px] font-bold leading-tight text-[#18382B] sm:text-[12.5px] xl:text-[13px]"
+                      >
+                        {feature.title}
+                      </span>
+                      <span
+                        title={feature.detail}
+                        className="mt-0.5 block break-words text-[10px] text-[#718073] sm:text-[10.5px] xl:text-[11px]"
+                      >
+                        {feature.detail}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* ── Right Column: Garden Image ── */}
-          <div className="hero-banner-image relative mt-6 w-full max-w-[560px] flex-1 sm:mt-8 lg:mt-0 lg:max-w-[580px] xl:max-w-[620px]">
+          <div
+            className={`${
+              homeDecorations
+                ? "hero-banner-image relative mt-6 w-full max-w-[560px] flex-1 sm:mt-8 lg:mt-0 lg:max-w-[580px] xl:max-w-[620px]"
+                : "hero-banner-image relative mt-6 w-full max-w-[460px] shrink-0 sm:mt-8 sm:max-w-[480px] lg:mt-0 lg:max-w-[480px] lg:flex-1 xl:max-w-[500px]"
+            }`}
+          >
             <div
               className="relative aspect-[1.12/1] w-full overflow-hidden shadow-[0px_24px_60px_0px_rgba(22,70,34,0.18)]"
               style={{
@@ -770,14 +935,52 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
             >
               <img
                 ref={imgRef}
-                src={heroImage}
-                alt="Potted blooming garden plants on display with Green Happier You"
-                className="hero-img-animate h-full w-full object-cover object-center transition-transform duration-500 ease-out hover:scale-[1.02]"
+                src={homeDecorations ? heroImage : aboutHeroImage}
+                alt={
+                  homeDecorations
+                    ? "Potted blooming garden plants on display with Green Happier You"
+                    : "Curated botanical plants and planters on display"
+                }
+                style={{ opacity: 1 }}
+                className="hero-img-animate block h-full w-full object-cover object-center opacity-100 transition-transform duration-500 ease-out hover:scale-[1.02]"
               />
             </div>
           </div>
 
         </div>
+
+        {/* ── Statistics Cards (About Us page - Full Horizontal Row Below Hero Row) ── */}
+        {!homeDecorations && (
+          <div className="mt-6 w-full sm:mt-7 lg:mt-8">
+            <div className="grid w-full grid-cols-1 gap-3 min-[380px]:grid-cols-2 lg:grid-cols-4 sm:gap-3.5 lg:gap-4">
+              {aboutStatistics.map((stat) => (
+                <div
+                  key={stat.title}
+                  data-reveal-card
+                  className="flex h-full min-w-0 items-center gap-3.5 rounded-[18px] border border-[#E7EADF] bg-white/95 p-3.5 shadow-[0px_4px_16px_0px_rgba(26,67,36,0.06)] transition-all duration-200 sm:p-4"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-[#E2F1DA] text-[#267445] sm:h-11 sm:w-11">
+                    {stat.icon}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <span
+                      title={stat.title}
+                      className="block truncate text-[14px] font-bold leading-tight text-[#18382B] sm:text-[15px] xl:text-[15.5px]"
+                    >
+                      {stat.title}
+                    </span>
+                    <span
+                      title={stat.detail}
+                      className="mt-0.5 block truncate text-[11px] font-medium text-[#718073] sm:text-[11.5px] xl:text-[12px]"
+                    >
+                      {stat.detail}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

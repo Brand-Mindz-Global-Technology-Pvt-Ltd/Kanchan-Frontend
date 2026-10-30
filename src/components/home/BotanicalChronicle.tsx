@@ -64,7 +64,7 @@ function BotanicalChronicle() {
           >
             <AnimatedHeadingText text="Get Inspired to Grow" />
           </h2>
-          <p data-reveal-paragraph className="mt-2 text-[12px] leading-relaxed text-black sm:text-[#718074] sm:mt-3 sm:text-[14px] sm:leading-5">
+          <p data-reveal-paragraph className="mt-2 text-[12px] leading-relaxed text-[#718074] sm:mt-3 sm:text-[14px] sm:leading-5">
             Expert guidance, fresh styling ideas, and seasonal garden advice
             written by our horticulture team.
           </p>

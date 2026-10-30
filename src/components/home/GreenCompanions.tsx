@@ -99,7 +99,7 @@ function GreenCompanions() {
 
           <p
             data-reveal-paragraph
-            className="mx-auto mt-2.5 max-w-[270px] text-[12px] leading-relaxed text-black sm:text-[#5E7163] sm:max-w-[620px] sm:text-[14px]"
+            className="mx-auto mt-2.5 max-w-[270px] text-[12px] leading-relaxed text-[#5E7163] sm:max-w-[620px] sm:text-[14px]"
           >
             Beautiful, handpicked plants ready to bring timeless green, vitality,
             and peace to any garden or home.

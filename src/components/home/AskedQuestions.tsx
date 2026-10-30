@@ -89,7 +89,7 @@ function AskedQuestions() {
 
           <p
             data-reveal-paragraph
-            className="mx-auto mt-2.5 max-w-[270px] text-[12px] leading-relaxed text-black sm:text-[#5E7163] sm:max-w-[620px] sm:text-[14px]"
+            className="mx-auto mt-2.5 max-w-[270px] text-[12px] leading-relaxed text-[#5E7163] sm:max-w-[620px] sm:text-[14px]"
           >
             Everything you need to know about choosing and caring for your plants.
           </p>
@@ -142,7 +142,7 @@ function AskedQuestions() {
                   {/* Accordion Answer */}
                   {isOpen && (
                     <div className="animate-fadeIn px-6 pb-5 pt-0 sm:px-8 sm:pb-6">
-                      <p className="text-[13px] leading-relaxed text-black sm:text-[#5A6D5E] sm:text-[14px]">
+                      <p className="text-[13px] leading-relaxed text-[#5A6D5E] sm:text-[14px]">
                         {faq.answer}
                       </p>
                     </div>

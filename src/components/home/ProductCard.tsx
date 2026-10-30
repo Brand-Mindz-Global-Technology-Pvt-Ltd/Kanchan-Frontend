@@ -116,7 +116,7 @@ function ProductCard({
         </h3>
 
         {/* Subtitle */}
-        <p className="mt-0.5 text-[12px] leading-normal text-black sm:text-[#6B7280]">
+        <p className="mt-0.5 text-[12px] leading-normal text-[#6B7280]">
           {product.subtitle}
         </p>
 

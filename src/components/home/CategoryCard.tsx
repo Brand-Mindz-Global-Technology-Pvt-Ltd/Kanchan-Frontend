@@ -39,7 +39,7 @@ function CategoryCard({
           <h3 className="whitespace-pre-line text-[19px] font-medium leading-[22px] text-[#183B2B]">
             {title}
           </h3>
-          <p className="mt-[7px] text-[12px] leading-4 text-black sm:text-[#637567]">
+          <p className="mt-[7px] text-[12px] leading-4 text-[#637567]">
             {articleDescription}
           </p>
           <a
@@ -82,7 +82,7 @@ function CategoryCard({
             {title}
           </h3>
 
-          <p className="mt-1 text-[10px] leading-[1.35] text-black sm:text-[#637567] line-clamp-2 sm:text-[12px]">
+          <p className="mt-1 text-[10px] leading-[1.35] text-[#637567] line-clamp-2 sm:text-[12px]">
             {description}
           </p>
         </div>

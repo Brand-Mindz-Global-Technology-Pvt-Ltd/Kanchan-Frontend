@@ -353,7 +353,7 @@ export default function GardenerStories() {
 
           <p
             data-reveal-paragraph
-            className="mt-1 text-[12px] leading-[1.4] text-black sm:text-[#718074] sm:text-[13px]"
+            className="mt-1 text-[12px] leading-[1.4] text-[#718074] sm:text-[13px]"
           >
             Real experiences from people who made their spaces greener with Kanchan Garden.
           </p>
@@ -467,7 +467,7 @@ export default function GardenerStories() {
                 </div>
               </div>
 
-              <p className="mt-2.5 font-serif text-[13px] leading-[19px] text-black sm:text-[#5D7062]">
+              <p className="mt-2.5 font-serif text-[13px] leading-[19px] text-[#5D7062]">
                 “{item.review}”
               </p>
             </article>

@@ -140,7 +140,7 @@ export default function WhyChooseKanchan() {
           .choose-kanchan-desc {
             font-size: 12.5px !important;
             line-height: 1.4 !important;
-            color: #000000 !important;
+            color: #5E7163 !important;
           }
         }
 
@@ -183,7 +183,7 @@ export default function WhyChooseKanchan() {
 
           <p
             data-reveal-paragraph
-            className="mx-auto mt-2.5 max-w-[270px] text-[12px] leading-relaxed text-black sm:text-[#5E7163] sm:max-w-[640px] sm:text-[14px]"
+            className="mx-auto mt-2.5 max-w-[270px] text-[12px] leading-relaxed text-[#5E7163] sm:max-w-[640px] sm:text-[14px]"
           >
             We believe in a deeper connection between humanity and nature, and
             it shows in everything we do.
