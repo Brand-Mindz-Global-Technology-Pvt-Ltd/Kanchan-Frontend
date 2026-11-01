@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import heroImage from "../../assets/hero-image.jpg";
 import aboutHeroImage from "../../assets/about/Hero-banner.png";
+import contactHeroImage from "../../assets/garden-banner.png";
 import leafTwo from "../../assets/leaves/leaf-2.png";
 import leafThree from "../../assets/leaves/leaf-3.png";
 import leafFour from "../../assets/leaves/leaf-4.png";
@@ -151,7 +152,7 @@ const aboutStatistics = [
   },
 ] as const;
 
-function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) {
+function HeroBanner({ homeDecorations = false, contactHero = false }: { homeDecorations?: boolean; contactHero?: boolean }) {
   const sectionRef = useDecorativeLeafReveal<HTMLElement>();
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -797,6 +798,8 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
               <span>
                 {homeDecorations
                   ? "Natural • Sustainable • Healthier Homes"
+                  : contactHero
+                  ? "WE'RE HERE TO HELP"
                   : "OUR STORY & MISSION"}
               </span>
             </div>
@@ -807,6 +810,8 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
                 aria-label={
                   homeDecorations
                     ? "Bring Home the Beauty of Nature"
+                    : contactHero
+                    ? "Let's Grow Something Beautiful Together"
                     : "Cultivating Green Spaces & Timeless Botanicals"
                 }
                 className="font-serif text-[32px] font-bold leading-[1.1] tracking-[-0.02em] text-[#18382B] sm:text-[46px] lg:text-[50px] xl:text-[54px]"
@@ -818,6 +823,22 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
                     </span>
                     <span className="block italic text-[#0B633B]">
                       <AnimatedHeadingText text="Beauty of Nature" />
+                    </span>
+                  </>
+                ) : contactHero ? (
+                  <>
+                    <span className="block">
+                      <AnimatedHeadingText text="Let's Grow" />
+                    </span>
+                    <span className="block">
+                      <AnimatedHeadingText text="Something" />
+                    </span>
+                    <span className="block">
+                      <span className="italic text-[#0B633B]">
+                        <AnimatedHeadingText text="Beautiful" />
+                      </span>
+                      {" "}
+                      <AnimatedHeadingText text="Together" />
                     </span>
                   </>
                 ) : (
@@ -848,6 +869,8 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
             >
               {homeDecorations
                 ? "Everything you need to grow, nurture, and create your own serene sanctuary. From rare tropical foliage to seeds and organic nourishment."
+                : contactHero
+                ? "Have questions about our plants, gardening essentials, or your order? We'd love to hear from you. Our team is here to help your garden thrive."
                 : "At Kanchan Garden, we believe every room deserves a touch of nature. Our passion for plants inspires us to bring beautiful greenery thoughtfully curated garden ingredients."}
             </p>
 
@@ -868,6 +891,13 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
                     Explore Our Services
                   </a>
                 </>
+              ) : contactHero ? (
+                <a
+                  href="/plants"
+                  className="inline-flex items-center justify-center rounded-full bg-[#06452E] px-6 py-3.5 text-[14px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#043322] active:scale-95 sm:px-7 sm:py-3.5 sm:text-[14.5px]"
+                >
+                  Shop Plants <span className="ml-2 font-normal">›</span>
+                </a>
               ) : (
                 <a
                   href="#story"
@@ -935,10 +965,12 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
             >
               <img
                 ref={imgRef}
-                src={homeDecorations ? heroImage : aboutHeroImage}
+                src={homeDecorations ? heroImage : contactHero ? contactHeroImage : aboutHeroImage}
                 alt={
                   homeDecorations
                     ? "Potted blooming garden plants on display with Green Happier You"
+                    : contactHero
+                    ? "Garden nursery with terracotta pots and plants by a window"
                     : "Curated botanical plants and planters on display"
                 }
                 style={{ opacity: 1 }}
@@ -950,7 +982,7 @@ function HeroBanner({ homeDecorations = false }: { homeDecorations?: boolean }) 
         </div>
 
         {/* ── Statistics Cards (About Us page - Full Horizontal Row Below Hero Row) ── */}
-        {!homeDecorations && (
+        {!homeDecorations && !contactHero && (
           <div className="mt-6 w-full sm:mt-7 lg:mt-8">
             <div className="grid w-full grid-cols-1 gap-3 min-[380px]:grid-cols-2 lg:grid-cols-4 sm:gap-3.5 lg:gap-4">
               {aboutStatistics.map((stat) => (

@@ -1,3 +1,4 @@
+import HeroBanner from "../components/ui/HeroBanner";
 import ContactChannels from "../components/contact/ContactChannels";
 import ContactFormSection from "../components/contact/ContactFormSection";
 import NurseryLocation from "../components/contact/NurseryLocation";
@@ -99,6 +100,9 @@ export default function ContactUs() {
         }
         .cu-guide-row:hover { background: #F4F9EE; }
       `}</style>
+
+      {/* SECTION 1 — CONTACT HERO BANNER */}
+      <HeroBanner contactHero />
 
       {/* White section separator before Section 2 */}
       <div className="w-full bg-white" style={{ height: "10px" }} aria-hidden="true" />

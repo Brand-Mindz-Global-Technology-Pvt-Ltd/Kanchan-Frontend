@@ -1,4 +1,5 @@
 import AboutStory from "../components/about/AboutStory";
+import FounderSection from "../components/about/FounderSection";
 import BotanicalCommitment from "../components/about/BotanicalCommitment";
 import BotanicalSanctuary from "../components/about/BotanicalSanctuary";
 import Caretakers from "../components/about/Caretakers";
@@ -26,7 +27,13 @@ export default function AboutUs() {
       {/* SECTION 2: HOW WE BEGAN */}
       <AboutStory />
 
-      {/* White section separator between Section 2 and Section 3 */}
+      {/* White section separator between Section 2 and Founder */}
+      <div className="w-full bg-white" style={{ height: "8px" }} aria-hidden="true" />
+
+      {/* SECTION 2B: OUR FOUNDER */}
+      <FounderSection />
+
+      {/* White section separator between Founder and Section 3 */}
       <div className="w-full bg-white" style={{ height: "8px" }} aria-hidden="true" />
 
       {/* SECTION 3: OUR BOTANICAL COMMITMENT */}

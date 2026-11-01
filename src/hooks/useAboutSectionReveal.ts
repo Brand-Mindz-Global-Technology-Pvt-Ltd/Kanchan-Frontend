@@ -7,7 +7,8 @@ export type AboutSectionType =
   | "caretakers"
   | "benefits"
   | "faq"
-  | "community";
+  | "community"
+  | "founder";
 
 /**
  * Custom hook delivering REPEATING botanical scroll reveals
@@ -321,6 +322,58 @@ export function useAboutSectionReveal<T extends HTMLElement = HTMLElement>(
             }, 70 + idx * 100);
             timeouts.push(t);
           });
+        };
+        break;
+      }
+
+      case "founder": {
+        // FounderSection: heading fades down, image slides from left, details from right, cards stagger up
+        const heading = section.querySelector<HTMLElement>("[data-founder-heading]");
+        const image = section.querySelector<HTMLElement>("[data-founder-image]");
+        const details = section.querySelector<HTMLElement>("[data-founder-details]");
+        const cards = Array.from(section.querySelectorAll<HTMLElement>("[data-founder-cards] > *"));
+        const strip = section.querySelector<HTMLElement>("[data-founder-strip]");
+
+        resetAnimation = () => {
+          clearPendingTimeouts();
+          if (heading) { heading.style.transition = "none"; heading.style.opacity = "0"; heading.style.transform = "translateY(16px)"; }
+          if (image) { image.style.transition = "none"; image.style.opacity = "0"; image.style.transform = "translateX(-28px) scale(0.97)"; }
+          if (details) { details.style.transition = "none"; details.style.opacity = "0"; details.style.transform = "translateX(24px)"; }
+          cards.forEach((c) => { c.style.transition = "none"; c.style.opacity = "0"; c.style.transform = "translateY(22px) scale(0.97)"; });
+          if (strip) { strip.style.transition = "none"; strip.style.opacity = "0"; strip.style.transform = "translateY(16px)"; }
+        };
+
+        playAnimation = () => {
+          clearPendingTimeouts();
+          if (heading) {
+            heading.style.transition = "opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1)";
+            heading.style.opacity = "1"; heading.style.transform = "translateY(0px)";
+          }
+          const t1 = setTimeout(() => {
+            if (image) {
+              image.style.transition = "opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1)";
+              image.style.opacity = "1"; image.style.transform = "translateX(0px) scale(1)";
+            }
+            if (details) {
+              details.style.transition = "opacity 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s, transform 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s";
+              details.style.opacity = "1"; details.style.transform = "translateX(0px)";
+            }
+          }, 100);
+          timeouts.push(t1);
+          cards.forEach((c, idx) => {
+            const t = setTimeout(() => {
+              c.style.transition = "opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1)";
+              c.style.opacity = "1"; c.style.transform = "translateY(0px) scale(1)";
+            }, 350 + idx * 80);
+            timeouts.push(t);
+          });
+          const tStrip = setTimeout(() => {
+            if (strip) {
+              strip.style.transition = "opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1)";
+              strip.style.opacity = "1"; strip.style.transform = "translateY(0px)";
+            }
+          }, 600);
+          timeouts.push(tStrip);
         };
         break;
       }
