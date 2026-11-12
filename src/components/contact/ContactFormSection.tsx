@@ -3,6 +3,7 @@ import type { FormEvent } from "react";
 import BotanicalLeaf from "./BotanicalLeaf";
 import ContactEdgeLeaves from "./ContactEdgeLeaves";
 import { useContactSectionReveal } from "../../hooks/useContactSectionReveal";
+import { submitEnquiryApi, EnquiryApiError } from "../../services/enquiryApi";
 
 export default function ContactFormSection() {
   const sectionRef = useContactSectionReveal<HTMLElement>("form");
@@ -15,11 +16,54 @@ export default function ContactFormSection() {
     message: "",
     consent: false,
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (isSubmitting) return;
+
+    if (!formData.consent) {
+      setErrorMessage("Please agree to the Privacy Policy to submit your enquiry.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    try {
+      await submitEnquiryApi({
+        fullName: formData.fullName.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        city: formData.city.trim(),
+        state: formData.state.trim(),
+        message: formData.message.trim(),
+      });
+
+      // Reset form data and show success state only after API confirms success
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        city: "",
+        state: "",
+        message: "",
+        consent: false,
+      });
+      setSubmitted(true);
+    } catch (err: unknown) {
+      const msg =
+        err instanceof EnquiryApiError
+          ? err.message
+          : err instanceof Error
+          ? err.message
+          : "Failed to send message. Please check your connection and try again.";
+      setErrorMessage(msg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -142,6 +186,57 @@ export default function ContactFormSection() {
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
+                {/* Error Banner */}
+                {errorMessage && (
+                  <div
+                    role="alert"
+                    className="cu-sans"
+                    style={{
+                      background: "#FEE2E2",
+                      border: "1px solid #FCA5A5",
+                      color: "#991B1B",
+                      borderRadius: "10px",
+                      padding: "10px 14px",
+                      fontSize: "12.5px",
+                      marginBottom: "16px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: "8px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                      <svg
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        style={{ width: "16px", height: "16px", flexShrink: 0 }}
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      <span>{errorMessage}</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setErrorMessage(null)}
+                      style={{
+                        background: "none",
+                        border: "none",
+                        color: "#991B1B",
+                        cursor: "pointer",
+                        fontWeight: 700,
+                        padding: "2px 4px",
+                      }}
+                      title="Dismiss error"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                )}
+
                 {/* Row 1: Full Name & Email */}
                 <div data-contact-form-field style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "16px" }}>
                   <div>
@@ -274,30 +369,62 @@ export default function ContactFormSection() {
                 {/* Row 6: Submit Button */}
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="cu-sans"
                   style={{
                     width: "100%",
-                    background: "#143826",
+                    background: isSubmitting ? "#3b5847" : "#143826",
                     color: "#fff",
                     border: "none",
                     borderRadius: "50px",
                     padding: "14px 24px",
                     fontSize: "14px",
                     fontWeight: 600,
-                    cursor: "pointer",
+                    cursor: isSubmitting ? "wait" : "pointer",
+                    opacity: isSubmitting ? 0.8 : 1,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     gap: "8px",
-                    transition: "background 0.15s",
+                    transition: "background 0.15s, opacity 0.15s",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = "#0d2419")}
-                  onMouseLeave={(e) => (e.currentTarget.style.background = "#143826")}
+                  onMouseEnter={(e) => {
+                    if (!isSubmitting) e.currentTarget.style.background = "#0d2419";
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isSubmitting) e.currentTarget.style.background = "#143826";
+                  }}
                 >
-                  Send Message
-                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 13, height: 13 }}>
-                    <path d="M3 8h10M9 4l4 4-4 4" />
-                  </svg>
+                  {isSubmitting ? (
+                    <>
+                      <div
+                        style={{
+                          width: "14px",
+                          height: "14px",
+                          border: "2px solid #fff",
+                          borderTopColor: "transparent",
+                          borderRadius: "50%",
+                          animation: "spin 0.8s linear infinite",
+                        }}
+                      />
+                      <span>Sending Message...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Send Message</span>
+                      <svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        style={{ width: 13, height: 13 }}
+                      >
+                        <path d="M3 8h10M9 4l4 4-4 4" />
+                      </svg>
+                    </>
+                  )}
                 </button>
               </form>
             )}

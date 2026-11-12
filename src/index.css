@@ -17,3 +17,202 @@ body {
   font-family: Arial, sans-serif;
   background: white;
 }
+
+/* ========================================================
+   Kanchan Botanical Animation Suite
+   ======================================================== */
+
+@keyframes kanchanFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes kanchanFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes kanchanScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: kanchanFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in-up {
+  animation: kanchanFadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-scale-in {
+  animation: kanchanScaleIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animation-delay-150 {
+  animation-delay: 150ms;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+/* Accessibility: Respect user reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-fade-in-up,
+  .animate-scale-in,
+  [data-scroll-reveal] {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .btn-premium,
+  .btn-premium-outline,
+  .card-hover-lift,
+  .img-hover-zoom {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ========================================================
+   Scroll-Triggered Reveal Animation System
+   ======================================================== */
+
+[data-scroll-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+[data-scroll-reveal="scale"] {
+  opacity: 0;
+  transform: scale(0.96) translateY(12px);
+}
+
+[data-scroll-reveal="fade"] {
+  opacity: 0;
+  transform: none;
+}
+
+[data-scroll-reveal="left"] {
+  opacity: 0;
+  transform: translateX(-24px);
+}
+
+[data-scroll-reveal="right"] {
+  opacity: 0;
+  transform: translateX(24px);
+}
+
+[data-scroll-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+/* Stagger delays for list and grid items */
+[data-scroll-reveal][data-stagger="1"] { transition-delay: 50ms; }
+[data-scroll-reveal][data-stagger="2"] { transition-delay: 100ms; }
+[data-scroll-reveal][data-stagger="3"] { transition-delay: 150ms; }
+[data-scroll-reveal][data-stagger="4"] { transition-delay: 200ms; }
+[data-scroll-reveal][data-stagger="5"] { transition-delay: 250ms; }
+[data-scroll-reveal][data-stagger="6"] { transition-delay: 300ms; }
+[data-scroll-reveal][data-stagger="7"] { transition-delay: 350ms; }
+[data-scroll-reveal][data-stagger="8"] { transition-delay: 400ms; }
+
+/* ========================================================
+   Interactive Button & Card Hover Enhancements
+   ======================================================== */
+
+.btn-premium {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              border-color 0.2s ease;
+  will-change: transform, box-shadow;
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 8px 20px rgba(6, 69, 46, 0.22);
+}
+
+.btn-premium:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 8px rgba(6, 69, 46, 0.15);
+}
+
+.btn-premium svg,
+.btn-premium span[aria-hidden="true"] {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-premium:hover svg:not(.animate-spin),
+.btn-premium:hover span[aria-hidden="true"] {
+  transform: translateX(3px);
+}
+
+.btn-premium-outline {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              border-color 0.2s ease,
+              color 0.2s ease;
+}
+
+.btn-premium-outline:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 16px rgba(20, 56, 38, 0.08);
+}
+
+.btn-premium-outline:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.card-hover-lift {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease;
+}
+
+.card-hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgba(20, 56, 38, 0.09);
+}
+
+.img-hover-zoom {
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.img-hover-zoom:hover,
+.group:hover .img-hover-zoom {
+  transform: scale(1.06);
+}

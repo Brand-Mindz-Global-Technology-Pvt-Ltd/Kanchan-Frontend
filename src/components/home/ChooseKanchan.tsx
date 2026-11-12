@@ -1,4 +1,5 @@
 import HomeEdgeLeaves from "./HomeEdgeLeaves";
+import AboutEdgeLeaves from "../about/AboutEdgeLeaves";
 import {
   AnimatedHeadingText,
   useDecorativeLeafReveal,
@@ -111,7 +112,13 @@ const features: FeatureItem[] = [
   },
 ];
 
-export default function WhyChooseKanchan() {
+export interface WhyChooseKanchanProps {
+  aboutEdgeLeaves?: boolean;
+}
+
+export default function WhyChooseKanchan({
+  aboutEdgeLeaves = false,
+}: WhyChooseKanchanProps = {}) {
   const sectionRef = useDecorativeLeafReveal<HTMLElement>();
 
   return (
@@ -152,19 +159,23 @@ export default function WhyChooseKanchan() {
         }
       `}</style>
 
-      <HomeEdgeLeaves
-        placements={[
-          {
-            left: { top: "-3%", width: "clamp(115px, 18vw, 245px)", opacity: 0.92 },
-            right: { top: "0%", width: "clamp(105px, 17vw, 230px)", opacity: 0.9 },
-          },
-          {
-            left: { bottom: "-12%", width: "clamp(110px, 17vw, 235px)", opacity: 0.88 },
-            right: { bottom: "-10%", width: "clamp(115px, 18vw, 245px)", opacity: 0.9 },
-          },
-        ]}
-        mobileBorderTreatment
-      />
+      {aboutEdgeLeaves ? (
+        <AboutEdgeLeaves />
+      ) : (
+        <HomeEdgeLeaves
+          placements={[
+            {
+              left: { top: "-3%", width: "clamp(115px, 18vw, 245px)", opacity: 0.92 },
+              right: { top: "0%", width: "clamp(105px, 17vw, 230px)", opacity: 0.9 },
+            },
+            {
+              left: { bottom: "-12%", width: "clamp(110px, 17vw, 235px)", opacity: 0.88 },
+              right: { bottom: "-10%", width: "clamp(115px, 18vw, 245px)", opacity: 0.9 },
+            },
+          ]}
+          mobileBorderTreatment
+        />
+      )}
 
       <div className="relative z-10 mx-auto w-[92%] max-w-[1180px]">
         {/* Section Heading */}

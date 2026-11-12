@@ -9,5 +9,11 @@ export default defineConfig({
     watch: {
       usePolling: process.platform === 'win32',
     },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+      },
+    },
   },
 })

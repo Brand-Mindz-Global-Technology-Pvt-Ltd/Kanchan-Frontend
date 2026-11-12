@@ -34,7 +34,7 @@ const features = [
   },
   {
     title: "Organic Inputs",
-    detail: "Chemical-Free Care",
+    detail: "Free Care",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -53,7 +53,7 @@ const features = [
   },
   {
     title: "Total Solution",
-    detail: "Everything you need",
+    detail: "Everything need",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -152,7 +152,15 @@ const aboutStatistics = [
   },
 ] as const;
 
-function HeroBanner({ homeDecorations = false, contactHero = false }: { homeDecorations?: boolean; contactHero?: boolean }) {
+function HeroBanner({
+  homeDecorations = false,
+  contactHero = false,
+  plantsHero = false,
+}: {
+  homeDecorations?: boolean;
+  contactHero?: boolean;
+  plantsHero?: boolean;
+}) {
   const sectionRef = useDecorativeLeafReveal<HTMLElement>();
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -760,25 +768,22 @@ function HeroBanner({ homeDecorations = false, contactHero = false }: { homeDeco
       )}
 
       <div
-        className={`${
-          homeDecorations
-            ? "hero-banner-content-shell relative z-10 mx-auto w-[92%] max-w-[1320px]"
-            : "relative z-10 mx-auto max-w-[1140px] px-6 sm:px-8 lg:px-10"
-        }`}
+        className={`${homeDecorations
+          ? "hero-banner-content-shell relative z-10 mx-auto w-[92%] max-w-[1320px]"
+          : "relative z-10 mx-auto max-w-[1140px] px-6 sm:px-8 lg:px-10"
+          }`}
       >
         {/* Two-Column Hero Row */}
-        <div className={`${
-          homeDecorations
-            ? "hero-banner-layout flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-10 xl:gap-14"
-            : "flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-8 xl:gap-10"
-        }`}>
+        <div className={`${homeDecorations
+          ? "hero-banner-layout flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-10 xl:gap-14"
+          : "flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-8 xl:gap-10"
+          }`}>
 
           {/* ── Left Column: Text & Features ── */}
-          <div className={`${
-            homeDecorations
-              ? "hero-banner-copy relative z-10 w-full shrink-0 lg:max-w-[580px] xl:max-w-[620px]"
-              : "relative z-10 w-full shrink-0 lg:max-w-[540px] xl:max-w-[560px]"
-          }`}>
+          <div className={`${homeDecorations
+            ? "hero-banner-copy relative z-10 w-full shrink-0 lg:max-w-[580px] xl:max-w-[620px]"
+            : "relative z-10 w-full shrink-0 lg:max-w-[540px] xl:max-w-[560px]"
+            }`}>
             {/* Badge */}
             <div className="hero-banner-badge inline-flex items-center gap-2 rounded-full bg-[#EAF2D7] px-3.5 py-1.5 text-[11px] font-semibold text-[#315F38] sm:text-[12px]">
               <svg
@@ -799,8 +804,10 @@ function HeroBanner({ homeDecorations = false, contactHero = false }: { homeDeco
                 {homeDecorations
                   ? "Natural • Sustainable • Healthier Homes"
                   : contactHero
-                  ? "WE'RE HERE TO HELP"
-                  : "OUR STORY & MISSION"}
+                    ? "WE'RE HERE TO HELP"
+                    : plantsHero
+                      ? "OUR PLANT COLLECTION"
+                      : "OUR STORY & MISSION"}
               </span>
             </div>
 
@@ -811,8 +818,10 @@ function HeroBanner({ homeDecorations = false, contactHero = false }: { homeDeco
                   homeDecorations
                     ? "Bring Home the Beauty of Nature"
                     : contactHero
-                    ? "Let's Grow Something Beautiful Together"
-                    : "Cultivating Green Spaces & Timeless Botanicals"
+                      ? "Let's Grow Something Beautiful Together"
+                      : plantsHero
+                        ? "Enrich Your Space with Living Botanicals"
+                        : "Cultivating Green Spaces & Timeless Botanicals"
                 }
                 className="font-serif text-[32px] font-bold leading-[1.1] tracking-[-0.02em] text-[#18382B] sm:text-[46px] lg:text-[50px] xl:text-[54px]"
               >
@@ -839,6 +848,18 @@ function HeroBanner({ homeDecorations = false, contactHero = false }: { homeDeco
                       </span>
                       {" "}
                       <AnimatedHeadingText text="Together" />
+                    </span>
+                  </>
+                ) : plantsHero ? (
+                  <>
+                    <span className="block">
+                      <AnimatedHeadingText text="Enrich Your" />
+                    </span>
+                    <span className="block">
+                      <AnimatedHeadingText text="Space with" />
+                    </span>
+                    <span className="block italic text-[#0B633B]">
+                      <AnimatedHeadingText text="Living Botanicals" />
                     </span>
                   </>
                 ) : (
@@ -870,8 +891,10 @@ function HeroBanner({ homeDecorations = false, contactHero = false }: { homeDeco
               {homeDecorations
                 ? "Everything you need to grow, nurture, and create your own serene sanctuary. From rare tropical foliage to seeds and organic nourishment."
                 : contactHero
-                ? "Have questions about our plants, gardening essentials, or your order? We'd love to hear from you. Our team is here to help your garden thrive."
-                : "At Kanchan Garden, we believe every room deserves a touch of nature. Our passion for plants inspires us to bring beautiful greenery thoughtfully curated garden ingredients."}
+                  ? "Have questions about our plants, gardening essentials, or your order? We'd love to hear from you. Our team is here to help your garden thrive."
+                  : plantsHero
+                    ? "Explore our carefully nurtured collection of indoor and outdoor plants. From resilient low-light greenery to statement tropicals, find the perfect companion to transform your home."
+                    : "At Kanchan Garden, we believe every room deserves a touch of nature. Our passion for plants inspires us to bring beautiful greenery thoughtfully curated garden ingredients."}
             </p>
 
             {/* CTA Buttons */}
@@ -897,6 +920,20 @@ function HeroBanner({ homeDecorations = false, contactHero = false }: { homeDeco
                   className="inline-flex items-center justify-center rounded-full bg-[#06452E] px-6 py-3.5 text-[14px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#043322] active:scale-95 sm:px-7 sm:py-3.5 sm:text-[14.5px]"
                 >
                   Shop Plants <span className="ml-2 font-normal">›</span>
+                </a>
+              ) : plantsHero ? (
+                <a
+                  href="#plants-collection"
+                  onClick={(e) => {
+                    const el = document.getElementById("plants-collection");
+                    if (el) {
+                      e.preventDefault();
+                      el.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                  className="inline-flex items-center justify-center rounded-full bg-[#06452E] px-6 py-3.5 text-[14px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#043322] active:scale-95 sm:px-7 sm:py-3.5 sm:text-[14.5px]"
+                >
+                  Explore Collection <span className="ml-2 font-normal">›</span>
                 </a>
               ) : (
                 <a
@@ -951,11 +988,10 @@ function HeroBanner({ homeDecorations = false, contactHero = false }: { homeDeco
 
           {/* ── Right Column: Garden Image ── */}
           <div
-            className={`${
-              homeDecorations
-                ? "hero-banner-image relative mt-6 w-full max-w-[560px] flex-1 sm:mt-8 lg:mt-0 lg:max-w-[580px] xl:max-w-[620px]"
-                : "hero-banner-image relative mt-6 w-full max-w-[460px] shrink-0 sm:mt-8 sm:max-w-[480px] lg:mt-0 lg:max-w-[480px] lg:flex-1 xl:max-w-[500px]"
-            }`}
+            className={`${homeDecorations
+              ? "hero-banner-image relative mt-6 w-full max-w-[560px] flex-1 sm:mt-8 lg:mt-0 lg:max-w-[580px] xl:max-w-[620px]"
+              : "hero-banner-image relative mt-6 w-full max-w-[460px] shrink-0 sm:mt-8 sm:max-w-[480px] lg:mt-0 lg:max-w-[480px] lg:flex-1 xl:max-w-[500px]"
+              }`}
           >
             <div
               className="relative aspect-[1.12/1] w-full overflow-hidden shadow-[0px_24px_60px_0px_rgba(22,70,34,0.18)]"
@@ -970,8 +1006,10 @@ function HeroBanner({ homeDecorations = false, contactHero = false }: { homeDeco
                   homeDecorations
                     ? "Potted blooming garden plants on display with Green Happier You"
                     : contactHero
-                    ? "Garden nursery with terracotta pots and plants by a window"
-                    : "Curated botanical plants and planters on display"
+                      ? "Garden nursery with terracotta pots and plants by a window"
+                      : plantsHero
+                        ? "Carefully nurtured botanical plants and indoor greenery collection"
+                        : "Curated botanical plants and planters on display"
                 }
                 style={{ opacity: 1 }}
                 className="hero-img-animate block h-full w-full object-cover object-center opacity-100 transition-transform duration-500 ease-out hover:scale-[1.02]"
@@ -982,7 +1020,7 @@ function HeroBanner({ homeDecorations = false, contactHero = false }: { homeDeco
         </div>
 
         {/* ── Statistics Cards (About Us page - Full Horizontal Row Below Hero Row) ── */}
-        {!homeDecorations && !contactHero && (
+        {!homeDecorations && !contactHero && !plantsHero && (
           <div className="mt-6 w-full sm:mt-7 lg:mt-8">
             <div className="grid w-full grid-cols-1 gap-3 min-[380px]:grid-cols-2 lg:grid-cols-4 sm:gap-3.5 lg:gap-4">
               {aboutStatistics.map((stat) => (

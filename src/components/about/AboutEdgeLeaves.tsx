@@ -1,18 +1,25 @@
 import left1 from "../../assets/about/leaf/left-1.png";
 import left2 from "../../assets/about/leaf/left-2.png";
+import left3 from "../../assets/about/leaf/left-3.png";
 import right1 from "../../assets/about/leaf/right-1.png";
 import right2 from "../../assets/about/leaf/right-2.png";
+import right3 from "../../assets/about/leaf/right-3.png";
 
 export interface AboutEdgeLeavesProps {
   /** Width clamp matching the original displayed leaf size */
   width?: string;
   /** Opacity of decorative leaves */
   opacity?: number;
+  className?: string;
+  /** Optional matching middle leaves along the left and right edges */
+  includeMiddleLeaves?: boolean;
 }
 
 export default function AboutEdgeLeaves({
   width = "clamp(70px, 10vw, 160px)",
   opacity = 0.88,
+  className = "",
+  includeMiddleLeaves = false,
 }: AboutEdgeLeavesProps = {}) {
   const commonLeftStyle: React.CSSProperties = {
     position: "absolute",
@@ -59,7 +66,7 @@ export default function AboutEdgeLeaves({
       `}</style>
       <div
         aria-hidden="true"
-        className="about-edge-leaves-container pointer-events-none absolute inset-0 z-0 select-none"
+        className={`about-edge-leaves-container pointer-events-none absolute inset-0 z-0 select-none ${className}`}
         style={{
           position: "absolute",
           top: 0,
@@ -92,6 +99,32 @@ export default function AboutEdgeLeaves({
             top: "0%",
           }}
         />
+
+        {/* MIDDLE LEFT LEAF */}
+        {includeMiddleLeaves && (
+          <img
+            src={left3}
+            alt=""
+            style={{
+              ...commonLeftStyle,
+              top: "50%",
+              transform: "translateY(-50%)",
+            }}
+          />
+        )}
+
+        {/* MIDDLE RIGHT LEAF */}
+        {includeMiddleLeaves && (
+          <img
+            src={right3}
+            alt=""
+            style={{
+              ...commonRightStyle,
+              top: "50%",
+              transform: "translateY(-50%)",
+            }}
+          />
+        )}
 
         {/* BOTTOM LEFT LEAF */}
         <img
