@@ -67,7 +67,7 @@ export default function SecurityCard({ onLogout }: SecurityCardProps) {
         </div>
 
         {/* Right Section: Logout Button */}
-        <div className="flex items-center gap-2 self-end sm:self-auto">
+        <div className="flex items-center justify-end gap-2 w-full sm:w-auto pt-2.5 sm:pt-0 border-t border-[#ECE0CA]/60 sm:border-t-0">
           {logoutNotice && (
             <span style={{ color: "#163B1C" }} className="text-xs font-medium animate-fade-in">
               Session cleared. Redirecting...

@@ -104,7 +104,7 @@ export default function PersonalDetailsCard({
       {!isEditing ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-2 pt-2.5 sm:pt-3">
           {/* 1. Full Name */}
-          <div style={{ borderColor: "#EBE0CF" }} className="flex flex-col items-center text-center px-2 lg:border-r">
+          <div style={{ borderColor: "#EBE0CF" }} className="flex flex-col items-center text-center px-2 pb-2.5 sm:pb-0 border-b border-[#ECE0CA]/60 sm:border-b-0 lg:border-r">
             <div style={{ backgroundColor: "#DFECCC", color: "#184328" }} className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full flex items-center justify-center mb-1.5">
               <svg
                 className="w-3.5 h-3.5"
@@ -118,13 +118,13 @@ export default function PersonalDetailsCard({
             <span style={{ color: "#647B68" }} className="text-[10px] sm:text-[10.5px] uppercase tracking-wider font-semibold">
               Full Name
             </span>
-            <span style={{ color: "#153A1B" }} className="text-[13px] sm:text-[14px] font-bold mt-0.5 truncate max-w-full">
+            <span style={{ color: "#153A1B" }} className="text-[13px] sm:text-[14px] font-bold mt-0.5 truncate max-w-full px-1" title={profile.fullName}>
               {profile.fullName}
             </span>
           </div>
 
           {/* 2. Email Address */}
-          <div style={{ borderColor: "#EBE0CF" }} className="flex flex-col items-center text-center px-2 lg:border-r">
+          <div style={{ borderColor: "#EBE0CF" }} className="flex flex-col items-center text-center px-2 pb-2.5 sm:pb-0 border-b border-[#ECE0CA]/60 sm:border-b-0 lg:border-r">
             <div style={{ backgroundColor: "#DFECCC", color: "#184328" }} className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full flex items-center justify-center mb-1.5">
               <svg
                 className="w-3.5 h-3.5"
@@ -140,13 +140,13 @@ export default function PersonalDetailsCard({
             <span style={{ color: "#647B68" }} className="text-[10px] sm:text-[10.5px] uppercase tracking-wider font-semibold">
               Email Address
             </span>
-            <span style={{ color: "#153A1B" }} className="text-[13px] sm:text-[14px] font-bold mt-0.5 truncate max-w-full">
+            <span style={{ color: "#153A1B" }} className="text-[13px] sm:text-[14px] font-bold mt-0.5 truncate max-w-full px-1" title={profile.email}>
               {profile.email}
             </span>
           </div>
 
           {/* 3. Mobile Number */}
-          <div style={{ borderColor: "#EBE0CF" }} className="flex flex-col items-center text-center px-2 lg:border-r">
+          <div style={{ borderColor: "#EBE0CF" }} className="flex flex-col items-center text-center px-2 pb-2.5 sm:pb-0 border-b border-[#ECE0CA]/60 sm:border-b-0 lg:border-r">
             <div style={{ backgroundColor: "#DFECCC", color: "#184328" }} className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full flex items-center justify-center mb-1.5">
               <svg
                 className="w-3.5 h-3.5"
@@ -159,13 +159,13 @@ export default function PersonalDetailsCard({
             <span style={{ color: "#647B68" }} className="text-[10px] sm:text-[10.5px] uppercase tracking-wider font-semibold">
               Mobile Number
             </span>
-            <span style={{ color: "#153A1B" }} className="text-[13px] sm:text-[14px] font-bold mt-0.5 truncate max-w-full">
+            <span style={{ color: "#153A1B" }} className="text-[13px] sm:text-[14px] font-bold mt-0.5 truncate max-w-full px-1" title={profile.phone}>
               {profile.phone}
             </span>
           </div>
 
           {/* 4. Gender */}
-          <div className="flex flex-col items-center text-center px-2">
+          <div className="flex flex-col items-center text-center px-2 pt-0.5 sm:pt-0">
             <div style={{ backgroundColor: "#DFECCC", color: "#184328" }} className="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-full flex items-center justify-center mb-1.5">
               <svg
                 className="w-3.5 h-3.5"
@@ -183,7 +183,7 @@ export default function PersonalDetailsCard({
             <span style={{ color: "#647B68" }} className="text-[10px] sm:text-[10.5px] uppercase tracking-wider font-semibold">
               Gender
             </span>
-            <span style={{ color: "#153A1B" }} className="text-[13px] sm:text-[14px] font-bold mt-0.5 truncate max-w-full">
+            <span style={{ color: "#153A1B" }} className="text-[13px] sm:text-[14px] font-bold mt-0.5 truncate max-w-full px-1" title={profile.gender}>
               {profile.gender}
             </span>
           </div>

@@ -14,7 +14,7 @@ function Navbar() {
   const currentPath = typeof window !== "undefined" ? window.location.pathname : "/";
   const links: NavbarLink[] = [
     { name: "Home", href: "/" },
-    { name: "Plants", href: "/plants", disabled: true },
+    { name: "Plants", href: "/plants" },
     { name: "Services", href: "/services", disabled: true },
     { name: "Blog", href: "/blog", disabled: true },
     { name: "About", href: "/about" },

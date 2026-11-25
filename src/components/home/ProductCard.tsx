@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useShop } from "../../context/ShopContext";
+import { getCustomerToken } from "../../services/customerAuth";
 
 export type Product = {
   id: string;
@@ -30,9 +31,9 @@ function ProductCard({
   onToggleWishlist,
   whiteAddButton = false,
 }: ProductCardProps) {
-  const [isWishlisted, setIsWishlisted] = useState(false);
+  const { selectProductAndNavigate, addToCart, isProductWishlisted, toggleWishlist, navigateTo } = useShop();
+  const wishlisted = isProductWishlisted(product.id);
   const [isAdded, setIsAdded] = useState(false);
-  const { selectProductAndNavigate, addToCart } = useShop();
 
   const isOutOfStock = typeof product.stock === "number" && product.stock <= 0;
   const isLowStock = typeof product.stock === "number" && product.stock > 0 && product.stock <= 10;
@@ -45,12 +46,16 @@ function ProductCard({
       ? Math.round(((numericOriginal - numericPrice) / numericOriginal) * 100)
       : 0;
 
-  const handleWishlist = (e: React.MouseEvent) => {
+  const handleWishlist = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    const next = !isWishlisted;
-    setIsWishlisted(next);
-    onToggleWishlist?.(product, next);
+    const token = getCustomerToken();
+    if (!token) {
+      navigateTo("/login");
+      return;
+    }
+    const nextState = await toggleWishlist(product);
+    onToggleWishlist?.(product, nextState);
   };
 
   const handleAddToCart = (e: React.MouseEvent) => {
@@ -118,14 +123,14 @@ function ProductCard({
         <button
           type="button"
           onClick={handleWishlist}
-          aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+          aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
           className="absolute right-2.5 top-2.5 z-20 flex h-7 w-7 items-center justify-center rounded-full bg-white shadow-[0px_2px_8px_rgba(0,0,0,0.12)] transition-transform duration-200 hover:scale-110 active:scale-90 sm:right-3 sm:top-3 sm:h-8 sm:w-8 cursor-pointer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            fill={isWishlisted ? "#D94F4F" : "none"}
-            stroke={isWishlisted ? "#D94F4F" : "#D94F4F"}
+            fill={wishlisted ? "#D94F4F" : "none"}
+            stroke={wishlisted ? "#D94F4F" : "#D94F4F"}
             strokeWidth="1.8"
             strokeLinecap="round"
             strokeLinejoin="round"

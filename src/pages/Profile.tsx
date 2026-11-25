@@ -135,7 +135,7 @@ export default function Profile() {
   return (
     <div
       style={{ backgroundColor: "#FAF4E8" }}
-      className="relative isolate w-full min-h-[calc(100vh-70px)] overflow-x-hidden px-4 py-4 sm:px-6 sm:py-6 lg:px-8 xl:px-10 text-[#163B1C]"
+      className="relative isolate w-full min-h-[calc(100vh-70px)] overflow-x-hidden px-3.5 py-4 sm:px-6 sm:py-6 lg:px-8 xl:px-10 text-[#163B1C]"
     >
       {/* Import Serif and Sans fonts + Dedicated Palette Rules */}
       <style>{`

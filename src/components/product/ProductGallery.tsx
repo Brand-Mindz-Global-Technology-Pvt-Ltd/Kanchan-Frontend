@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useShop } from "../../context/ShopContext";
+import { getCustomerToken } from "../../services/customerAuth";
 import { resolveProductImage, type BackendProduct } from "../../services/productApi";
 
 export interface ProductGalleryProps {
@@ -7,10 +8,25 @@ export interface ProductGalleryProps {
 }
 
 export default function ProductGallery({ product }: ProductGalleryProps = {}) {
-  const { selectedProduct } = useShop();
+  const { selectedProduct, isProductWishlisted, toggleWishlist, navigateTo } = useShop();
   const productName = product ? product.name : selectedProduct.name;
   const productBadge = product ? product.badge : selectedProduct.badge;
   const productBadgeBg = (product ? product.badgeBg : selectedProduct.badgeBg) || "#06452E";
+
+  const currentProductId = product?.id || selectedProduct.id;
+  const isWishlisted = isProductWishlisted(currentProductId);
+
+  const handleWishlistClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const token = getCustomerToken();
+    if (!token) {
+      navigateTo("/login");
+      return;
+    }
+    const targetProduct = product || selectedProduct;
+    await toggleWishlist(targetProduct);
+  };
 
   // Derive all unique, valid image URLs from product (supporting 1, 2, 4, etc. uploaded images)
   const galleryImages: string[] = useMemo(() => {
@@ -69,7 +85,6 @@ export default function ProductGallery({ product }: ProductGalleryProps = {}) {
   const primaryImage = galleryImages[0] || resolveProductImage("");
 
   const [activeImage, setActiveImage] = useState<string>(primaryImage);
-  const [isWishlisted, setIsWishlisted] = useState<boolean>(false);
   const [isZoomed, setIsZoomed] = useState<boolean>(false);
 
   // When switching products or when gallery images change, reset to primary image and reset zoom
@@ -115,7 +130,7 @@ export default function ProductGallery({ product }: ProductGalleryProps = {}) {
         {/* Wishlist Button (top-right) */}
         <button
           type="button"
-          onClick={() => setIsWishlisted((prev) => !prev)}
+          onClick={handleWishlistClick}
           aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
           className="absolute right-3.5 top-3.5 z-10 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-white shadow-[0px_2px_10px_rgba(0,0,0,0.12)] transition-transform duration-200 hover:scale-110 active:scale-90 sm:right-4 sm:top-4 sm:h-10 sm:w-10"
         >

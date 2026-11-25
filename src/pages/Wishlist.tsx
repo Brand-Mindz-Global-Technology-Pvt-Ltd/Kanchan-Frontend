@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 import { useShop } from "../context/ShopContext";
+import { getCustomerToken } from "../services/customerAuth";
+import { resolveProductImage } from "../services/productApi";
 import {
   WishlistNotificationBanner,
   WishlistProductRow,
@@ -10,52 +12,37 @@ import {
 } from "../components/wishlist/WishlistComponents";
 import AboutEdgeLeaves from "../components/about/AboutEdgeLeaves";
 import BotanicalLeaf from "../components/about/BotanicalLeaf";
-import imgMonstera from "../assets/products/img-1.png";
-import imgSnakePlant from "../assets/products/img-2.png";
-import imgPeaceLily from "../assets/products/img-3.png";
-
-// Sample initial wishlist items matching the screenshot reference
-const initialWishlistItems: WishlistItem[] = [
-  {
-    id: "item-monstera",
-    name: "Monstera Deliciosa",
-    badge: "BEST SELLER",
-    badgeVariant: "green",
-    description: "A tropical beauty · Air purifying",
-    price: 899,
-    originalPrice: 999,
-    image: imgMonstera,
-    isFavorite: true,
-  },
-  {
-    id: "item-snake-plant",
-    name: "Snake Plant Zeylanica",
-    badge: "LOW LIGHT",
-    badgeVariant: "green",
-    description: "Low maintenance · Drought tolerant",
-    price: 549,
-    originalPrice: 699,
-    image: imgSnakePlant,
-    isFavorite: true,
-  },
-  {
-    id: "item-peace-lily",
-    name: "Peace Lily Sensation",
-    badge: "FLOWERING",
-    badgeVariant: "amber",
-    description: "Purifies indoor air · Humidity lover",
-    price: 699,
-    originalPrice: 899,
-    image: imgPeaceLily,
-    isFavorite: true,
-  },
-];
 
 export default function Wishlist() {
-  const { addToCart } = useShop();
-  const [items, setItems] = useState<WishlistItem[]>(initialWishlistItems);
+  const {
+    wishlistItems,
+    isWishlistLoading,
+    wishlistError,
+    reloadWishlist,
+    removeFromWishlist,
+    addToCart,
+    navigateTo,
+  } = useShop();
+
   const [addedIds, setAddedIds] = useState<Record<string, boolean>>({});
   const [isAllAdded, setIsAllAdded] = useState(false);
+
+  const isAuthenticated = !!getCustomerToken();
+
+  // Map backend wishlist items to UI WishlistItem format
+  const items: WishlistItem[] = useMemo(() => {
+    return wishlistItems.map((item) => ({
+      id: item.productId,
+      name: item.name,
+      badge: item.badge || "FEATURED",
+      badgeVariant: item.badgeVariant || "green",
+      description: item.description,
+      price: item.price,
+      originalPrice: item.originalPrice,
+      image: resolveProductImage(item.image),
+      isFavorite: true,
+    }));
+  }, [wishlistItems]);
 
   useScrollReveal([items.length]);
 
@@ -77,18 +64,14 @@ export default function Wishlist() {
     }, 2500);
   };
 
-  // Toggle favorite flag
+  // Toggle favorite flag (clicking in wishlist removes the item)
   const handleToggleFavorite = (id: string) => {
-    setItems((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, isFavorite: !item.isFavorite } : item
-      )
-    );
+    removeFromWishlist(id);
   };
 
   // Remove individual product
   const handleRemove = (id: string) => {
-    setItems((prev) => prev.filter((item) => item.id !== id));
+    removeFromWishlist(id);
   };
 
   // Add all products to bag
@@ -166,7 +149,10 @@ export default function Wishlist() {
         </nav>
 
         {/* Main Wishlist Card */}
-        <div data-scroll-reveal="fade-up" className="rounded-[24px] border border-[#E6EADF] bg-white p-5 sm:p-8 shadow-[0_4px_24px_rgba(20,56,38,0.06)] animate-fade-in-up">
+        <div
+          data-scroll-reveal="fade-up"
+          className="rounded-[24px] border border-[#E6EADF] bg-white p-5 sm:p-8 shadow-[0_4px_24px_rgba(20,56,38,0.06)] animate-fade-in-up"
+        >
           {/* Wishlist Header */}
           <div className="flex items-center gap-3">
             <h1 className="font-serif-heading text-[24px] font-bold text-[#18382B] sm:text-[30px]">
@@ -177,13 +163,62 @@ export default function Wishlist() {
             </span>
           </div>
 
-          {/* Notification Banner */}
-          <div className="mt-4">
-            <WishlistNotificationBanner message="Move items to your bag to enjoy complimentary plant-safe transit packing!" />
-          </div>
+          {/* Error Banner */}
+          {wishlistError && (
+            <div className="mt-4 flex items-center justify-between rounded-[14px] border border-[#FCA5A5] bg-[#FEF2F2] p-3 text-[13px] text-[#991B1B]">
+              <span>{wishlistError}</span>
+              <button
+                type="button"
+                onClick={() => reloadWishlist()}
+                className="cursor-pointer font-bold text-[#DC2626] underline hover:no-underline ml-3"
+              >
+                Retry
+              </button>
+            </div>
+          )}
 
-          {items.length > 0 ? (
+          {/* Unauthenticated State */}
+          {!isAuthenticated ? (
+            <div className="py-12 text-center">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#F0F7EE] text-[#185338]">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  className="h-8 w-8"
+                >
+                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                </svg>
+              </div>
+              <h3 className="font-serif-heading text-xl font-bold text-[#18382B]">
+                Sign in to view your wishlist
+              </h3>
+              <p className="mx-auto mt-2 max-w-md text-sm text-[#718073]">
+                Your favorite botanical specimens and rare indoor varieties are safely stored in your account.
+              </p>
+              <button
+                type="button"
+                onClick={() => navigateTo("/login")}
+                className="mt-6 inline-flex cursor-pointer items-center justify-center rounded-xl bg-[#06452E] px-6 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-[#085a3c]"
+              >
+                Sign In to Account
+              </button>
+            </div>
+          ) : isWishlistLoading && items.length === 0 ? (
+            /* Loading State */
+            <div className="py-16 text-center">
+              <div className="inline-block h-8 w-8 animate-spin rounded-full border-3 border-solid border-[#06452E] border-r-transparent align-[-0.125em]" />
+              <p className="mt-3 text-sm text-[#718073]">Loading your botanical wishlist...</p>
+            </div>
+          ) : items.length > 0 ? (
             <>
+              {/* Notification Banner */}
+              <div className="mt-4">
+                <WishlistNotificationBanner message="Move items to your bag to enjoy complimentary plant-safe transit packing!" />
+              </div>
+
               {/* Product List Table Header (Desktop) */}
               <div className="mt-6 hidden grid-cols-12 border-b border-[#EAEFE5] pb-2.5 text-[10.5px] font-bold uppercase tracking-wider text-[#8A9A8C] sm:grid">
                 <div className="col-span-2">ITEM</div>
@@ -219,11 +254,12 @@ export default function Wishlist() {
             </>
           ) : (
             /* Empty State */
-            <WishlistEmptyState />
+            <div className="mt-4">
+              <WishlistEmptyState />
+            </div>
           )}
         </div>
       </div>
     </div>
   );
 }
-

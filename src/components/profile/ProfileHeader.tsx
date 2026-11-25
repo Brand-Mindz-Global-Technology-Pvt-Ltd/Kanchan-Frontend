@@ -24,7 +24,7 @@ export default function ProfileHeader({ fullName }: ProfileHeaderProps) {
 
         <h1
           style={{ color: "#163B1C" }}
-          className="font-serif-heading text-[26px] sm:text-[30px] lg:text-[33px] font-bold tracking-tight leading-tight"
+          className="font-serif-heading text-[22px] sm:text-[30px] lg:text-[33px] font-bold tracking-tight leading-tight"
         >
           Welcome Back, {firstName}!
         </h1>
@@ -39,7 +39,7 @@ export default function ProfileHeader({ fullName }: ProfileHeaderProps) {
         <div className="mt-1.5 flex items-center">
           <svg
             style={{ color: "#7FA868" }}
-            className="w-40 sm:w-48 h-2 opacity-80"
+            className="w-36 sm:w-48 h-2 opacity-80"
             viewBox="0 0 240 8"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -59,13 +59,13 @@ export default function ProfileHeader({ fullName }: ProfileHeaderProps) {
       <div className="self-end md:self-start text-right select-none pr-1 sm:pr-2">
         <div className="inline-block relative">
           <span
-            className="block text-[23px] sm:text-[26px] lg:text-[28px] font-normal leading-none"
+            className="block text-[20px] sm:text-[26px] lg:text-[28px] font-normal leading-none"
             style={{ fontFamily: "'Playfair Display', Georgia, cursive", fontStyle: "italic", color: "#183D1F" }}
           >
             Green Living
           </span>
           <span
-            className="block text-[17px] sm:text-[19px] lg:text-[20px] font-normal tracking-wide mt-0.5"
+            className="block text-[15px] sm:text-[19px] lg:text-[20px] font-normal tracking-wide mt-0.5"
             style={{ fontFamily: "'Playfair Display', Georgia, cursive", fontStyle: "italic", color: "#1E4D28" }}
           >
             Starts Here...

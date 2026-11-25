@@ -9,6 +9,14 @@ import {
   clearCartApi,
   CartApiError,
 } from "../services/cartApi";
+import {
+  fetchWishlistApi,
+  addToWishlistApi,
+  removeFromWishlistApi,
+  resolveCanonicalProductId,
+  type BackendWishlistItem,
+  WishlistApiError,
+} from "../services/wishlistApi";
 import { getCustomerToken } from "../services/customerAuth";
 import { resolveProductImage } from "../services/productApi";
 import imgMonstera from "../assets/products/img-1.png";
@@ -338,6 +346,34 @@ interface ShopContextType {
 
   // Navigation
   navigateTo: (path: string) => void;
+
+  // Wishlist State & Methods
+  wishlistItems: BackendWishlistItem[];
+  isWishlistLoading: boolean;
+  wishlistError: string | null;
+  reloadWishlist: () => Promise<void>;
+  isProductWishlisted: (productId: string) => boolean;
+  addToWishlist: (product: {
+    id: string;
+    name?: string;
+    price?: number;
+    originalPrice?: number;
+    image?: string;
+    badge?: string;
+    badgeVariant?: "green" | "amber" | "sage";
+    description?: string;
+  }) => Promise<void>;
+  removeFromWishlist: (productId: string) => Promise<void>;
+  toggleWishlist: (product: {
+    id: string;
+    name?: string;
+    price?: number;
+    originalPrice?: number;
+    image?: string;
+    badge?: string;
+    badgeVariant?: "green" | "amber" | "sage";
+    description?: string;
+  }) => Promise<boolean>;
 }
 
 const ShopContext = createContext<ShopContextType | null>(null);
@@ -360,6 +396,42 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
   const [cartError, setCartError] = useState<string | null>(null);
   const [isCartAuthenticated, setIsCartAuthenticated] = useState<boolean>(() => !!getCustomerToken());
   const syncSeqRef = useRef<number>(0);
+
+  // Wishlist state
+  const [wishlistItems, setWishlistItems] = useState<BackendWishlistItem[]>([]);
+  const [isWishlistLoading, setIsWishlistLoading] = useState<boolean>(() => !!getCustomerToken());
+  const [wishlistError, setWishlistError] = useState<string | null>(null);
+  const wishlistSyncSeqRef = useRef<number>(0);
+
+  const syncWishlist = useCallback(async () => {
+    const token = getCustomerToken();
+    if (!token) {
+      setWishlistItems([]);
+      setIsWishlistLoading(false);
+      setWishlistError(null);
+      return;
+    }
+
+    const currentSeq = ++wishlistSyncSeqRef.current;
+    setIsWishlistLoading(true);
+    setWishlistError(null);
+
+    try {
+      const res = await fetchWishlistApi();
+      if (currentSeq !== wishlistSyncSeqRef.current) return;
+      setWishlistItems(res.items || []);
+      setIsWishlistLoading(false);
+      setWishlistError(null);
+    } catch (err: unknown) {
+      if (currentSeq !== wishlistSyncSeqRef.current) return;
+      setIsWishlistLoading(false);
+      const msg = err instanceof Error ? err.message : "Failed to load wishlist";
+      setWishlistError(msg);
+      if (err instanceof WishlistApiError && err.status === 401) {
+        setWishlistItems([]);
+      }
+    }
+  }, []);
 
   const syncCart = useCallback(async () => {
     const token = getCustomerToken();
@@ -417,9 +489,11 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     syncCart();
+    syncWishlist();
 
     const handleAuthChange = () => {
       syncCart();
+      syncWishlist();
     };
 
     window.addEventListener("kanchan:auth-change", handleAuthChange);
@@ -429,7 +503,7 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
       window.removeEventListener("kanchan:auth-change", handleAuthChange);
       window.removeEventListener("storage", handleAuthChange);
     };
-  }, [syncCart]);
+  }, [syncCart, syncWishlist]);
 
   const [selectedProductId, setSelectedProductIdState] = useState<string>(() => {
     if (typeof window !== "undefined") {
@@ -686,6 +760,127 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const isProductWishlisted = useCallback(
+    (productId: string): boolean => {
+      if (!productId) return false;
+      const target = resolveCanonicalProductId(productId);
+      return wishlistItems.some(
+        (item) =>
+          resolveCanonicalProductId(item.productId) === target ||
+          item.productId === productId
+      );
+    },
+    [wishlistItems]
+  );
+
+  const addToWishlist = useCallback(
+    async (product: {
+      id: string;
+      name?: string;
+      price?: number;
+      originalPrice?: number;
+      image?: string;
+      badge?: string;
+      badgeVariant?: "green" | "amber" | "sage";
+      description?: string;
+    }) => {
+      const token = getCustomerToken();
+      if (!token) {
+        navigateTo("/login");
+        return;
+      }
+
+      const resolvedId = resolveCanonicalProductId(product.id);
+      if (
+        wishlistItems.some(
+          (i) => resolveCanonicalProductId(i.productId) === resolvedId
+        )
+      ) {
+        return;
+      }
+
+      // Optimistic update
+      const optimisticItem: BackendWishlistItem = {
+        productId: resolvedId,
+        name: product.name || "Plant",
+        price: product.price || 0,
+        originalPrice: product.originalPrice || product.price || 0,
+        image: product.image || "",
+        badge: product.badge || "",
+        badgeVariant: product.badgeVariant || "green",
+        description: product.description || "",
+        isFavorite: true,
+        addedAt: new Date().toISOString(),
+      };
+      setWishlistItems((prev) => [optimisticItem, ...prev]);
+
+      try {
+        const res = await addToWishlistApi(resolvedId);
+        setWishlistItems(res.items || []);
+      } catch (err) {
+        console.error("Failed to add to wishlist in database:", err);
+        syncWishlist();
+      }
+    },
+    [wishlistItems, syncWishlist]
+  );
+
+  const removeFromWishlist = useCallback(
+    async (productId: string) => {
+      const token = getCustomerToken();
+      const resolvedId = resolveCanonicalProductId(productId);
+
+      // Optimistic update
+      setWishlistItems((prev) =>
+        prev.filter(
+          (i) =>
+            resolveCanonicalProductId(i.productId) !== resolvedId &&
+            i.productId !== productId
+        )
+      );
+
+      if (!token) return;
+
+      try {
+        const res = await removeFromWishlistApi(resolvedId);
+        setWishlistItems(res.items || []);
+      } catch (err) {
+        console.error("Failed to remove from wishlist in database:", err);
+        syncWishlist();
+      }
+    },
+    [syncWishlist]
+  );
+
+  const toggleWishlist = useCallback(
+    async (product: {
+      id: string;
+      name?: string;
+      price?: number;
+      originalPrice?: number;
+      image?: string;
+      badge?: string;
+      badgeVariant?: "green" | "amber" | "sage";
+      description?: string;
+    }): Promise<boolean> => {
+      const token = getCustomerToken();
+      if (!token) {
+        navigateTo("/login");
+        return false;
+      }
+
+      const alreadyWishlisted = isProductWishlisted(product.id);
+      if (alreadyWishlisted) {
+        await removeFromWishlist(product.id);
+        return false;
+      } else {
+        await addToWishlist(product);
+        return true;
+      }
+    },
+    [isProductWishlisted, addToWishlist, removeFromWishlist]
+  );
+
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
@@ -744,6 +939,14 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
         orders,
         addOrder,
         navigateTo,
+        wishlistItems,
+        isWishlistLoading,
+        wishlistError,
+        reloadWishlist: syncWishlist,
+        isProductWishlisted,
+        addToWishlist,
+        removeFromWishlist,
+        toggleWishlist,
       }}
     >
       {children}

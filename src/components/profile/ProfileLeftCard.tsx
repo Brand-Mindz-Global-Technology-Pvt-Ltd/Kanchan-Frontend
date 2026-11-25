@@ -15,17 +15,41 @@ export default function ProfileLeftCard({
 }: ProfileLeftCardProps) {
   return (
     <div className="w-full flex justify-center lg:justify-start items-start">
-      {/* Responsive left-margin style: -20px on desktop (20px further left), 0px on mobile */}
+      {/* Responsive styling: -20px left margin on desktop, centered 246px card on mobile */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Caveat:wght@500;600;700&display=swap');
         @media (min-width: 1024px) {
           #profile-left-card-container {
+            width: min(350px, 100%) !important;
+            max-width: 350px !important;
             margin-left: -20px !important;
+          }
+          #profile-green-bg-img {
+            max-width: 350px !important;
+            object-position: left center !important;
+          }
+          #profile-left-card-overlay {
+            width: min(246px, 100%) !important;
+            left: 0 !important;
           }
         }
         @media (max-width: 1023px) {
           #profile-left-card-container {
-            margin-left: 0px !important;
+            width: 246px !important;
+            max-width: 100% !important;
+            margin: 0 auto !important;
+          }
+          #profile-green-bg-img {
+            width: 246px !important;
+            max-width: 246px !important;
+            object-position: center !important;
+          }
+          #profile-left-card-overlay {
+            width: 246px !important;
+            max-width: 100% !important;
+            left: 0 !important;
+            right: 0 !important;
+            margin: 0 auto !important;
           }
         }
       `}</style>
@@ -67,6 +91,7 @@ export default function ProfileLeftCard({
           Preserved exact internal avatar and text positioning.
         */}
         <div
+          id="profile-left-card-overlay"
           className="absolute top-0 left-0 z-10 flex flex-col items-center text-center justify-between pointer-events-none"
           style={{
             padding: "40px 14px 50px 14px",
